@@ -462,8 +462,17 @@ function buildPrompt(text,R,mode,dialect){
   return p;
 }
 
-// Adres van de Cloudflare Worker (zie README, stap 3)
-const API='https://zostere-vertaler.JOUW-SUBDOMEIN.workers.dev';
+// Adres van het Google Apps Script (web-app-URL, eindigt op /exec)
+const API='https://script.google.com/macros/s/VUL-HIER-DE-APPS-SCRIPT-ID-IN/exec';
+async function api(action,data,signal){
+  let r;
+  try{ r=await fetch(API,{method:'POST',headers:{'content-type':'text/plain;charset=utf-8'},body:JSON.stringify(Object.assign({action},data||{})),signal,redirect:'follow'}); }
+  catch(e){ if(e&&e.name==='AbortError') throw {code:'cancelled'}; throw {code:'offline'}; }
+  let j=null; try{ j=await r.json(); }catch{}
+  if(!j) throw {code:'upstream'};
+  if(!j.ok) throw {code:j.code||'upstream'};
+  return j;
+}
 // ---- UI ----
 const nl=$('nl'), out=$('out'), go=$('go'), stopBtn=$('stop'), st=$('st');
 let sample=null, ctl=null, lastNl='', lastZo='', lastMode='nl', lastDialect='';
@@ -524,7 +533,7 @@ document.querySelector('.seg').addEventListener('keydown',e=>{if(e.key==='ArrowR
 let saved='nl'; try{saved=localStorage.getItem('zo-mode')||'nl';}catch{}
 setMode(saved);
 
-const ERR={rate_limited:'Even te veel verzoeken. Probeer het over een minuut opnieuw.',too_long:'De tekst is te lang. Vertaal hem in kleinere stukken.',busy:'Claude heeft het even te druk. Probeer het over een minuut opnieuw.',forbidden:'Deze site mag de vertaaldienst niet gebruiken.',offline:'Er is geen verbinding met de vertaaldienst. Controleer je internet en probeer het opnieuw.'};
+const ERR={daily_limit:'De vertaler heeft vandaag zijn maximum bereikt. Probeer het morgen opnieuw.',not_configured:'De vertaler is nog niet helemaal ingesteld. Probeer het later opnieuw.',rate_limited:'Het is even druk. Probeer het over een paar minuten opnieuw.',too_long:'De tekst is te lang. Vertaal hem in kleinere stukken.',busy:'Claude heeft het even te druk. Probeer het over een minuut opnieuw.',forbidden:'Deze site mag de vertaaldienst niet gebruiken.',offline:'Er is geen verbinding met de vertaaldienst. Controleer je internet en probeer het opnieuw.'};
 
 function parse(text){
   const v=text.match(/<vertaling>\s*([\s\S]*?)(?:<\/vertaling>|$)/);
@@ -542,30 +551,10 @@ function showSources(R){
     R.zins.slice(0,20).forEach(z=>{const d=document.createElement('div');const q=document.createElement('span');q.className='q';q.textContent=ZIN[z.i][0];const m=document.createElement('span');m.className='meta';m.textContent='  · Heemklank '+ZIN[z.i][1]+', '+ZIN[z.i][2];d.append(q,m);box.append(d);});}
 }
 
-let streamed='';
-async function askClaude(prompt,signal,onText){
-  let r;
-  try{ r=await fetch(API+'/vertaal',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({prompt}),signal}); }
-  catch(e){ if(e&&e.name==='AbortError') throw {code:'cancelled'}; throw {code:'offline'}; }
-  if(!r.ok){ let j={}; try{j=await r.json();}catch{} throw {code:j.code||'upstream'}; }
-  const rd=r.body.getReader(), dec=new TextDecoder(); let buf='', stop='';
-  streamed='';
-  try{
-    for(;;){
-      const {done,value}=await rd.read(); if(done) break;
-      buf+=dec.decode(value,{stream:true});
-      let k; while((k=buf.indexOf('\n\n'))>=0){
-        const ev=buf.slice(0,k); buf=buf.slice(k+2);
-        const line=ev.split('\n').find(l=>l.startsWith('data:')); if(!line) continue;
-        let d; try{ d=JSON.parse(line.slice(5)); }catch{ continue; }
-        if(d.type==='content_block_delta'&&d.delta&&d.delta.type==='text_delta'){ streamed+=d.delta.text; onText(streamed); }
-        else if(d.type==='message_delta'&&d.delta&&d.delta.stop_reason) stop=d.delta.stop_reason;
-        else if(d.type==='error') throw {code:(d.error&&d.error.type==='overloaded_error')?'busy':'upstream',text:streamed};
-      }
-    }
-  }catch(e){ if(e&&e.name==='AbortError') throw {code:'cancelled',text:streamed}; if(e&&e.code) throw e; throw {code:'offline',text:streamed}; }
-  if(!streamed.trim()) throw {code:'upstream'};
-  return {text:streamed,truncated:stop==='max_tokens'};
+async function askClaude(prompt,signal){
+  const t0=Date.now(); const tick=setInterval(()=>{ if(out.classList.contains('thinking')) out.textContent='Woorden opzoeken en vertalen… '+Math.round((Date.now()-t0)/1000)+' s'; },1000);
+  try{ const j=await api('vertaal',{prompt},signal); if(!String(j.text||'').trim()) throw {code:'upstream'}; return {text:j.text,truncated:!!j.truncated}; }
+  finally{ clearInterval(tick); }
 }
 async function translate(){
   const text=nl.value.trim(); if(!text){nl.focus();return;}
@@ -577,7 +566,7 @@ async function translate(){
   out.className='out thinking'; out.textContent='Woorden opzoeken en vertalen…';
   $('notes').hidden=true;
   try{
-    const res=await askClaude(prompt,ctl.signal,text=>{const p=parse(text); if(p.zo){out.className='out'; out.textContent=p.zo;}});
+    const res=await askClaude(prompt,ctl.signal);
     const p=parse(res.text);
     out.className='out'; out.textContent=p.zo||res.text.trim();
     lastNl=text; lastZo=out.textContent; lastMode=useMode; lastDialect=dialect;
@@ -587,7 +576,7 @@ async function translate(){
     showSources(R); $('notes').hidden=false;
     if(res.truncated) setStatus(st,'De vertaling is afgekapt. Vertaal kortere stukken.',true);
   }catch(e){
-    if(e&&e.code==='cancelled'){ if(e.text){const p=parse(e.text); out.textContent=p.zo;} setStatus(st,'Gestopt.'); }
+    if(e&&e.code==='cancelled'){ out.className='out placeholder'; out.textContent='Gestopt.'; setStatus(st,''); }
     else { out.className='out placeholder'; out.textContent=(e&&e.text&&parse(e.text).zo)||'Geen vertaling.'; setStatus(st,ERR[e&&e.code]||'Er ging iets mis bij het vertalen. Probeer het opnieuw.',true); }
   }finally{ go.disabled=false; stopBtn.hidden=true; }
 }
@@ -609,8 +598,7 @@ $('save').onclick=async()=>{
   if(!zo||!src){setStatus($('save-st'),'Zowel de brontekst als de verbeterde vertaling zijn nodig.',true);return;}
   $('save').disabled=true; setStatus($('save-st'),'Versturen…');
   try{
-    const r=await fetch(API+'/voorstel',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({nl:src.slice(0,4000),zo:zo.slice(0,4000),concept:lastZo.slice(0,4000),bron:lastMode,dialect:lastDialect})});
-    if(!r.ok){ let j={}; try{j=await r.json();}catch{} throw {code:j.code}; }
+    await api('voorstel',{nl:src.slice(0,4000),zo:zo.slice(0,4000),concept:lastZo.slice(0,4000),bron:lastMode,dialect:lastDialect});
     setStatus($('save-st'),'Bedankt! Je voorstel gaat naar de redactie.');
     out.textContent=zo; $('out-tag').innerHTML='<span class="tag ok">Jouw versie</span>';
     setTimeout(()=>{$('edit').hidden=true;},1600);
@@ -632,8 +620,7 @@ function renderCorr(failed){
 }
 async function loadCorr(){
   try{
-    const r=await fetch(API+'/verbeteringen'); if(!r.ok) throw 0;
-    const j=await r.json();
+    const j=await api('verbeteringen');
     CORR=(Array.isArray(j.items)?j.items:[]).map((x,i)=>({id:String(i),nl:String(x.nl||''),zo:String(x.zo||''),bron:x.bron==='li'?'li':'nl',dialect:String(x.dialect||''),t:Number(x.t)||0})).filter(c=>c.nl&&c.zo);
     renderCorr();
   }catch{ renderCorr(true); }
@@ -695,8 +682,7 @@ $('gz-form').addEventListener('submit',async e=>{
   if(!tekst){setStatus($('gz-st'),'Er is nog geen tekst om in te sturen.',true);$('gz-tekst').focus();return;}
   $('gz-send').disabled=true; setStatus($('gz-st'),'Versturen…');
   try{
-    const r=await fetch(API+'/inzending',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({titel,naam,tel,tekst,bron:lastNl||'',bronTaal:lastMode,dialect:lastDialect,foto:gzPhoto?gzPhoto.b64:null,website:$('gz-web').value})});
-    if(!r.ok){ let j={}; try{j=await r.json();}catch{} throw {code:j.code}; }
+    await api('inzending',{titel,naam,tel,tekst,bron:lastNl||'',bronTaal:lastMode,dialect:lastDialect,foto:gzPhoto?gzPhoto.b64:null,website:$('gz-web').value});
     try{localStorage.setItem('gz-naam',naam);localStorage.setItem('gz-tel',tel);}catch{}
     setStatus($('gz-st'),'Verstuurd. Bedankt voor je inzending!');
     setTimeout(()=>dlg.close(),1600);
