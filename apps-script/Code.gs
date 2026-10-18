@@ -1,5 +1,5 @@
 /**
- * Zösters Vertaler — Google Apps Script (de "achterkant" van zostere.nl/vertaler)
+ * Sjrief Zösters — Google Apps Script (de "achterkant" van zostere.nl/vertaler)
  *
  * Doet vier dingen:
  *  1. Vertalen: stuurt de opdracht van de site naar Claude (Anthropic) met jouw API-sleutel.
@@ -24,7 +24,7 @@ const MAX_INZENDINGEN_PER_UUR = 30;
 function setup() {
   const p = PropertiesService.getScriptProperties();
   if (!p.getProperty('SHEET_ID')) {
-    const ss = SpreadsheetApp.create('Zösters vertaler – verbetervoorstellen');
+    const ss = SpreadsheetApp.create('Sjrief Zösters – verbetervoorstellen');
     const sh = ss.getSheets()[0];
     sh.setName('Voorstellen');
     sh.appendRow(['Ingestuurd', 'Brontaal', 'Dialect', 'Brontekst', 'Voorstel in Zösters', 'Vertaling van Claude', 'Goedgekeurd (ja/nee)']);
@@ -63,7 +63,7 @@ function doPost(e) {
 }
 
 function doGet() {
-  return out({ ok: true, info: 'De achterkant van de Zösters Vertaler werkt.' });
+  return out({ ok: true, info: 'De achterkant van Sjrief Zösters werkt.' });
 }
 
 function out(o) {
