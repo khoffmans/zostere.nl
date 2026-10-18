@@ -1,0 +1,4 @@
+exclude:
+  - worker
+  - apps-script
+  - README.md
