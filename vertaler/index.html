@@ -168,13 +168,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch;display:grid;gap:6px;bor
           </select>
         </div>
         <div class="dictate" id="dictate" hidden>
-          <div class="row"><span>Ik spreek in:</span>
-            <div class="seg" role="radiogroup" aria-label="Taal waarin je inspreekt">
-              <button type="button" role="radio" aria-checked="true" id="sp-nl">Nederlands</button>
-              <button type="button" role="radio" aria-checked="false" id="sp-zo">Zösters</button>
-            </div>
-          </div>
-          <p id="sr-yes" hidden>Spreek nu. Wat je zegt verschijnt in het tekstvak. Een korte pauze wordt een punt; je kunt ook “komma”, “punt”, “vraagteken” of “nieuwe regel” zeggen. Klik op “Stop opname” als je klaar bent.</p>
+          <p id="sr-yes" hidden>Spreek nu in het Nederlands. Wat je zegt verschijnt in het tekstvak. Een korte pauze wordt een punt; je kunt ook “komma”, “punt”, “vraagteken” of “nieuwe regel” zeggen. Klik op “Stop opname” als je klaar bent.</p>
           <p id="sr-no">Deze browser kan zelf geen spraak herkennen (dat kan wel in Chrome, Edge en Safari). Spreek in met de dicteerfunctie van je toestel; wat je zegt komt vanzelf in het tekstvak:</p>
           <ul id="sr-tips">
             <li><strong>iPhone of iPad:</strong> tik in het tekstvak en dan op het microfoontje op het toetsenbord.</li>
@@ -492,6 +486,7 @@ function setMode(m){
   mode=m==='li'?'li':'nl';
   $('m-nl').setAttribute('aria-checked',String(mode==='nl')); $('m-li').setAttribute('aria-checked',String(mode==='li'));
   $('dialect-row').hidden=mode!=='li';
+  $('mic').hidden=mode==='li'; if(mode==='li'){ $('dictate').hidden=true; $('mic').setAttribute('aria-expanded','false'); }
   nl.placeholder=mode==='li'?'Plak hier een tekst in jouw Limburgse dialect…':'Typ of plak hier een Nederlandse tekst…';
   updateGo();
   renderExamples();
@@ -502,12 +497,7 @@ $('dialect').addEventListener('change',updateGo);
 let spk='nl';
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 $('sr-yes').hidden=!SR; $('sr-no').hidden=!!SR; $('sr-tips').hidden=!!SR;
-function setSpeak(v){
-  spk=v; $('sp-nl').setAttribute('aria-checked',String(v==='nl')); $('sp-zo').setAttribute('aria-checked',String(v==='zo'));
-  if(v==='zo'){ setMode('li'); $('dialect').value='Zösters'; updateGo();
-    $('sp-tip').textContent='De spraakherkenning schrijft je Zösters in een Hollandse schrijfwijze op. Klik daarna op “Zet in Zösterse schrijfwijze” voor de juiste Zösterse spelling.'+(SR?'':' Zet de dicteertaal van je toestel op Nederlands.'); }
-  else { setMode('nl'); $('sp-tip').textContent=SR?'':'Zet de dicteertaal van je toestel op Nederlands.'; }
-}
+function setSpeak(){ setMode('nl'); $('sp-tip').textContent=SR?'':'Zet de dicteertaal van je toestel op Nederlands.'; }
 const DEFAULT_TEXT=nl.value;
 let rec=null, listening=false;
 function micUi(){ const m=$('mic'); m.classList.toggle('rec',listening); m.lastChild.textContent=listening?'Stop opname':'Inspreken'; }
@@ -544,10 +534,9 @@ $('mic').onclick=()=>{
   if(listening){ rec&&rec.stop(); return; }
   const wasOpen=!$('dictate').hidden;
   $('dictate').hidden=false; $('mic').setAttribute('aria-expanded','true');
-  if(!wasOpen) setSpeak(mode==='li'&&$('dialect').value==='Zösters'?'zo':'nl');
+  if(!wasOpen) setSpeak();
   if(SR) startRec(); else { if(nl.value===DEFAULT_TEXT){nl.value='';wc();} nl.focus(); }
 };
-$('sp-nl').onclick=()=>{setSpeak('nl');}; $('sp-zo').onclick=()=>{setSpeak('zo');};
 $('m-nl').onclick=()=>setMode('nl'); $('m-li').onclick=()=>setMode('li');
 document.querySelector('.seg').addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();setMode(mode==='nl'?'li':'nl');$(mode==='nl'?'m-nl':'m-li').focus();}});
 let saved='nl'; try{saved=localStorage.getItem('zo-mode')||'nl';}catch{}
