@@ -168,7 +168,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch;display:grid;gap:6px;bor
           </select>
         </div>
         <div class="dictate" id="dictate" hidden>
-          <p id="sr-yes" hidden>Spreek nu in het Nederlands. Wat je zegt verschijnt in het tekstvak. Een korte pauze wordt een punt; je kunt ook “komma”, “punt”, “vraagteken” of “nieuwe regel” zeggen. Klik op “Stop opname” als je klaar bent.</p>
+          <p id="sr-yes" hidden>Spreek nu in het Nederlands. Wat je zegt verschijnt in het tekstvak. Leestekens kun je uitspreken: “komma”, “punt”, “vraagteken” of “nieuwe regel”. Klik op “Stop opname” als je klaar bent.</p>
           <p id="sr-no">Deze browser kan zelf geen spraak herkennen (dat kan wel in Chrome, Edge en Safari). Spreek in met de dicteerfunctie van je toestel; wat je zegt komt vanzelf in het tekstvak:</p>
           <ul id="sr-tips">
             <li><strong>iPhone of iPad:</strong> tik in het tekstvak en dan op het microfoontje op het toetsenbord.</li>
@@ -511,22 +511,27 @@ function leestekens(t){
     .replace(/\s*\bpunt\b/gi,'.')
     .replace(/([,.?!:])(?=[^\s\n])/g,'$1 ');
 }
-function zin(seg,ervoor){
-  seg=leestekens(seg).replace(/^[ \t]+|[ \t]+$/g,'');
-  if(!seg.trim()) return '';
-  const nieuw=!ervoor.trim()||/[.!?\n]\s*$/.test(ervoor);
-  if(nieuw) seg=seg.replace(/^(\s*)(\S)/,(m,a,b)=>a+b.toUpperCase());
-  seg=seg.replace(/([.!?]\s+|\n\s*)(\S)/g,(m,a,b)=>a+b.toUpperCase()).replace(/[ \t]+\n/g,'\n');
-  if(!/[.!?,:;\n]$/.test(seg)) seg+='.';
-  return seg+(seg.endsWith('\n')?'':' ');
+function opmaak(t,ervoor,einde){
+  t=leestekens(t).replace(/[ \t]+/g,' ').replace(/ ?\n ?/g,'\n').trim();
+  if(!t) return '';
+  if(!ervoor.trim()||/[.!?\n]\s*$/.test(ervoor)) t=t.charAt(0).toUpperCase()+t.slice(1);
+  t=t.replace(/([.!?] |\n)(\S)/g,(m,a,b)=>a+b.toUpperCase());
+  if(einde&&!/[.!?,:;]$/.test(t)) t+='.';
+  return t;
 }
 function startRec(){
   if(nl.value===DEFAULT_TEXT){nl.value='';wc();}
-  const base=nl.value.trim()?nl.value.replace(/\s*$/,' '):''; let fin='';
+  const base=nl.value.trim()?nl.value.replace(/\s*$/,' '):'';
+  const finals=[];
+  const voeg=t=>{ t=t.trim(); if(!t) return; const vorige=finals[finals.length-1]||''; const a=t.toLowerCase(), v=vorige.toLowerCase();
+    if(v&&a.startsWith(v)) finals[finals.length-1]=t;      // Android: dezelfde zin, maar langer
+    else if(v&&v.endsWith(a)) return;                       // herhaling van wat er al staat
+    else finals.push(t); };
+  const toon=(interim,einde)=>{ nl.value=base+opmaak(finals.join(' ')+(interim?' '+interim:''),base,einde); wc(); };
   rec=new SR(); rec.lang='nl-NL'; rec.continuous=true; rec.interimResults=true;
-  rec.onresult=e=>{ let interim=''; for(let i=e.resultIndex;i<e.results.length;i++){const r=e.results[i]; if(r.isFinal){ const z=zin(r[0].transcript,base+fin); if(/^[,.?!:;]/.test(z)) fin=fin.replace(/[.]?[ \t]*$/,''); else if(/^\n/.test(z)) fin=fin.replace(/[ \t]+$/,''); fin+=z; } else interim+=r[0].transcript;} nl.value=base+fin+interim; wc(); };
+  rec.onresult=e=>{ let interim=''; for(let i=e.resultIndex;i<e.results.length;i++){ const r=e.results[i]; if(r.isFinal) voeg(r[0].transcript); else interim+=r[0].transcript; } toon(interim.trim(),false); };
   rec.onerror=e=>{ const m={'not-allowed':'Geef de browser toestemming om je microfoon te gebruiken en probeer het opnieuw.','service-not-allowed':'Spraakherkenning staat uit in deze browser. Gebruik de dicteerfunctie van je toestel.','no-speech':'Er werd niets gehoord. Klik op Inspreken en probeer het opnieuw.','audio-capture':'Er is geen microfoon gevonden.','network':'Spraakherkenning heeft een internetverbinding nodig.'}[e.error]; if(e.error!=='aborted') setStatus($('sr-st'),m||'Inspreken lukte niet. Probeer het opnieuw.',true); };
-  rec.onend=()=>{ listening=false; micUi(); };
+  rec.onend=()=>{ listening=false; if(finals.length) toon('',true); micUi(); };
   try{ rec.start(); listening=true; setStatus($('sr-st'),''); }catch{ listening=false; }
   micUi();
 }
