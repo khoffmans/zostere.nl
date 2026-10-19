@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-02-05-vastelaovesaovend-scs-en-noav@zostere.nl
+DTSTAMP:20270205T000000Z
+DTSTART;TZID=Europe/Amsterdam:20270205T201100
+DTEND;TZID=Europe/Amsterdam:20270205T231100
+SUMMARY:Vastelaovesaovend SCS en NOAV
+LOCATION:D’n Hermeniezaal\, Susteren
+DESCRIPTION:Vastelaovesavond van SCS en NOAV.\nhttps://zostere.nl/aktiviteite/2027-02-05-vastelaovesaovend-scs-en-noav/
+URL:https://zostere.nl/aktiviteite/2027-02-05-vastelaovesaovend-scs-en-noav/
+END:VEVENT
+END:VCALENDAR

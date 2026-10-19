@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2026-11-13-aopening-vastelaovend-graasboerriek@zostere.nl
+DTSTAMP:20261113T000000Z
+DTSTART;TZID=Europe/Amsterdam:20261113T201100
+DTEND;TZID=Europe/Amsterdam:20261113T231100
+SUMMARY:Äöpening vastelaovend Graasboerriek
+LOCATION:De Graasboer\, Mèrt\, Susteren
+DESCRIPTION:De opening van het vastelaovesseizoen 2026–2027 in de Graasboerriek.\nhttps://zostere.nl/aktiviteite/2026-11-13-aopening-vastelaovend-graasboerriek/
+URL:https://zostere.nl/aktiviteite/2026-11-13-aopening-vastelaovend-graasboerriek/
+END:VEVENT
+END:VCALENDAR

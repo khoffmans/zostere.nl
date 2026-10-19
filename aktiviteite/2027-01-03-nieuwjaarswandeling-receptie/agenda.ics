@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-01-03-nieuwjaarswandeling-receptie@zostere.nl
+DTSTAMP:20270103T000000Z
+DTSTART;VALUE=DATE:20270103
+DTEND;VALUE=DATE:20270104
+SUMMARY:Nieuwjaarswandeling + Receptie
+LOCATION:SCS Susteren\, Susteren
+DESCRIPTION:Nieuwjaarswandeling met aansluitend de nieuwjaarsreceptie van voetbalclub SCS Susteren.\nhttps://zostere.nl/aktiviteite/2027-01-03-nieuwjaarswandeling-receptie/
+URL:https://zostere.nl/aktiviteite/2027-01-03-nieuwjaarswandeling-receptie/
+END:VEVENT
+END:VCALENDAR

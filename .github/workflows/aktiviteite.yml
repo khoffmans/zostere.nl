@@ -1,0 +1,39 @@
+name: Aktiviteite bijwerken
+
+on:
+  schedule:
+    - cron: "17 * * * *"   # elk uur
+  workflow_dispatch:         # handmatig via de knop "Run workflow"
+  push:
+    paths:
+      - "aktiviteite/vast.json"
+      - "tools/bouw-aktiviteite.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aktiviteite
+  cancel-in-progress: false
+
+jobs:
+  bouw:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Pagina's bouwen
+        run: node tools/bouw-aktiviteite.mjs
+      - name: Wijzigingen opslaan
+        run: |
+          git config user.name "Zöstere.nl"
+          git config user.email "info@zostere.nl"
+          git add -A aktiviteite sitemap.xml robots.txt
+          if git diff --cached --quiet; then
+            echo "Niets veranderd."
+          else
+            git commit -m "Aktiviteite bijgewerkt"
+            git push
+          fi

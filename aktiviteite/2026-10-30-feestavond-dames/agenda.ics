@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2026-10-30-feestavond-dames@zostere.nl
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20261030
+DTEND;VALUE=DATE:20261031
+SUMMARY:Feestavond Dames
+LOCATION:SCS Susteren\, Susteren
+DESCRIPTION:Feestavond van de damesafdeling van voetbalclub SCS Susteren.\nhttps://zostere.nl/aktiviteite/2026-10-30-feestavond-dames/
+URL:https://zostere.nl/aktiviteite/2026-10-30-feestavond-dames/
+END:VEVENT
+END:VCALENDAR

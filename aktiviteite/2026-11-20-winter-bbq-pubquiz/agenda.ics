@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2026-11-20-winter-bbq-pubquiz@zostere.nl
+DTSTAMP:20261120T000000Z
+DTSTART;VALUE=DATE:20261120
+DTEND;VALUE=DATE:20261121
+SUMMARY:Winter BBQ + PubQuiz
+LOCATION:SCS Susteren\, Susteren
+DESCRIPTION:Winterbarbecue met pubquiz bij voetbalclub SCS Susteren.\nhttps://zostere.nl/aktiviteite/2026-11-20-winter-bbq-pubquiz/
+URL:https://zostere.nl/aktiviteite/2026-11-20-winter-bbq-pubquiz/
+END:VEVENT
+END:VCALENDAR

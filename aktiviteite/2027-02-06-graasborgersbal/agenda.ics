@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-02-06-graasborgersbal@zostere.nl
+DTSTAMP:20270206T000000Z
+DTSTART;TZID=Europe/Amsterdam:20270206T201100
+DTEND;TZID=Europe/Amsterdam:20270206T231100
+SUMMARY:Graasbörgersbal
+LOCATION:Keffees Zöstere\, Susteren
+DESCRIPTION:Het bal van de Graasbörgers\, in de cafés van Zöstere.\nhttps://zostere.nl/aktiviteite/2027-02-06-graasborgersbal/
+URL:https://zostere.nl/aktiviteite/2027-02-06-graasborgersbal/
+END:VEVENT
+END:VCALENDAR

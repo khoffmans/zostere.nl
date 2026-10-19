@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-01-10-aanbeeje-graasboer@zostere.nl
+DTSTAMP:20270110T000000Z
+DTSTART;TZID=Europe/Amsterdam:20270110T103000
+DTEND;TZID=Europe/Amsterdam:20270110T133000
+SUMMARY:Aanbeeje Graasboer
+LOCATION:Nuuje Prins\, Susteren
+DESCRIPTION:Onderdeel van het vastelaovesprogramma van de Graasbörgers.\nhttps://zostere.nl/aktiviteite/2027-01-10-aanbeeje-graasboer/
+URL:https://zostere.nl/aktiviteite/2027-01-10-aanbeeje-graasboer/
+END:VEVENT
+END:VCALENDAR

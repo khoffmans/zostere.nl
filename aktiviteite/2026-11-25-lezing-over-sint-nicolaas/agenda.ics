@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2026-11-25-lezing-over-sint-nicolaas@zostere.nl
+DTSTAMP:20261125T000000Z
+DTSTART;VALUE=DATE:20261125
+DTEND;VALUE=DATE:20261126
+SUMMARY:Lezing over Sint-Nicolaas
+LOCATION:Susteren\, Susteren
+DESCRIPTION:Lezing over het leven en de verhalen van Sint-Nicolaas. Tijd en plaats: zie de website van de parochie.\nhttps://zostere.nl/aktiviteite/2026-11-25-lezing-over-sint-nicolaas/
+URL:https://zostere.nl/aktiviteite/2026-11-25-lezing-over-sint-nicolaas/
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-02-10-hieeringbiete@zostere.nl
+DTSTAMP:20270210T000000Z
+DTSTART;TZID=Europe/Amsterdam:20270210T160000
+DTEND;TZID=Europe/Amsterdam:20270210T190000
+SUMMARY:Hieëringbiete
+LOCATION:Keffees Zöstere\, Susteren
+DESCRIPTION:Haring happen op Aswoensdag.\nhttps://zostere.nl/aktiviteite/2027-02-10-hieeringbiete/
+URL:https://zostere.nl/aktiviteite/2027-02-10-hieeringbiete/
+END:VEVENT
+END:VCALENDAR

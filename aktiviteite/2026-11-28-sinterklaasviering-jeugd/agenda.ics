@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2026-11-28-sinterklaasviering-jeugd@zostere.nl
+DTSTAMP:20261128T000000Z
+DTSTART;VALUE=DATE:20261128
+DTEND;VALUE=DATE:20261129
+SUMMARY:Sinterklaasviering Jeugd
+LOCATION:SCS Susteren\, Susteren
+DESCRIPTION:Sinterklaasviering voor de jeugdleden van voetbalclub SCS Susteren.\nhttps://zostere.nl/aktiviteite/2026-11-28-sinterklaasviering-jeugd/
+URL:https://zostere.nl/aktiviteite/2026-11-28-sinterklaasviering-jeugd/
+END:VEVENT
+END:VCALENDAR

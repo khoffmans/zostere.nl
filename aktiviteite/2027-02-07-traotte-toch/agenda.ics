@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-02-07-traotte-toch@zostere.nl
+DTSTAMP:20270207T000000Z
+DTSTART;TZID=Europe/Amsterdam:20270207T141100
+DTEND;TZID=Europe/Amsterdam:20270207T171100
+SUMMARY:Träötte-toch
+LOCATION:Keffees Zöstere\, Susteren
+DESCRIPTION:Onderdeel van het vastelaovesprogramma van de Graasbörgers.\nhttps://zostere.nl/aktiviteite/2027-02-07-traotte-toch/
+URL:https://zostere.nl/aktiviteite/2027-02-07-traotte-toch/
+END:VEVENT
+END:VCALENDAR

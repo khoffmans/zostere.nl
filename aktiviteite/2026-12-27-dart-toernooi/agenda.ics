@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2026-12-27-dart-toernooi@zostere.nl
+DTSTAMP:20261227T000000Z
+DTSTART;VALUE=DATE:20261227
+DTEND;VALUE=DATE:20261228
+SUMMARY:Dart Toernooi
+LOCATION:SCS Susteren\, Susteren
+DESCRIPTION:Darttoernooi bij voetbalclub SCS Susteren.\nhttps://zostere.nl/aktiviteite/2026-12-27-dart-toernooi/
+URL:https://zostere.nl/aktiviteite/2026-12-27-dart-toernooi/
+END:VEVENT
+END:VCALENDAR

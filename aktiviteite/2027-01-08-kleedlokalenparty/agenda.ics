@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-01-08-kleedlokalenparty@zostere.nl
+DTSTAMP:20270108T000000Z
+DTSTART;VALUE=DATE:20270108
+DTEND;VALUE=DATE:20270109
+SUMMARY:Kleedlokalenparty
+LOCATION:SCS Susteren\, Susteren
+DESCRIPTION:Kleedlokalenparty bij voetbalclub SCS Susteren.\nhttps://zostere.nl/aktiviteite/2027-01-08-kleedlokalenparty/
+URL:https://zostere.nl/aktiviteite/2027-01-08-kleedlokalenparty/
+END:VEVENT
+END:VCALENDAR

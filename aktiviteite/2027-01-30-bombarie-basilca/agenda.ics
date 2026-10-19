@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-01-30-bombarie-basilca@zostere.nl
+DTSTAMP:20270130T000000Z
+DTSTART;TZID=Europe/Amsterdam:20270130T151100
+DTEND;TZID=Europe/Amsterdam:20270130T181100
+SUMMARY:Bombarie Basilca
+LOCATION:Salvatorplein\, Susteren
+DESCRIPTION:Onderdeel van het vastelaovesprogramma van de Graasbörgers.\nhttps://zostere.nl/aktiviteite/2027-01-30-bombarie-basilca/
+URL:https://zostere.nl/aktiviteite/2027-01-30-bombarie-basilca/
+END:VEVENT
+END:VCALENDAR

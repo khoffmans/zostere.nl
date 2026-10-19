@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2026-11-15-boake-van-t-lache@zostere.nl
+DTSTAMP:20261115T000000Z
+DTSTART;TZID=Europe/Amsterdam:20261115T141100
+DTEND;TZID=Europe/Amsterdam:20261115T171100
+SUMMARY:Böäke van ’t Lache
+LOCATION:Zaal Mirage\, Susteren
+DESCRIPTION:Onderdeel van het vastelaovesprogramma van de Graasbörgers.\nhttps://zostere.nl/aktiviteite/2026-11-15-boake-van-t-lache/
+URL:https://zostere.nl/aktiviteite/2026-11-15-boake-van-t-lache/
+END:VEVENT
+END:VCALENDAR

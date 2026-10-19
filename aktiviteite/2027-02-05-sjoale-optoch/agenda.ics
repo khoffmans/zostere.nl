@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-02-05-sjoale-optoch@zostere.nl
+DTSTAMP:20270205T000000Z
+DTSTART;TZID=Europe/Amsterdam:20270205T091100
+DTEND;TZID=Europe/Amsterdam:20270205T121100
+SUMMARY:Sjoale-optoch
+LOCATION:Raadhuisplein\, Susteren
+DESCRIPTION:De optocht van de scholen.\nhttps://zostere.nl/aktiviteite/2027-02-05-sjoale-optoch/
+URL:https://zostere.nl/aktiviteite/2027-02-05-sjoale-optoch/
+END:VEVENT
+END:VCALENDAR

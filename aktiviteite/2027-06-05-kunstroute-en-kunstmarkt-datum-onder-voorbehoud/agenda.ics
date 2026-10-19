@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-06-05-kunstroute-en-kunstmarkt-datum-onder-voorbehoud@zostere.nl
+DTSTAMP:20270605T000000Z
+DTSTART;VALUE=DATE:20270605
+DTEND;VALUE=DATE:20270607
+SUMMARY:Kunstroute & Kunstmarkt (datum onder voorbehoud)
+LOCATION:Centrum en Beeldentuin Suestra\, achter de Amelbergabasiliek\, Susteren
+DESCRIPTION:Jaarlijkse kunstroute door het centrum en kunstmarkt in de beeldentuin. De datum voor 2027 is nog niet bekend\; meestal het eerste weekend van juni.\nhttps://zostere.nl/aktiviteite/2027-06-05-kunstroute-en-kunstmarkt-datum-onder-voorbehoud/
+URL:https://zostere.nl/aktiviteite/2027-06-05-kunstroute-en-kunstmarkt-datum-onder-voorbehoud/
+END:VEVENT
+END:VCALENDAR

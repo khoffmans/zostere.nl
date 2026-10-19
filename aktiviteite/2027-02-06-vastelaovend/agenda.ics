@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-02-06-vastelaovend@zostere.nl
+DTSTAMP:20270206T000000Z
+DTSTART;VALUE=DATE:20270206
+DTEND;VALUE=DATE:20270210
+SUMMARY:Vastelaovend
+LOCATION:Zöstere\, Susteren
+DESCRIPTION:Vier daag vastelaovend in Zöstere. Het precieze programma volgt.\nhttps://zostere.nl/aktiviteite/2027-02-06-vastelaovend/
+URL:https://zostere.nl/aktiviteite/2027-02-06-vastelaovend/
+END:VEVENT
+END:VCALENDAR

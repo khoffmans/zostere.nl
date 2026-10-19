@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-02-09-aafsjeete-graasboer@zostere.nl
+DTSTAMP:20270209T000000Z
+DTSTART;TZID=Europe/Amsterdam:20270209T201100
+DTEND;TZID=Europe/Amsterdam:20270209T231100
+SUMMARY:Aafsjeete Graasboer
+LOCATION:Raadhuisplein\, Susteren
+DESCRIPTION:Het afsluiten van de vastelaovend.\nhttps://zostere.nl/aktiviteite/2027-02-09-aafsjeete-graasboer/
+URL:https://zostere.nl/aktiviteite/2027-02-09-aafsjeete-graasboer/
+END:VEVENT
+END:VCALENDAR

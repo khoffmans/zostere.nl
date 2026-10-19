@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2026-11-14-sjlagerverkeezing@zostere.nl
+DTSTAMP:20261114T000000Z
+DTSTART;TZID=Europe/Amsterdam:20261114T201100
+DTEND;TZID=Europe/Amsterdam:20261114T231100
+SUMMARY:Sjlagerverkeezing
+LOCATION:Café Bie Alois\, Susteren
+DESCRIPTION:De verkiezing van de vastelaovesschlager van de Graasboerriek.\nhttps://zostere.nl/aktiviteite/2026-11-14-sjlagerverkeezing/
+URL:https://zostere.nl/aktiviteite/2026-11-14-sjlagerverkeezing/
+END:VEVENT
+END:VCALENDAR

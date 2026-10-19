@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2026-12-11-kerst-toeptoernooi@zostere.nl
+DTSTAMP:20261211T000000Z
+DTSTART;VALUE=DATE:20261211
+DTEND;VALUE=DATE:20261212
+SUMMARY:Kerst Toeptoernooi
+LOCATION:SCS Susteren\, Susteren
+DESCRIPTION:Kersttoeptoernooi bij voetbalclub SCS Susteren.\nhttps://zostere.nl/aktiviteite/2026-12-11-kerst-toeptoernooi/
+URL:https://zostere.nl/aktiviteite/2026-12-11-kerst-toeptoernooi/
+END:VEVENT
+END:VCALENDAR

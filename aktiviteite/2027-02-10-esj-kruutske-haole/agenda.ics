@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-02-10-esj-kruutske-haole@zostere.nl
+DTSTAMP:20270210T000000Z
+DTSTART;TZID=Europe/Amsterdam:20270210T174500
+DTEND;TZID=Europe/Amsterdam:20270210T204500
+SUMMARY:Esj-kruutske haole
+LOCATION:Kirk Mariaveldj\, Susteren
+DESCRIPTION:Het askruisje halen op Aswoensdag.\nhttps://zostere.nl/aktiviteite/2027-02-10-esj-kruutske-haole/
+URL:https://zostere.nl/aktiviteite/2027-02-10-esj-kruutske-haole/
+END:VEVENT
+END:VCALENDAR

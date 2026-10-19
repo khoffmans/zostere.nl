@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-01-23-recepsie-hoaghede@zostere.nl
+DTSTAMP:20270123T000000Z
+DTSTART;TZID=Europe/Amsterdam:20270123T201100
+DTEND;TZID=Europe/Amsterdam:20270123T231100
+SUMMARY:Recepsie Hoaghede
+LOCATION:D’n Hermeniezaal\, Susteren
+DESCRIPTION:De receptie van de hoogheden van de Graasboerriek.\nhttps://zostere.nl/aktiviteite/2027-01-23-recepsie-hoaghede/
+URL:https://zostere.nl/aktiviteite/2027-01-23-recepsie-hoaghede/
+END:VEVENT
+END:VCALENDAR

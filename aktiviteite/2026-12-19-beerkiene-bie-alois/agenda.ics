@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2026-12-19-beerkiene-bie-alois@zostere.nl
+DTSTAMP:20261219T000000Z
+DTSTART;TZID=Europe/Amsterdam:20261219T140000
+DTEND;TZID=Europe/Amsterdam:20261219T170000
+SUMMARY:Beerkiene bie Alois
+LOCATION:Café Bie Alois\, Susteren
+DESCRIPTION:Kiene veur beer of wien! Kienen (bingo) om bier of wijn\, met drie geheime artiesten. Deuren open om 12.00 uur\, start om 14.00 uur.\nToegang: € 10\nhttps://zostere.nl/aktiviteite/2026-12-19-beerkiene-bie-alois/
+URL:https://zostere.nl/aktiviteite/2026-12-19-beerkiene-bie-alois/
+END:VEVENT
+END:VCALENDAR

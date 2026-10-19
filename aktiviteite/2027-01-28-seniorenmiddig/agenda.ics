@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-01-28-seniorenmiddig@zostere.nl
+DTSTAMP:20270128T000000Z
+DTSTART;VALUE=DATE:20270128
+DTEND;VALUE=DATE:20270129
+SUMMARY:Seniorenmiddig
+LOCATION:D’n Hermeniezaal\, Susteren
+DESCRIPTION:De vastelaovesmiddag voor senioren. De tijd volgt nog.\nhttps://zostere.nl/aktiviteite/2027-01-28-seniorenmiddig/
+URL:https://zostere.nl/aktiviteite/2027-01-28-seniorenmiddig/
+END:VEVENT
+END:VCALENDAR

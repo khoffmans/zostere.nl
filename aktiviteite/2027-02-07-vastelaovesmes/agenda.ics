@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-02-07-vastelaovesmes@zostere.nl
+DTSTAMP:20270207T000000Z
+DTSTART;TZID=Europe/Amsterdam:20270207T120000
+DTEND;TZID=Europe/Amsterdam:20270207T150000
+SUMMARY:Vastelaovesmès
+LOCATION:Amelbergabasiliek\, Susteren
+DESCRIPTION:De vastelaovesmis in de basiliek.\nhttps://zostere.nl/aktiviteite/2027-02-07-vastelaovesmes/
+URL:https://zostere.nl/aktiviteite/2027-02-07-vastelaovesmes/
+END:VEVENT
+END:VCALENDAR

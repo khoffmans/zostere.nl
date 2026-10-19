@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-02-08-de-groate-optoch@zostere.nl
+DTSTAMP:20270208T000000Z
+DTSTART;TZID=Europe/Amsterdam:20270208T141100
+DTEND;TZID=Europe/Amsterdam:20270208T171100
+SUMMARY:De Groate Optoch
+LOCATION:Zöstere\, Susteren
+DESCRIPTION:De grote vastelaovesoptocht door Zöstere.\nhttps://zostere.nl/aktiviteite/2027-02-08-de-groate-optoch/
+URL:https://zostere.nl/aktiviteite/2027-02-08-de-groate-optoch/
+END:VEVENT
+END:VCALENDAR

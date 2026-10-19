@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-01-24-vrouwluujzitting@zostere.nl
+DTSTAMP:20270124T000000Z
+DTSTART;TZID=Europe/Amsterdam:20270124T100000
+DTEND;TZID=Europe/Amsterdam:20270124T130000
+SUMMARY:Vrouwluujzitting
+LOCATION:D’n Hermeniezaal\, Susteren
+DESCRIPTION:De vrouwenzitting van de Graasbörgers.\nhttps://zostere.nl/aktiviteite/2027-01-24-vrouwluujzitting/
+URL:https://zostere.nl/aktiviteite/2027-01-24-vrouwluujzitting/
+END:VEVENT
+END:VCALENDAR

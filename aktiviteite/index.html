@@ -3,83 +3,96 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Aktiviteite – Zöstere.nl</title>
-<meta name="description" content="Wat is d'r te doon in Zöstere? Activiteiten in Susteren: vastelaovend, kirmes, muziek, natuur, kerk en meer.">
+<title>Aktiviteite in Zöstere – agenda van Susteren | Zöstere.nl</title>
+<meta name="description" content="Wat is er te doen in Susteren (Zöstere)? Vastelaovend, kirmes, muziek, sport, kerk en meer, in een overzichtelijke maandkalender.">
+<link rel="canonical" href="https://zostere.nl/aktiviteite/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:site_name" content="Zöstere.nl">
+<meta property="og:title" content="Aktiviteite in Zöstere – agenda van Susteren | Zöstere.nl">
+<meta property="og:description" content="Wat is er te doen in Susteren (Zöstere)? Vastelaovend, kirmes, muziek, sport, kerk en meer, in een overzichtelijke maandkalender.">
+<meta property="og:url" content="https://zostere.nl/aktiviteite/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d5e63'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' text-anchor='middle' fill='%23e3b448'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
-/* Layout: kop met navigatie, filters, activiteiten per maand als lijst met datumblok */
-:root{
-  --paper:#f5f6f2; --sheet:#ffffff; --ink:#1c2629; --muted:#5a676b; --line:#d5dbd8;
-  --maas:#0d5e63; --maas-soft:#e3efee; --goud:#b7860f; --goud-soft:#f7edd3; --warn:#9a4a12;
-  --display:"Zilla Slab",Rockwell,"Roboto Slab",Georgia,serif;
-  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
-  --ui:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-}
-@media (prefers-color-scheme: dark){:root{
-  --paper:#11181a; --sheet:#182124; --ink:#e4ebe9; --muted:#9aa8a9; --line:#2c3a3d;
-  --maas:#63bfc0; --maas-soft:#1b3234; --goud:#e3b448; --goud-soft:#2e2814; --warn:#e8935a; color-scheme:dark}}
-*{box-sizing:border-box}
-[hidden]{display:none!important}
-html,body{margin:0}
-body{background:var(--paper);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.5;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 64px}
-.wrap{max-width:900px;margin:0 auto;display:grid;gap:28px}
+:root{--paper:#f5f6f2;--sheet:#fff;--ink:#1c2629;--muted:#5a676b;--line:#d5dbd8;--maas:#0d5e63;--goud:#b7860f;--goud-soft:#f7edd3;--warn:#9a4a12;--c0:#c62828;--c1:#d9730d;--c2:#7b4fb3;--c3:#3d8b2f;--c4:#2f62a8;--c5:#13867c;--c6:#c2417d;--c7:#8a5a2b;--c8:#68737a;
+--display:"Zilla Slab",Rockwell,"Roboto Slab",Georgia,serif;--body:"Source Serif 4",Georgia,"Times New Roman",serif;--ui:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+@media (prefers-color-scheme:dark){:root{--paper:#11181a;--sheet:#182124;--ink:#e4ebe9;--muted:#9aa8a9;--line:#2c3a3d;--maas:#63bfc0;--goud:#e3b448;--goud-soft:#2e2814;--warn:#e8935a;--c0:#ef6c6c;--c1:#f0a050;--c2:#b391e0;--c3:#7fc46f;--c4:#7aa6e6;--c5:#4fc2b6;--c6:#ec84b5;--c7:#c99a6a;--c8:#a3adb3;color-scheme:dark}}
+*{box-sizing:border-box}[hidden]{display:none!important}html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.5;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 64px}
+.wrap{max-width:960px;margin:0 auto;display:grid;gap:28px}
 nav.site{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;font-size:14px}
 nav.site .home{font-family:var(--display);font-weight:700;font-size:20px;color:var(--ink);text-decoration:none;margin-right:8px}
-nav.site .home span{color:var(--goud)}
-nav.site a{color:var(--muted);text-decoration:none}
-nav.site a:hover,nav.site a[aria-current="page"]{color:var(--maas)}
-nav.site a[aria-current="page"]{font-weight:600}
-header{display:grid;gap:10px}
-h1{font-family:var(--display);font-weight:700;font-size:clamp(34px,6vw,52px);line-height:1;margin:0}
-h1 .o{color:var(--goud)}
+nav.site .home span{color:var(--goud)}nav.site a{color:var(--muted);text-decoration:none}
+nav.site a:hover,nav.site a[aria-current="page"]{color:var(--maas)}nav.site a[aria-current="page"]{font-weight:600}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(32px,6vw,52px);line-height:1.05;margin:0;text-wrap:balance}
+h2{font-family:var(--display);font-weight:600;font-size:24px;margin:0;text-wrap:balance}
 .lede{font-family:var(--body);font-size:17px;color:var(--muted);margin:0;max-width:62ch}
-.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{font-family:var(--ui);font-size:13px;border:1px solid var(--line);border-radius:999px;padding:4px 11px;background:transparent;color:var(--muted);cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--maas);border-color:var(--maas);color:var(--sheet)}
-.chip:hover{border-color:var(--maas)}
+a{color:var(--maas)}
 button{font-family:var(--ui);font-size:14px;font-weight:500;border-radius:4px;border:1px solid var(--line);background:var(--sheet);color:var(--ink);padding:8px 14px;cursor:pointer}
-button:hover{border-color:var(--maas)}
-button.primary{background:var(--maas);border-color:var(--maas);color:var(--sheet);font-weight:600}
+button:hover{border-color:var(--maas)}button.primary,a.btn.primary{background:var(--maas);border-color:var(--maas);color:var(--sheet);font-weight:600}
 button:disabled{opacity:.5;cursor:default}
-button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--maas);outline-offset:2px}
-.month{display:grid;gap:0}
-.month h2{font-family:var(--display);font-weight:600;font-size:22px;margin:0 0 6px;text-transform:capitalize}
-.ev{display:grid;grid-template-columns:64px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line)}
-.date{background:var(--sheet);border:1px solid var(--line);border-radius:6px;text-align:center;padding:6px 0;align-self:start;font-variant-numeric:tabular-nums}
+a.btn{display:inline-block;font-size:14px;font-weight:500;border-radius:4px;border:1px solid var(--line);background:var(--sheet);color:var(--ink);padding:8px 14px;text-decoration:none}
+a.btn:hover{border-color:var(--maas)}
+:focus-visible{outline:2px solid var(--maas);outline-offset:2px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.tag i{width:10px;height:10px;border-radius:3px;background:var(--k);display:inline-block}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;border:1px solid var(--line);border-radius:999px;padding:4px 11px;background:transparent;color:var(--muted);cursor:pointer}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--k)}
+.chip[aria-pressed="true"]{border-color:var(--ink);color:var(--ink);background:var(--sheet);font-weight:600}
+/* kalender */
+.cal{background:var(--sheet);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.cal-head{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid var(--line);gap:8px}
+.cal-head h2{font-size:22px;text-transform:capitalize}
+.cal-head button{padding:6px 12px}
+.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.wd{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:6px 8px;border-bottom:1px solid var(--line)}
+.day{min-height:92px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:4px 5px;display:flex;flex-direction:column;gap:3px;min-width:0;background:none;border-top:0;border-left:0;border-radius:0;text-align:left;font:inherit;color:inherit;cursor:default}
+.day:nth-child(7n){border-right:0}
+.day.leeg{background:var(--paper)}
+.day .n{font-size:12px;font-variant-numeric:tabular-nums;color:var(--muted);line-height:1.2}
+.day.vandaag .n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--maas);color:var(--sheet);font-weight:600}
+.pill{display:block;font-size:11.5px;line-height:1.25;padding:2px 5px;border-radius:3px;background:color-mix(in srgb,var(--k) 16%,transparent);border-left:3px solid var(--k);color:var(--ink);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill:hover{background:color-mix(in srgb,var(--k) 28%,transparent)}
+.dots{display:none;gap:3px;flex-wrap:wrap}
+.dots i{width:7px;height:7px;border-radius:50%;background:var(--k)}
+.daglijst{padding:12px;border-top:1px solid var(--line);display:grid;gap:6px}
+.daglijst h3{font-family:var(--display);font-size:17px;margin:0}
+@media (max-width:640px){.day{min-height:54px;cursor:pointer}.pill{display:none}.dots{display:flex}.day[aria-pressed="true"]{background:var(--goud-soft)}}
+/* lijst */
+.month{display:grid}.month h2{font-size:22px;margin:0 0 6px;text-transform:capitalize}
+.ev{display:grid;grid-template-columns:64px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line);text-decoration:none;color:inherit}
+.ev:hover .t{color:var(--maas);text-decoration:underline}
+.date{background:var(--sheet);border:1px solid var(--line);border-top:4px solid var(--k);border-radius:6px;text-align:center;padding:5px 0;align-self:start;font-variant-numeric:tabular-nums}
 .date .d{font-family:var(--display);font-weight:700;font-size:26px;line-height:1}
-.date .m{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.date .w{font-size:11px;color:var(--muted)}
-.ev .t{font-family:var(--display);font-weight:600;font-size:20px;line-height:1.2;margin:0}
-.ev .meta{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:4px}
-.ev .tx{font-family:var(--body);font-size:16px;margin:6px 0 0;max-width:65ch;white-space:pre-line}
-.ev .acts{display:flex;gap:12px;margin-top:8px;font-size:13px;flex-wrap:wrap}
-.ev .acts a,.ev .acts button{color:var(--maas);background:none;border:0;padding:0;font-size:13px;font-weight:500;text-decoration:underline;cursor:pointer}
-.tag{display:inline-block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:2px 7px;border-radius:3px;background:var(--goud-soft);color:var(--goud)}
+.date .m,.date .w{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ev .t{font-family:var(--display);font-weight:600;font-size:20px;line-height:1.2;margin:2px 0 0}
+.ev .meta{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:3px}
 .empty{font-family:var(--body);color:var(--muted);font-size:16px;padding:20px 0;border-top:1px solid var(--line)}
-.status{font-size:13px;color:var(--muted);min-height:1.2em}
-.status.err{color:var(--warn)}
+/* detailpagina */
+.crumb{font-size:13px;color:var(--muted)}.crumb a{color:var(--muted)}
+.feiten{display:grid;grid-template-columns:max-content 1fr;gap:8px 18px;margin:0;padding:16px 18px;background:var(--sheet);border:1px solid var(--line);border-left:4px solid var(--k);border-radius:6px;font-size:15px}
+.feiten dt{color:var(--muted);font-size:13px;padding-top:2px}.feiten dd{margin:0;font-weight:500}
+.tekst{font-family:var(--body);font-size:18px;line-height:1.6;max-width:65ch;margin:0;white-space:pre-line}
+.knoppen{display:flex;flex-wrap:wrap;gap:8px}
+.voorbij{padding:10px 14px;border-radius:6px;background:var(--goud-soft);color:var(--goud);font-weight:600;font-size:14px}
+.status{font-size:13px;color:var(--muted);min-height:1.2em}.status.err{color:var(--warn)}
 dialog{border:1px solid var(--line);border-radius:8px;padding:0;background:var(--sheet);color:var(--ink);width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 32px)}
 dialog::backdrop{background:rgba(10,16,18,.55)}
-.dlg{display:grid;gap:12px;padding:20px}
-.dlg h3{font-family:var(--display);font-weight:600;font-size:22px;margin:0}
-.dlg .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media (max-width:480px){.dlg .row2{grid-template-columns:1fr}}
-.field{display:grid;gap:4px;min-width:0}
-.field label{font-size:13px;font-weight:600}
-.opt{font-weight:400;color:var(--muted)}
+.dlg{display:grid;gap:12px;padding:20px}.dlg h3{font-family:var(--display);font-weight:600;font-size:22px;margin:0}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media (max-width:480px){.row2{grid-template-columns:1fr}}
+.field{display:grid;gap:4px;min-width:0}.field label{font-size:13px;font-weight:600}.opt{font-weight:400;color:var(--muted)}
 .field input,.field select,.field textarea{font-family:var(--ui);font-size:16px;padding:8px 10px;border:1px solid var(--line);border-radius:4px;background:var(--paper);color:var(--ink);width:100%}
 .field textarea{min-height:90px;resize:vertical;font-family:var(--body)}
-.actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;align-items:center}
-.actions .status{flex:1}
+.actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;align-items:center}.actions .status{flex:1}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
-footer a{color:var(--muted)}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}footer a{color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.pill,.chip{transition:background .15s}}
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"url":"https://zostere.nl/aktiviteite/2026-10-30-feestavond-dames/","name":"Feestavond Dames"},{"@type":"ListItem","position":2,"url":"https://zostere.nl/aktiviteite/2026-11-13-aopening-vastelaovend-graasboerriek/","name":"Äöpening vastelaovend Graasboerriek"},{"@type":"ListItem","position":3,"url":"https://zostere.nl/aktiviteite/2026-11-14-sjlagerverkeezing/","name":"Sjlagerverkeezing"},{"@type":"ListItem","position":4,"url":"https://zostere.nl/aktiviteite/2026-11-15-boake-van-t-lache/","name":"Böäke van ’t Lache"},{"@type":"ListItem","position":5,"url":"https://zostere.nl/aktiviteite/2026-11-20-winter-bbq-pubquiz/","name":"Winter BBQ + PubQuiz"},{"@type":"ListItem","position":6,"url":"https://zostere.nl/aktiviteite/2026-11-25-lezing-over-sint-nicolaas/","name":"Lezing over Sint-Nicolaas"},{"@type":"ListItem","position":7,"url":"https://zostere.nl/aktiviteite/2026-11-28-sinterklaasviering-jeugd/","name":"Sinterklaasviering Jeugd"},{"@type":"ListItem","position":8,"url":"https://zostere.nl/aktiviteite/2026-12-11-kerst-toeptoernooi/","name":"Kerst Toeptoernooi"},{"@type":"ListItem","position":9,"url":"https://zostere.nl/aktiviteite/2026-12-19-beerkiene-bie-alois/","name":"Beerkiene bie Alois"},{"@type":"ListItem","position":10,"url":"https://zostere.nl/aktiviteite/2026-12-27-dart-toernooi/","name":"Dart Toernooi"},{"@type":"ListItem","position":11,"url":"https://zostere.nl/aktiviteite/2027-01-03-nieuwjaarswandeling-receptie/","name":"Nieuwjaarswandeling + Receptie"},{"@type":"ListItem","position":12,"url":"https://zostere.nl/aktiviteite/2027-01-08-kleedlokalenparty/","name":"Kleedlokalenparty"},{"@type":"ListItem","position":13,"url":"https://zostere.nl/aktiviteite/2027-01-09-galazitting/","name":"Galazitting"},{"@type":"ListItem","position":14,"url":"https://zostere.nl/aktiviteite/2027-01-10-aanbeeje-graasboer/","name":"Aanbeeje Graasboer"},{"@type":"ListItem","position":15,"url":"https://zostere.nl/aktiviteite/2027-01-10-auwt-prinse-middig/","name":"Auwt Prinse-middig"},{"@type":"ListItem","position":16,"url":"https://zostere.nl/aktiviteite/2027-01-17-kenjerzitting/","name":"Kènjerzitting"},{"@type":"ListItem","position":17,"url":"https://zostere.nl/aktiviteite/2027-01-23-recepsie-hoaghede/","name":"Recepsie Hoaghede"},{"@type":"ListItem","position":18,"url":"https://zostere.nl/aktiviteite/2027-01-24-vrouwluujzitting/","name":"Vrouwluujzitting"},{"@type":"ListItem","position":19,"url":"https://zostere.nl/aktiviteite/2027-01-28-seniorenmiddig/","name":"Seniorenmiddig"},{"@type":"ListItem","position":20,"url":"https://zostere.nl/aktiviteite/2027-01-30-bombarie-basilca/","name":"Bombarie Basilca"},{"@type":"ListItem","position":21,"url":"https://zostere.nl/aktiviteite/2027-02-05-sjoale-optoch/","name":"Sjoale-optoch"},{"@type":"ListItem","position":22,"url":"https://zostere.nl/aktiviteite/2027-02-05-vastelaovesaovend-scs-en-noav/","name":"Vastelaovesaovend SCS en NOAV"},{"@type":"ListItem","position":23,"url":"https://zostere.nl/aktiviteite/2027-02-06-vastelaovend/","name":"Vastelaovend"},{"@type":"ListItem","position":24,"url":"https://zostere.nl/aktiviteite/2027-02-06-graasborgersbal/","name":"Graasbörgersbal"},{"@type":"ListItem","position":25,"url":"https://zostere.nl/aktiviteite/2027-02-07-vastelaovesmes/","name":"Vastelaovesmès"},{"@type":"ListItem","position":26,"url":"https://zostere.nl/aktiviteite/2027-02-07-traotte-toch/","name":"Träötte-toch"},{"@type":"ListItem","position":27,"url":"https://zostere.nl/aktiviteite/2027-02-08-de-groate-optoch/","name":"De Groate Optoch"},{"@type":"ListItem","position":28,"url":"https://zostere.nl/aktiviteite/2027-02-09-de-leste-runj/","name":"De Lèste Runj"},{"@type":"ListItem","position":29,"url":"https://zostere.nl/aktiviteite/2027-02-09-aafsjeete-graasboer/","name":"Aafsjeete Graasboer"},{"@type":"ListItem","position":30,"url":"https://zostere.nl/aktiviteite/2027-02-10-hieeringbiete/","name":"Hieëringbiete"},{"@type":"ListItem","position":31,"url":"https://zostere.nl/aktiviteite/2027-02-10-esj-kruutske-haole/","name":"Esj-kruutske haole"},{"@type":"ListItem","position":32,"url":"https://zostere.nl/aktiviteite/2027-06-05-kunstroute-en-kunstmarkt-datum-onder-voorbehoud/","name":"Kunstroute & Kunstmarkt (datum onder voorbehoud)"}]}</script>
 </head>
 <body>
 <div class="wrap">
@@ -88,22 +101,188 @@ footer a{color:var(--muted)}
     <a href="/vertaler/">Sjrief Zösters</a>
     <a href="/aktiviteite/" aria-current="page">Aktiviteite</a>
   </nav>
-
-  <header>
-    <h1>Aktiviteite<span class="o">.</span></h1>
-    <p class="lede">Wat is d’r te doon in Zöstere? Vastelaovend, kirmes, meziek, wanjele en alles wat Susteren verder te bieden heeft. Organiseer je zelf iets? Meld het aan.</p>
+  <header style="display:grid;gap:10px">
+    <h1>Aktiviteite<span style="color:var(--goud)">.</span></h1>
+    <p class="lede">Wat is d’r te doon in Zöstere? Vastelaovend, kirmes, meziek, sport en alles wat Susteren verder te bieden heeft. Organiseer je zelf iets? <a href="#aanmelden" id="meld-link">Meld het aan</a>.</p>
   </header>
 
-  <div class="bar">
-    <div class="chips" id="chips" aria-label="Filter op soort"></div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between">
+    <div class="chips" id="chips" aria-label="Filter op soort"><button type="button" class="chip" data-cat="" aria-pressed="true">Alles</button><button type="button" class="chip" style="--k:var(--c0)" data-cat="Vastelaovend" aria-pressed="false"><i></i>Vastelaovend</button><button type="button" class="chip" style="--k:var(--c1)" data-cat="Kirmes &amp; fieëste" aria-pressed="false"><i></i>Kirmes &amp; fieëste</button><button type="button" class="chip" style="--k:var(--c2)" data-cat="Meziek &amp; cultuur" aria-pressed="false"><i></i>Meziek &amp; cultuur</button><button type="button" class="chip" style="--k:var(--c3)" data-cat="Natuur &amp; wanjele" aria-pressed="false"><i></i>Natuur &amp; wanjele</button><button type="button" class="chip" style="--k:var(--c4)" data-cat="Kirk" aria-pressed="false"><i></i>Kirk</button><button type="button" class="chip" style="--k:var(--c5)" data-cat="Sport" aria-pressed="false"><i></i>Sport</button><button type="button" class="chip" style="--k:var(--c6)" data-cat="Kènjer" aria-pressed="false"><i></i>Kènjer</button><button type="button" class="chip" style="--k:var(--c7)" data-cat="Markt" aria-pressed="false"><i></i>Markt</button><button type="button" class="chip" style="--k:var(--c8)" data-cat="Anger" aria-pressed="false"><i></i>Anger</button></div>
     <button class="primary" id="meld" type="button">Aktiviteit aanmelden</button>
   </div>
 
-  <div id="lijst" aria-live="polite"><p class="empty" id="laden">Aktiviteite laden…</p></div>
+  <section class="cal" aria-label="Maandkalender">
+    <div class="cal-head"><button type="button" id="vorige" aria-label="Vorige maand">←</button><h2 id="maandnaam" aria-live="polite"></h2><button type="button" id="volgende" aria-label="Volgende maand">→</button></div>
+    <div class="grid" id="grid"></div>
+    <div class="daglijst" id="daglijst" hidden></div>
+  </section>
 
-  <footer>Ontbreekt er iets of klopt er iets niet? Meld het via <em>Aktiviteit aanmelden</em> of mail naar <a href="mailto:info@zostere.nl">info@zostere.nl</a>. · <a href="/privacy/">Privacy</a></footer>
+  <section id="lijst" aria-label="Komende aktiviteite" style="display:grid;gap:22px">
+    <section class="month" data-maand="2026-9"><h2>oktober 2026</h2><a class="ev" href="/aktiviteite/2026-10-30-feestavond-dames/" style="--k:var(--c5)" data-cat="Sport">
+      <div class="date" aria-hidden="true"><div class="w">vr</div><div class="d">30</div><div class="m">okt</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Sport</span>
+        <h3 class="t">Feestavond Dames</h3>
+        <div class="meta"><span>vrijdag 30 oktober 2026</span><span>SCS Susteren</span><span>SCS Susteren</span></div></div>
+    </a></section><section class="month" data-maand="2026-10"><h2>november 2026</h2><a class="ev" href="/aktiviteite/2026-11-13-aopening-vastelaovend-graasboerriek/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">vr</div><div class="d">13</div><div class="m">nov</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Äöpening vastelaovend Graasboerriek</h3>
+        <div class="meta"><span>vrijdag 13 november 2026 · 20:11</span><span>De Graasboer, Mèrt</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2026-11-14-sjlagerverkeezing/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">za</div><div class="d">14</div><div class="m">nov</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Sjlagerverkeezing</h3>
+        <div class="meta"><span>zaterdag 14 november 2026 · 20:11</span><span>Café Bie Alois</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2026-11-15-boake-van-t-lache/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">zo</div><div class="d">15</div><div class="m">nov</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Böäke van ’t Lache</h3>
+        <div class="meta"><span>zondag 15 november 2026 · 14:11</span><span>Zaal Mirage</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2026-11-20-winter-bbq-pubquiz/" style="--k:var(--c5)" data-cat="Sport">
+      <div class="date" aria-hidden="true"><div class="w">vr</div><div class="d">20</div><div class="m">nov</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Sport</span>
+        <h3 class="t">Winter BBQ + PubQuiz</h3>
+        <div class="meta"><span>vrijdag 20 november 2026</span><span>SCS Susteren</span><span>SCS Susteren</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2026-11-25-lezing-over-sint-nicolaas/" style="--k:var(--c4)" data-cat="Kirk">
+      <div class="date" aria-hidden="true"><div class="w">wo</div><div class="d">25</div><div class="m">nov</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Kirk</span>
+        <h3 class="t">Lezing over Sint-Nicolaas</h3>
+        <div class="meta"><span>woensdag 25 november 2026</span><span>Susteren</span><span>Parochie Christus Salvator</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2026-11-28-sinterklaasviering-jeugd/" style="--k:var(--c6)" data-cat="Kènjer">
+      <div class="date" aria-hidden="true"><div class="w">za</div><div class="d">28</div><div class="m">nov</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Kènjer</span>
+        <h3 class="t">Sinterklaasviering Jeugd</h3>
+        <div class="meta"><span>zaterdag 28 november 2026</span><span>SCS Susteren</span><span>SCS Susteren</span></div></div>
+    </a></section><section class="month" data-maand="2026-11"><h2>december 2026</h2><a class="ev" href="/aktiviteite/2026-12-11-kerst-toeptoernooi/" style="--k:var(--c5)" data-cat="Sport">
+      <div class="date" aria-hidden="true"><div class="w">vr</div><div class="d">11</div><div class="m">dec</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Sport</span>
+        <h3 class="t">Kerst Toeptoernooi</h3>
+        <div class="meta"><span>vrijdag 11 december 2026</span><span>SCS Susteren</span><span>SCS Susteren</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2026-12-19-beerkiene-bie-alois/" style="--k:var(--c1)" data-cat="Kirmes &amp; fieëste">
+      <div class="date" aria-hidden="true"><div class="w">za</div><div class="d">19</div><div class="m">dec</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Kirmes &amp; fieëste</span>
+        <h3 class="t">Beerkiene bie Alois</h3>
+        <div class="meta"><span>zaterdag 19 december 2026 · 14:00</span><span>Café Bie Alois</span><span>Café Bie Alois</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2026-12-27-dart-toernooi/" style="--k:var(--c5)" data-cat="Sport">
+      <div class="date" aria-hidden="true"><div class="w">zo</div><div class="d">27</div><div class="m">dec</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Sport</span>
+        <h3 class="t">Dart Toernooi</h3>
+        <div class="meta"><span>zondag 27 december 2026</span><span>SCS Susteren</span><span>SCS Susteren</span></div></div>
+    </a></section><section class="month" data-maand="2027-0"><h2>januari 2027</h2><a class="ev" href="/aktiviteite/2027-01-03-nieuwjaarswandeling-receptie/" style="--k:var(--c3)" data-cat="Natuur &amp; wanjele">
+      <div class="date" aria-hidden="true"><div class="w">zo</div><div class="d">3</div><div class="m">jan</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Natuur &amp; wanjele</span>
+        <h3 class="t">Nieuwjaarswandeling + Receptie</h3>
+        <div class="meta"><span>zondag 3 januari 2027</span><span>SCS Susteren</span><span>SCS Susteren</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-01-08-kleedlokalenparty/" style="--k:var(--c5)" data-cat="Sport">
+      <div class="date" aria-hidden="true"><div class="w">vr</div><div class="d">8</div><div class="m">jan</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Sport</span>
+        <h3 class="t">Kleedlokalenparty</h3>
+        <div class="meta"><span>vrijdag 8 januari 2027</span><span>SCS Susteren</span><span>SCS Susteren</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-01-09-galazitting/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">za</div><div class="d">9</div><div class="m">jan</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Galazitting</h3>
+        <div class="meta"><span>zaterdag 9 januari 2027 · 20:11</span><span>D’n Hermeniezaal</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-01-10-aanbeeje-graasboer/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">zo</div><div class="d">10</div><div class="m">jan</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Aanbeeje Graasboer</h3>
+        <div class="meta"><span>zondag 10 januari 2027 · 10:30</span><span>Nuuje Prins</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-01-10-auwt-prinse-middig/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">zo</div><div class="d">10</div><div class="m">jan</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Auwt Prinse-middig</h3>
+        <div class="meta"><span>zondag 10 januari 2027 · 15:11</span><span>Café Hermeniezaal</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-01-17-kenjerzitting/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">zo</div><div class="d">17</div><div class="m">jan</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Kènjerzitting</h3>
+        <div class="meta"><span>zondag 17 januari 2027 · 14:11</span><span>Zaal Mirage</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-01-23-recepsie-hoaghede/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">za</div><div class="d">23</div><div class="m">jan</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Recepsie Hoaghede</h3>
+        <div class="meta"><span>zaterdag 23 januari 2027 · 20:11</span><span>D’n Hermeniezaal</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-01-24-vrouwluujzitting/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">zo</div><div class="d">24</div><div class="m">jan</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Vrouwluujzitting</h3>
+        <div class="meta"><span>zondag 24 januari 2027 · 10:00</span><span>D’n Hermeniezaal</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-01-28-seniorenmiddig/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">do</div><div class="d">28</div><div class="m">jan</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Seniorenmiddig</h3>
+        <div class="meta"><span>donderdag 28 januari 2027</span><span>D’n Hermeniezaal</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-01-30-bombarie-basilca/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">za</div><div class="d">30</div><div class="m">jan</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Bombarie Basilca</h3>
+        <div class="meta"><span>zaterdag 30 januari 2027 · 15:11</span><span>Salvatorplein</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a></section><section class="month" data-maand="2027-1"><h2>februari 2027</h2><a class="ev" href="/aktiviteite/2027-02-05-sjoale-optoch/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">vr</div><div class="d">5</div><div class="m">feb</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Sjoale-optoch</h3>
+        <div class="meta"><span>vrijdag 5 februari 2027 · 09:11</span><span>Raadhuisplein</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-02-05-vastelaovesaovend-scs-en-noav/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">vr</div><div class="d">5</div><div class="m">feb</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Vastelaovesaovend SCS en NOAV</h3>
+        <div class="meta"><span>vrijdag 5 februari 2027 · 20:11</span><span>D’n Hermeniezaal</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-02-06-vastelaovend/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">za</div><div class="d">6</div><div class="m">feb</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Vastelaovend</h3>
+        <div class="meta"><span>za 6 februari t/m dinsdag 9 februari 2027</span><span>Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-02-06-graasborgersbal/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">za</div><div class="d">6</div><div class="m">feb</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Graasbörgersbal</h3>
+        <div class="meta"><span>zaterdag 6 februari 2027 · 20:11</span><span>Keffees Zöstere</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-02-07-vastelaovesmes/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">zo</div><div class="d">7</div><div class="m">feb</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Vastelaovesmès</h3>
+        <div class="meta"><span>zondag 7 februari 2027 · 12:00</span><span>Amelbergabasiliek</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-02-07-traotte-toch/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">zo</div><div class="d">7</div><div class="m">feb</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Träötte-toch</h3>
+        <div class="meta"><span>zondag 7 februari 2027 · 14:11</span><span>Keffees Zöstere</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-02-08-de-groate-optoch/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">ma</div><div class="d">8</div><div class="m">feb</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">De Groate Optoch</h3>
+        <div class="meta"><span>maandag 8 februari 2027 · 14:11</span><span>Zöstere</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-02-09-de-leste-runj/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">di</div><div class="d">9</div><div class="m">feb</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">De Lèste Runj</h3>
+        <div class="meta"><span>dinsdag 9 februari 2027 · 14:11</span><span>Zöstere</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-02-09-aafsjeete-graasboer/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">di</div><div class="d">9</div><div class="m">feb</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Aafsjeete Graasboer</h3>
+        <div class="meta"><span>dinsdag 9 februari 2027 · 20:11</span><span>Raadhuisplein</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-02-10-hieeringbiete/" style="--k:var(--c0)" data-cat="Vastelaovend">
+      <div class="date" aria-hidden="true"><div class="w">wo</div><div class="d">10</div><div class="m">feb</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Vastelaovend</span>
+        <h3 class="t">Hieëringbiete</h3>
+        <div class="meta"><span>woensdag 10 februari 2027 · 16:00</span><span>Keffees Zöstere</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a><a class="ev" href="/aktiviteite/2027-02-10-esj-kruutske-haole/" style="--k:var(--c4)" data-cat="Kirk">
+      <div class="date" aria-hidden="true"><div class="w">wo</div><div class="d">10</div><div class="m">feb</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Kirk</span>
+        <h3 class="t">Esj-kruutske haole</h3>
+        <div class="meta"><span>woensdag 10 februari 2027 · 17:45</span><span>Kirk Mariaveldj</span><span>KV De Graasbörgers Zöstere</span></div></div>
+    </a></section><section class="month" data-maand="2027-5"><h2>juni 2027</h2><a class="ev" href="/aktiviteite/2027-06-05-kunstroute-en-kunstmarkt-datum-onder-voorbehoud/" style="--k:var(--c2)" data-cat="Meziek &amp; cultuur">
+      <div class="date" aria-hidden="true"><div class="w">za</div><div class="d">5</div><div class="m">jun</div></div>
+      <div style="min-width:0"><span class="tag"><i></i>Meziek &amp; cultuur</span>
+        <h3 class="t">Kunstroute &amp; Kunstmarkt (datum onder voorbehoud)</h3>
+        <div class="meta"><span>za 5 juni t/m zondag 6 juni 2027</span><span>Centrum en Beeldentuin Suestra, achter de Amelbergabasiliek</span><span>Kunstgroep Swentibold</span></div></div>
+    </a></section>
+  </section>
+
+  <footer>Ontbreekt er iets of klopt er iets niet? Meld het via <a href="/aktiviteite/#aanmelden">Aktiviteit aanmelden</a> of mail naar <a href="mailto:info@zostere.nl">info@zostere.nl</a>. · <a href="/privacy/">Privacy</a></footer>
 </div>
-
 <dialog id="dlg" aria-labelledby="dlg-h">
   <form class="dlg" id="form" method="dialog" novalidate>
     <h3 id="dlg-h">Aktiviteit aanmelden</h3>
@@ -116,7 +295,7 @@ footer a{color:var(--muted)}
     </div>
     <div class="row2">
       <div class="field"><label for="f-tijd">Tijd <span class="opt">(bijv. 19:30)</span></label><input type="text" id="f-tijd" maxlength="40"></div>
-      <div class="field"><label for="f-cat">Soort</label><select id="f-cat"></select></div>
+      <div class="field"><label for="f-cat">Soort</label><select id="f-cat"><option>Vastelaovend</option><option>Kirmes &amp; fieëste</option><option>Meziek &amp; cultuur</option><option>Natuur &amp; wanjele</option><option>Kirk</option><option>Sport</option><option>Kènjer</option><option>Markt</option><option>Anger</option></select></div>
     </div>
     <div class="field"><label for="f-plaats">Plaats</label><input type="text" id="f-plaats" maxlength="150" required placeholder="bijv. Amelbergabasiliek, Markt 1"></div>
     <div class="field"><label for="f-org">Organisator</label><input type="text" id="f-org" maxlength="120" required placeholder="vereniging of naam"></div>
@@ -126,115 +305,80 @@ footer a{color:var(--muted)}
     <div class="actions"><span class="status" id="f-st"></span><button type="button" id="f-annuleer">Annuleren</button><button type="submit" class="primary" id="f-stuur">Aanmelden</button></div>
   </form>
 </dialog>
-
 <script>
 (function(){
 "use strict";
-const API='https://script.google.com/macros/s/AKfycbw3Zu2mL3GQAaLOqeE8wQuM0bn3Zt2biqDMkbFcW6qHO6Y5ZCPFBf1uwCnFH-mS_zQ/exec';
-const CATS=['Vastelaovend','Kirmes & fieëste','Meziek & cultuur','Natuur & wanjele','Kirk','Sport','Kènjer','Markt','Anger'];
-const $=id=>document.getElementById(id);
-const MAAND=['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
-const DAG=['zo','ma','di','wo','do','vr','za'];
-let ITEMS=[], filter='';
-
-async function api(action,data){
-  let r;
-  try{ r=await fetch(API,{method:'POST',headers:{'content-type':'text/plain;charset=utf-8'},body:JSON.stringify(Object.assign({action},data||{})),redirect:'follow'}); }
-  catch{ throw {code:'offline'}; }
-  let j=null; try{ j=await r.json(); }catch{}
-  if(!j) throw {code:'upstream'};
-  if(!j.ok) throw {code:j.code||'upstream'};
-  return j;
-}
-const pd=s=>{ const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); };
-function el(tag,cls,txt){ const e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e; }
-
-function datumTekst(a){
-  const d=pd(a.datum);
-  let t=DAG[d.getDay()]+' '+d.getDate()+' '+MAAND[d.getMonth()];
-  if(a.eind&&a.eind!==a.datum){ const e=pd(a.eind); t+=' t/m '+DAG[e.getDay()]+' '+e.getDate()+' '+MAAND[e.getMonth()]; }
-  return t;
-}
-
-function renderChips(){
-  const box=$('chips'); box.textContent='';
-  const aanwezig=new Set(ITEMS.map(a=>a.cat));
-  [''].concat(CATS.filter(c=>aanwezig.has(c))).forEach(c=>{
-    const b=el('button','chip',c||'Alles'); b.type='button'; b.setAttribute('aria-pressed',String(filter===c));
-    b.onclick=()=>{ filter=c; renderChips(); renderLijst(); }; box.append(b);
-  });
-}
-
-function renderLijst(){
-  const box=$('lijst'); box.textContent='';
-  const items=ITEMS.filter(a=>!filter||a.cat===filter);
-  if(!items.length){ box.append(el('p','empty',ITEMS.length?'Geen aktiviteite in deze categorie.':'Er staan nog geen aktiviteite in de agenda. Weet jij er een? Meld hem aan!')); return; }
-  let huidig='', groep=null;
-  items.forEach(a=>{
-    const d=pd(a.datum); const key=d.getFullYear()+'-'+d.getMonth();
-    if(key!==huidig){ huidig=key; groep=el('section','month'); groep.append(el('h2',null,MAAND[d.getMonth()]+' '+d.getFullYear())); box.append(groep); }
-    const ev=el('article','ev');
-    const db=el('div','date'); db.append(el('div','w',DAG[d.getDay()]),el('div','d',String(d.getDate())),el('div','m',MAAND[d.getMonth()].slice(0,3)));
-    const body=el('div'); body.style.minWidth='0';
-    body.append(el('span','tag',a.cat));
-    const h=el('h3','t',a.titel); h.style.marginTop='4px'; body.append(h);
-    const meta=el('div','meta');
-    meta.append(el('span',null,datumTekst(a)+(a.tijd?' · '+a.tijd:'')));
-    if(a.plaats) meta.append(el('span',null,a.plaats));
-    if(a.org) meta.append(el('span',null,a.org));
-    body.append(meta);
-    if(a.tekst) body.append(el('p','tx',a.tekst));
-    const acts=el('div','acts');
-    if(a.link){ const l=el('a',null,'Meer info'); l.href=a.link; l.target='_blank'; l.rel='noopener'; acts.append(l); }
-    const ics=el('button',null,'Zet in mijn agenda'); ics.type='button'; ics.onclick=()=>downloadIcs(a); acts.append(ics);
-    body.append(acts);
-    ev.append(db,body); groep.append(ev);
-  });
-}
-
-function icsEsc(s){ return String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n'); }
-function ymd(d){ return d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0'); }
-function downloadIcs(a){
-  const s=pd(a.datum), e=pd(a.eind||a.datum);
-  const tm=String(a.tijd||'').match(/(\d{1,2})[:.](\d{2})/);
-  let start, end;
-  if(tm&&!a.eind){ const hh=String(tm[1]).padStart(2,'0'), mm=tm[2]; start='DTSTART;TZID=Europe/Amsterdam:'+ymd(s)+'T'+hh+mm+'00'; const eh=String(Math.min(23,Number(hh)+2)).padStart(2,'0'); end='DTEND;TZID=Europe/Amsterdam:'+ymd(s)+'T'+eh+mm+'00'; }
-  else { const e2=new Date(e); e2.setDate(e2.getDate()+1); start='DTSTART;VALUE=DATE:'+ymd(s); end='DTEND;VALUE=DATE:'+ymd(e2); }
-  const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//zostere.nl//aktiviteite//NL','BEGIN:VEVENT',
-    'UID:'+ymd(s)+'-'+encodeURIComponent(a.titel).slice(0,40)+'@zostere.nl','DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+/,''),
-    start,end,'SUMMARY:'+icsEsc(a.titel),'LOCATION:'+icsEsc(a.plaats||'Susteren'),
-    'DESCRIPTION:'+icsEsc((a.tekst||'')+(a.link?'\n'+a.link:'')+'\nVia zostere.nl/aktiviteite'),'END:VEVENT','END:VCALENDAR'];
-  const blob=new Blob([lines.join('\r\n')],{type:'text/calendar'});
-  const u=URL.createObjectURL(blob); const l=document.createElement('a'); l.href=u; l.download=(a.titel.replace(/[^\wÀ-ÿ -]/g,'').trim()||'aktiviteit')+'.ics';
-  document.body.append(l); l.click(); l.remove(); setTimeout(()=>URL.revokeObjectURL(u),1000);
-}
-
-async function laad(){
-  try{ const j=await api('aktiviteite'); ITEMS=(Array.isArray(j.items)?j.items:[]).filter(a=>a&&a.titel&&/^\d{4}-\d{2}-\d{2}$/.test(a.datum)); renderChips(); renderLijst(); }
-  catch{ $('lijst').textContent=''; $('lijst').append(el('p','empty','De aktiviteite konden niet geladen worden. Probeer het later nog eens.')); }
-}
-
-// Aanmelden
-const dlg=$('dlg');
-CATS.forEach(c=>{ const o=el('option',null,c); o.value=c; $('f-cat').append(o); });
+const API="https://script.google.com/macros/s/AKfycbw3Zu2mL3GQAaLOqeE8wQuM0bn3Zt2biqDMkbFcW6qHO6Y5ZCPFBf1uwCnFH-mS_zQ/exec";
+const $=id=>document.getElementById(id), dlg=$('dlg');
 function st(m,err){ $('f-st').textContent=m||''; $('f-st').classList.toggle('err',!!err); }
-$('meld').onclick=()=>{ $('form').reset(); st(''); try{ $('f-contact').value=localStorage.getItem('akt-contact')||''; $('f-org').value=localStorage.getItem('akt-org')||''; }catch{} if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open',''); $('f-titel').focus(); };
+function open(){ $('form').reset(); st(''); try{ $('f-contact').value=localStorage.getItem('akt-contact')||''; $('f-org').value=localStorage.getItem('akt-org')||''; }catch{} if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open',''); $('f-titel').focus(); }
+$('meld').onclick=open; const ml=$('meld-link'); if(ml) ml.onclick=e=>{ e.preventDefault(); open(); };
+if(location.hash==='#aanmelden') setTimeout(open,50);
 $('f-annuleer').onclick=()=>dlg.close();
 $('form').addEventListener('submit',async e=>{
   e.preventDefault();
   const v=id=>$(id).value.trim();
-  const d={titel:v('f-titel'),datum:v('f-datum'),eind:v('f-eind'),tijd:v('f-tijd'),cat:$('f-cat').value,plaats:v('f-plaats'),org:v('f-org'),tekst:v('f-tekst'),link:v('f-link'),contact:v('f-contact'),website:v('f-web')};
+  const d={action:'aktiviteit',titel:v('f-titel'),datum:v('f-datum'),eind:v('f-eind'),tijd:v('f-tijd'),cat:$('f-cat').value,plaats:v('f-plaats'),org:v('f-org'),tekst:v('f-tekst'),link:v('f-link'),contact:v('f-contact'),website:v('f-web')};
   const mist=[['f-titel','de naam van de activiteit'],['f-datum','de datum'],['f-plaats','de plaats'],['f-org','de organisator'],['f-contact','je e-mail of telefoon']].find(([id])=>!v(id));
   if(mist){ st('Vul '+mist[1]+' in.',true); $(mist[0]).focus(); return; }
   if(d.eind&&d.eind<d.datum){ st('De einddatum ligt voor de begindatum.',true); $('f-eind').focus(); return; }
   if(d.link&&!/^https?:\/\//.test(d.link)) d.link='https://'+d.link;
   $('f-stuur').disabled=true; st('Versturen…');
-  try{ await api('aktiviteit',d); try{ localStorage.setItem('akt-contact',d.contact); localStorage.setItem('akt-org',d.org); }catch{} st('Bedankt! Je activiteit verschijnt na controle op de site.'); setTimeout(()=>dlg.close(),1800); }
-  catch(err){ st(err&&err.code==='rate_limited'?'Het is even druk. Probeer het over een paar minuten opnieuw.':'Aanmelden lukte niet. Probeer het opnieuw.',true); }
+  try{
+    const r=await fetch(API,{method:'POST',headers:{'content-type':'text/plain;charset=utf-8'},body:JSON.stringify(d),redirect:'follow'});
+    const j=await r.json(); if(!j.ok) throw j;
+    try{ localStorage.setItem('akt-contact',d.contact); localStorage.setItem('akt-org',d.org); }catch{}
+    st('Bedankt! Je activiteit verschijnt na controle op de site.'); setTimeout(()=>dlg.close(),1800);
+  }catch(err){ st(err&&err.code==='rate_limited'?'Het is even druk. Probeer het over een paar minuten opnieuw.':'Aanmelden lukte niet. Probeer het opnieuw.',true); }
   finally{ $('f-stuur').disabled=false; }
 });
-
-laad();
+})();
+</script>
+<script>
+(function(){
+"use strict";
+const DATA=[{"s":"2026-10-30-feestavond-dames","d":"2026-10-30","e":"","t":"Feestavond Dames","c":"Sport","u":""},{"s":"2026-11-13-aopening-vastelaovend-graasboerriek","d":"2026-11-13","e":"","t":"Äöpening vastelaovend Graasboerriek","c":"Vastelaovend","u":"20:11"},{"s":"2026-11-14-sjlagerverkeezing","d":"2026-11-14","e":"","t":"Sjlagerverkeezing","c":"Vastelaovend","u":"20:11"},{"s":"2026-11-15-boake-van-t-lache","d":"2026-11-15","e":"","t":"Böäke van ’t Lache","c":"Vastelaovend","u":"14:11"},{"s":"2026-11-20-winter-bbq-pubquiz","d":"2026-11-20","e":"","t":"Winter BBQ + PubQuiz","c":"Sport","u":""},{"s":"2026-11-25-lezing-over-sint-nicolaas","d":"2026-11-25","e":"","t":"Lezing over Sint-Nicolaas","c":"Kirk","u":""},{"s":"2026-11-28-sinterklaasviering-jeugd","d":"2026-11-28","e":"","t":"Sinterklaasviering Jeugd","c":"Kènjer","u":""},{"s":"2026-12-11-kerst-toeptoernooi","d":"2026-12-11","e":"","t":"Kerst Toeptoernooi","c":"Sport","u":""},{"s":"2026-12-19-beerkiene-bie-alois","d":"2026-12-19","e":"","t":"Beerkiene bie Alois","c":"Kirmes & fieëste","u":"14:00"},{"s":"2026-12-27-dart-toernooi","d":"2026-12-27","e":"","t":"Dart Toernooi","c":"Sport","u":""},{"s":"2027-01-03-nieuwjaarswandeling-receptie","d":"2027-01-03","e":"","t":"Nieuwjaarswandeling + Receptie","c":"Natuur & wanjele","u":""},{"s":"2027-01-08-kleedlokalenparty","d":"2027-01-08","e":"","t":"Kleedlokalenparty","c":"Sport","u":""},{"s":"2027-01-09-galazitting","d":"2027-01-09","e":"","t":"Galazitting","c":"Vastelaovend","u":"20:11"},{"s":"2027-01-10-aanbeeje-graasboer","d":"2027-01-10","e":"","t":"Aanbeeje Graasboer","c":"Vastelaovend","u":"10:30"},{"s":"2027-01-10-auwt-prinse-middig","d":"2027-01-10","e":"","t":"Auwt Prinse-middig","c":"Vastelaovend","u":"15:11"},{"s":"2027-01-17-kenjerzitting","d":"2027-01-17","e":"","t":"Kènjerzitting","c":"Vastelaovend","u":"14:11"},{"s":"2027-01-23-recepsie-hoaghede","d":"2027-01-23","e":"","t":"Recepsie Hoaghede","c":"Vastelaovend","u":"20:11"},{"s":"2027-01-24-vrouwluujzitting","d":"2027-01-24","e":"","t":"Vrouwluujzitting","c":"Vastelaovend","u":"10:00"},{"s":"2027-01-28-seniorenmiddig","d":"2027-01-28","e":"","t":"Seniorenmiddig","c":"Vastelaovend","u":""},{"s":"2027-01-30-bombarie-basilca","d":"2027-01-30","e":"","t":"Bombarie Basilca","c":"Vastelaovend","u":"15:11"},{"s":"2027-02-05-sjoale-optoch","d":"2027-02-05","e":"","t":"Sjoale-optoch","c":"Vastelaovend","u":"09:11"},{"s":"2027-02-05-vastelaovesaovend-scs-en-noav","d":"2027-02-05","e":"","t":"Vastelaovesaovend SCS en NOAV","c":"Vastelaovend","u":"20:11"},{"s":"2027-02-06-vastelaovend","d":"2027-02-06","e":"2027-02-09","t":"Vastelaovend","c":"Vastelaovend","u":""},{"s":"2027-02-06-graasborgersbal","d":"2027-02-06","e":"","t":"Graasbörgersbal","c":"Vastelaovend","u":"20:11"},{"s":"2027-02-07-vastelaovesmes","d":"2027-02-07","e":"","t":"Vastelaovesmès","c":"Vastelaovend","u":"12:00"},{"s":"2027-02-07-traotte-toch","d":"2027-02-07","e":"","t":"Träötte-toch","c":"Vastelaovend","u":"14:11"},{"s":"2027-02-08-de-groate-optoch","d":"2027-02-08","e":"","t":"De Groate Optoch","c":"Vastelaovend","u":"14:11"},{"s":"2027-02-09-de-leste-runj","d":"2027-02-09","e":"","t":"De Lèste Runj","c":"Vastelaovend","u":"14:11"},{"s":"2027-02-09-aafsjeete-graasboer","d":"2027-02-09","e":"","t":"Aafsjeete Graasboer","c":"Vastelaovend","u":"20:11"},{"s":"2027-02-10-hieeringbiete","d":"2027-02-10","e":"","t":"Hieëringbiete","c":"Vastelaovend","u":"16:00"},{"s":"2027-02-10-esj-kruutske-haole","d":"2027-02-10","e":"","t":"Esj-kruutske haole","c":"Kirk","u":"17:45"},{"s":"2027-06-05-kunstroute-en-kunstmarkt-datum-onder-voorbehoud","d":"2027-06-05","e":"2027-06-06","t":"Kunstroute & Kunstmarkt (datum onder voorbehoud)","c":"Meziek & cultuur","u":""}];
+const CATS=["Vastelaovend","Kirmes & fieëste","Meziek & cultuur","Natuur & wanjele","Kirk","Sport","Kènjer","Markt","Anger"];
+const MAAND=["januari","februari","maart","april","mei","juni","juli","augustus","september","oktober","november","december"];
+const $=id=>document.getElementById(id);
+const nu=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Amsterdam'}).format(new Date());
+let filter='', jaar=+nu.slice(0,4), maand=+nu.slice(5,7)-1, gekozen='';
+const pad=n=>String(n).padStart(2,'0');
+const kvar=c=>'--k:var(--c'+Math.max(0,CATS.indexOf(c))+')';
+function opDag(s){ return DATA.filter(a=>(!filter||a.c===filter)&&a.d<=s&&(a.e||a.d)>=s); }
+function el(t,c,x){const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
+function teken(){
+  $('maandnaam').textContent=MAAND[maand]+' '+jaar;
+  const g=$('grid'); g.textContent='';
+  ['ma','di','wo','do','vr','za','zo'].forEach(w=>g.append(el('div','wd',w)));
+  const eerste=new Date(Date.UTC(jaar,maand,1)), start=(eerste.getUTCDay()+6)%7, dagen=new Date(Date.UTC(jaar,maand+1,0)).getUTCDate();
+  for(let i=0;i<start;i++) g.append(el('div','day leeg'));
+  for(let d=1;d<=dagen;d++){
+    const s=jaar+'-'+pad(maand+1)+'-'+pad(d), evs=opDag(s);
+    const c=el('div','day'+(s===nu?' vandaag':'')); c.append(el('span','n',String(d)));
+    if(evs.length){ c.setAttribute('role','button'); c.tabIndex=0; c.setAttribute('aria-pressed',String(gekozen===s)); c.setAttribute('aria-label',d+' '+MAAND[maand]+': '+evs.map(a=>a.t).join(', '));
+      c.onclick=()=>{ gekozen=gekozen===s?'':s; teken(); }; c.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); c.onclick(); } }; }
+    const dots=el('div','dots');
+    evs.forEach(a=>{ const p=el('a','pill',(a.u&&a.d===s?a.u+' ':'')+a.t); p.href='/aktiviteite/'+a.s+'/'; p.style.cssText=kvar(a.c); p.title=a.t; p.onclick=e=>e.stopPropagation(); c.append(p); const i=el('i'); i.style.cssText=kvar(a.c); dots.append(i); });
+    c.append(dots); g.append(c);
+  }
+  const rest=(7-(start+dagen)%7)%7; for(let i=0;i<rest;i++) g.append(el('div','day leeg'));
+  const dl=$('daglijst'); dl.textContent='';
+  if(gekozen&&gekozen.slice(0,7)===jaar+'-'+pad(maand+1)){
+    const dd=new Date(gekozen+'T12:00:00'); const kop=dd.toLocaleDateString('nl-NL',{weekday:'long',day:'numeric',month:'long'}); dl.append(el('h3',null,kop.charAt(0).toUpperCase()+kop.slice(1)));
+    opDag(gekozen).forEach(a=>{ const l=el('a','pill',(a.u?a.u+' · ':'')+a.t); l.href='/aktiviteite/'+a.s+'/'; l.style.cssText=kvar(a.c)+';display:block;white-space:normal;font-size:14px;padding:6px 8px'; dl.append(l); });
+    dl.hidden=false;
+  } else dl.hidden=true;
+}
+$('vorige').onclick=()=>{ maand--; if(maand<0){maand=11;jaar--;} gekozen=''; teken(); };
+$('volgende').onclick=()=>{ maand++; if(maand>11){maand=0;jaar++;} gekozen=''; teken(); };
+document.querySelectorAll('#chips .chip').forEach(b=>b.onclick=()=>{
+  filter=b.dataset.cat; document.querySelectorAll('#chips .chip').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  document.querySelectorAll('#lijst .ev').forEach(e=>{ e.hidden=!!filter&&e.dataset.cat!==filter; });
+  document.querySelectorAll('#lijst .month').forEach(m=>{ m.hidden=![...m.querySelectorAll('.ev')].some(e=>!e.hidden); });
+  teken();
+});
+teken();
 })();
 </script>
 </body>

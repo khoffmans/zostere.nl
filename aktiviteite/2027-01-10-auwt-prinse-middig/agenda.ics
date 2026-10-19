@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//zostere.nl//aktiviteite//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2027-01-10-auwt-prinse-middig@zostere.nl
+DTSTAMP:20270110T000000Z
+DTSTART;TZID=Europe/Amsterdam:20270110T151100
+DTEND;TZID=Europe/Amsterdam:20270110T181100
+SUMMARY:Auwt Prinse-middig
+LOCATION:Café Hermeniezaal\, Susteren
+DESCRIPTION:De middag van de oud-prinsen van de Graasboerriek.\nhttps://zostere.nl/aktiviteite/2027-01-10-auwt-prinse-middig/
+URL:https://zostere.nl/aktiviteite/2027-01-10-auwt-prinse-middig/
+END:VEVENT
+END:VCALENDAR
