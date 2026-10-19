@@ -174,7 +174,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch;display:grid;gap:6px;bor
               <button type="button" role="radio" aria-checked="false" id="sp-zo">Zösters</button>
             </div>
           </div>
-          <p id="sr-yes" hidden>Spreek nu. Wat je zegt verschijnt in het tekstvak. Klik op “Stop opname” als je klaar bent.</p>
+          <p id="sr-yes" hidden>Spreek nu. Wat je zegt verschijnt in het tekstvak. Een korte pauze wordt een punt; je kunt ook “komma”, “punt”, “vraagteken” of “nieuwe regel” zeggen. Klik op “Stop opname” als je klaar bent.</p>
           <p id="sr-no">Deze browser kan zelf geen spraak herkennen (dat kan wel in Chrome, Edge en Safari). Spreek in met de dicteerfunctie van je toestel; wat je zegt komt vanzelf in het tekstvak:</p>
           <ul id="sr-tips">
             <li><strong>iPhone of iPad:</strong> tik in het tekstvak en dan op het microfoontje op het toetsenbord.</li>
@@ -298,6 +298,7 @@ Belangrijk:
 - Gebruik waar het kan een woord uit de woordenlijst. Bestaat er geen eigen dialectwoord, dan neem je het Nederlandse woord en pas je de klanken aan volgens de regels hierboven.
 - Eigennamen, getallen, merknamen en citaten in een andere taal laat je staan.
 - Behoud alinea's, regelafbrekingen en leestekens van de brontekst.
+- Ontbreken leestekens of hoofdletters in de brontekst (bijvoorbeeld bij ingesproken tekst), zet ze dan op de juiste plekken in je vertaling.
 </script>
 <script>
 (function(){
@@ -510,11 +511,30 @@ function setSpeak(v){
 const DEFAULT_TEXT=nl.value;
 let rec=null, listening=false;
 function micUi(){ const m=$('mic'); m.classList.toggle('rec',listening); m.lastChild.textContent=listening?'Stop opname':'Inspreken'; }
+// Uitgesproken leestekens omzetten, en elke pauze als zinseinde behandelen
+function leestekens(t){
+  return t.replace(/\s*\bnieuwe (regel|alinea)\b\s*/gi,'\n')
+    .replace(/\s*\bdubbele punt\b/gi,':')
+    .replace(/\s*\bkomma\b/gi,',')
+    .replace(/\s*\bvraagteken\b/gi,'?')
+    .replace(/\s*\buitroepteken\b/gi,'!')
+    .replace(/\s*\bpunt\b/gi,'.')
+    .replace(/([,.?!:])(?=[^\s\n])/g,'$1 ');
+}
+function zin(seg,ervoor){
+  seg=leestekens(seg).replace(/^[ \t]+|[ \t]+$/g,'');
+  if(!seg.trim()) return '';
+  const nieuw=!ervoor.trim()||/[.!?\n]\s*$/.test(ervoor);
+  if(nieuw) seg=seg.replace(/^(\s*)(\S)/,(m,a,b)=>a+b.toUpperCase());
+  seg=seg.replace(/([.!?]\s+|\n\s*)(\S)/g,(m,a,b)=>a+b.toUpperCase()).replace(/[ \t]+\n/g,'\n');
+  if(!/[.!?,:;\n]$/.test(seg)) seg+='.';
+  return seg+(seg.endsWith('\n')?'':' ');
+}
 function startRec(){
   if(nl.value===DEFAULT_TEXT){nl.value='';wc();}
   const base=nl.value.trim()?nl.value.replace(/\s*$/,' '):''; let fin='';
   rec=new SR(); rec.lang='nl-NL'; rec.continuous=true; rec.interimResults=true;
-  rec.onresult=e=>{ let interim=''; for(let i=e.resultIndex;i<e.results.length;i++){const r=e.results[i]; if(r.isFinal) fin+=r[0].transcript.trim()+' '; else interim+=r[0].transcript;} nl.value=base+fin+interim; wc(); };
+  rec.onresult=e=>{ let interim=''; for(let i=e.resultIndex;i<e.results.length;i++){const r=e.results[i]; if(r.isFinal){ const z=zin(r[0].transcript,base+fin); if(/^[,.?!:;]/.test(z)) fin=fin.replace(/[.]?[ \t]*$/,''); else if(/^\n/.test(z)) fin=fin.replace(/[ \t]+$/,''); fin+=z; } else interim+=r[0].transcript;} nl.value=base+fin+interim; wc(); };
   rec.onerror=e=>{ const m={'not-allowed':'Geef de browser toestemming om je microfoon te gebruiken en probeer het opnieuw.','service-not-allowed':'Spraakherkenning staat uit in deze browser. Gebruik de dicteerfunctie van je toestel.','no-speech':'Er werd niets gehoord. Klik op Inspreken en probeer het opnieuw.','audio-capture':'Er is geen microfoon gevonden.','network':'Spraakherkenning heeft een internetverbinding nodig.'}[e.error]; if(e.error!=='aborted') setStatus($('sr-st'),m||'Inspreken lukte niet. Probeer het opnieuw.',true); };
   rec.onend=()=>{ listening=false; micUi(); };
   try{ rec.start(); listening=true; setStatus($('sr-st'),''); }catch{ listening=false; }
