@@ -17,6 +17,7 @@
 const MODEL = 'claude-sonnet-5-5';
 const MAP_NAAM = 'Sjrief Zösters – inzendingen';
 const SHEET_NAAM = 'Sjrief Zösters – verbetervoorstellen';
+const AKT_NAAM = 'Zöstere.nl – aktiviteite';
 
 // Grenzen tegen misbruik (voor de hele site samen)
 const MAX_VERTALINGEN_PER_10_MIN = 40;
@@ -57,6 +58,8 @@ function doPost(e) {
     if (d.action === 'inzending') return out(inzending(d));
     if (d.action === 'voorstel') return out(voorstel(d));
     if (d.action === 'verbeteringen') return out(verbeteringen());
+    if (d.action === 'aktiviteite') return out(aktiviteite());
+    if (d.action === 'aktiviteit') return out(aktiviteitAanmelden(d));
     return out({ ok: false, code: 'bad_request' });
   } catch (err) {
     console.error(err);
@@ -220,4 +223,87 @@ function verbeteringen() {
     .slice(0, 150);
   try { c.put('verbeteringen', JSON.stringify(items), 300); } catch (e) { /* te groot voor de cache: dan elke keer opnieuw */ }
   return { ok: true, items: items };
+}
+
+
+// ---- 5. Aktiviteite (agenda) ----
+// Kolommen in de Sheet "Zöstere.nl – aktiviteite":
+const AKT_KOP = ['Datum', 'Einddatum', 'Tijd', 'Titel', 'Categorie', 'Plaats', 'Organisator', 'Omschrijving', 'Link', 'Contact (niet openbaar)', 'Ingestuurd', 'Goedgekeurd (ja/nee)'];
+const AKT_CATEGORIEEN = ['Vastelaovend', 'Kirmes & fieëste', 'Meziek & cultuur', 'Natuur & wanjele', 'Kirk', 'Sport', 'Kènjer', 'Markt', 'Anger'];
+
+/** Eén keer uitvoeren: maakt de Sheet voor de aktiviteite aan, met een paar startactiviteiten. */
+function setupAktiviteite() {
+  const p = PropertiesService.getScriptProperties();
+  if (!p.getProperty('FOLDER_ID')) throw new Error('Voer eerst setup uit.');
+  if (!p.getProperty('AKT_ID')) {
+    const csv = AKT_KOP.map(csvVeld).join(',') + '\n';
+    const s = driveUpload({ name: AKT_NAAM, mimeType: 'application/vnd.google-apps.spreadsheet', parents: [p.getProperty('FOLDER_ID')] },
+      Utilities.newBlob(csv, 'text/csv').getBytes(), 'text/csv');
+    p.setProperty('AKT_ID', s.id);
+    const start = [
+      ['2026-11-25', '', '', 'Lezing over Sint-Nicolaas', 'Kirk', 'Susteren', 'Parochie Christus Salvator', 'Lezing over het leven en de verhalen van Sint-Nicolaas. Tijd en plaats: zie de website van de parochie.', 'https://www.christussalvator.nl/', '', vandaag(), 'ja'],
+      ['2027-02-06', '2027-02-09', '', 'Vastelaovend', 'Vastelaovend', 'Zöstere', '', 'Vier daag vastelaovend in Zöstere. Het precieze programma volgt.', '', '', vandaag(), 'ja'],
+      ['2027-06-05', '2027-06-06', '', 'Kunstroute & Kunstmarkt (datum onder voorbehoud)', 'Meziek & cultuur', 'Centrum en Beeldentuin Suestra, achter de Amelbergabasiliek', 'Kunstgroep Swentibold', 'Jaarlijkse kunstroute door het centrum en kunstmarkt in de beeldentuin. De datum voor 2027 is nog niet bekend; meestal het eerste weekend van juni.', 'https://www.deltalimburg.nl/article/14592/Kunstmarkt+%26+Kunstroute+Susteren+2026', '', vandaag(), 'ja'],
+    ];
+    google('post', 'https://sheets.googleapis.com/v4/spreadsheets/' + s.id + '/values/A1:L1:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS',
+      JSON.stringify({ values: start }));
+  }
+  Logger.log('✅ Sheet met aktiviteite: https://docs.google.com/spreadsheets/d/' + p.getProperty('AKT_ID'));
+}
+
+function csvVeld(v) { return '"' + String(v).replace(/"/g, '""') + '"'; }
+function vandaag() { return Utilities.formatDate(new Date(), 'Europe/Amsterdam', 'yyyy-MM-dd'); }
+
+/** Leest een datum uit een cel: een datum-getal van Sheets, "2026-11-25", "25-11-2026" of "25/11/2026". Geeft "yyyy-mm-dd" of "". */
+function leesDatum(v) {
+  if (v === '' || v === null || v === undefined) return '';
+  if (typeof v === 'number') {
+    const d = new Date(Math.round((v - 25569) * 86400000));
+    return Utilities.formatDate(d, 'UTC', 'yyyy-MM-dd');
+  }
+  const s = String(v).trim();
+  let m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if (m) return m[1] + '-' + ('0' + m[2]).slice(-2) + '-' + ('0' + m[3]).slice(-2);
+  m = s.match(/^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{4})/);
+  if (m) return m[3] + '-' + ('0' + m[2]).slice(-2) + '-' + ('0' + m[1]).slice(-2);
+  return '';
+}
+
+function aktiviteite() {
+  const c = CacheService.getScriptCache();
+  const hit = c.get('aktiviteite');
+  if (hit) return { ok: true, items: JSON.parse(hit) };
+  const id = PropertiesService.getScriptProperties().getProperty('AKT_ID');
+  if (!id) return { ok: true, items: [] };
+  const r = google('get', 'https://sheets.googleapis.com/v4/spreadsheets/' + id + '/values/A2:L2000?valueRenderOption=UNFORMATTED_VALUE&dateTimeRenderOption=SERIAL_NUMBER');
+  const nu = vandaag();
+  const items = (r.values || [])
+    .filter(function (x) { return String(x[11] || '').trim().toLowerCase() === 'ja' && x[3]; })
+    .map(function (x) {
+      return {
+        datum: leesDatum(x[0]), eind: leesDatum(x[1]), tijd: String(x[2] || ''), titel: String(x[3] || ''),
+        cat: String(x[4] || 'Anger'), plaats: String(x[5] || ''), org: String(x[6] || ''),
+        tekst: String(x[7] || ''), link: /^https?:\/\//.test(String(x[8] || '')) ? String(x[8]) : '',
+      };
+    })
+    .filter(function (a) { return a.datum && (a.eind || a.datum) >= nu; })
+    .sort(function (a, b) { return a.datum < b.datum ? -1 : a.datum > b.datum ? 1 : 0; })
+    .slice(0, 300);
+  try { c.put('aktiviteite', JSON.stringify(items), 300); } catch (e) { /* te groot voor de cache */ }
+  return { ok: true, items: items };
+}
+
+function aktiviteitAanmelden(d) {
+  if (d.website) return { ok: true }; // honeypot
+  const titel = str(d.titel, 120), datum = leesDatum(str(d.datum, 20)), plaats = str(d.plaats, 150), org = str(d.org, 120), contact = str(d.contact, 150);
+  if (!titel || !datum || !plaats || !org || !contact) return { ok: false, code: 'bad_request' };
+  if (!teller('inz-' + Math.floor(Date.now() / 3600000), MAX_INZENDINGEN_PER_UUR, 4000)) return { ok: false, code: 'rate_limited' };
+  const id = PropertiesService.getScriptProperties().getProperty('AKT_ID');
+  if (!id) return { ok: false, code: 'not_configured' };
+  const cat = AKT_CATEGORIEEN.indexOf(d.cat) >= 0 ? d.cat : 'Anger';
+  const link = /^https?:\/\//.test(str(d.link, 300)) ? str(d.link, 300) : '';
+  const rij = [datum, leesDatum(str(d.eind, 20)), str(d.tijd, 40), titel, cat, plaats, org, str(d.tekst, 1500), link, contact, vandaag(), ''];
+  google('post', 'https://sheets.googleapis.com/v4/spreadsheets/' + id + '/values/A1:L1:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS',
+    JSON.stringify({ values: [rij] }));
+  return { ok: true };
 }

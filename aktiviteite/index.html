@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Aktiviteite – Zöstere.nl</title>
+<meta name="description" content="Wat is d'r te doon in Zöstere? Activiteiten in Susteren: vastelaovend, kirmes, muziek, natuur, kerk en meer.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d5e63'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' text-anchor='middle' fill='%23e3b448'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: kop met navigatie, filters, activiteiten per maand als lijst met datumblok */
+:root{
+  --paper:#f5f6f2; --sheet:#ffffff; --ink:#1c2629; --muted:#5a676b; --line:#d5dbd8;
+  --maas:#0d5e63; --maas-soft:#e3efee; --goud:#b7860f; --goud-soft:#f7edd3; --warn:#9a4a12;
+  --display:"Zilla Slab",Rockwell,"Roboto Slab",Georgia,serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --ui:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root{
+  --paper:#11181a; --sheet:#182124; --ink:#e4ebe9; --muted:#9aa8a9; --line:#2c3a3d;
+  --maas:#63bfc0; --maas-soft:#1b3234; --goud:#e3b448; --goud-soft:#2e2814; --warn:#e8935a; color-scheme:dark}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 64px}
+.wrap{max-width:900px;margin:0 auto;display:grid;gap:28px}
+nav.site{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;font-size:14px}
+nav.site .home{font-family:var(--display);font-weight:700;font-size:20px;color:var(--ink);text-decoration:none;margin-right:8px}
+nav.site .home span{color:var(--goud)}
+nav.site a{color:var(--muted);text-decoration:none}
+nav.site a:hover,nav.site a[aria-current="page"]{color:var(--maas)}
+nav.site a[aria-current="page"]{font-weight:600}
+header{display:grid;gap:10px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(34px,6vw,52px);line-height:1;margin:0}
+h1 .o{color:var(--goud)}
+.lede{font-family:var(--body);font-size:17px;color:var(--muted);margin:0;max-width:62ch}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--ui);font-size:13px;border:1px solid var(--line);border-radius:999px;padding:4px 11px;background:transparent;color:var(--muted);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--maas);border-color:var(--maas);color:var(--sheet)}
+.chip:hover{border-color:var(--maas)}
+button{font-family:var(--ui);font-size:14px;font-weight:500;border-radius:4px;border:1px solid var(--line);background:var(--sheet);color:var(--ink);padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--maas)}
+button.primary{background:var(--maas);border-color:var(--maas);color:var(--sheet);font-weight:600}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--maas);outline-offset:2px}
+.month{display:grid;gap:0}
+.month h2{font-family:var(--display);font-weight:600;font-size:22px;margin:0 0 6px;text-transform:capitalize}
+.ev{display:grid;grid-template-columns:64px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.date{background:var(--sheet);border:1px solid var(--line);border-radius:6px;text-align:center;padding:6px 0;align-self:start;font-variant-numeric:tabular-nums}
+.date .d{font-family:var(--display);font-weight:700;font-size:26px;line-height:1}
+.date .m{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.date .w{font-size:11px;color:var(--muted)}
+.ev .t{font-family:var(--display);font-weight:600;font-size:20px;line-height:1.2;margin:0}
+.ev .meta{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:4px}
+.ev .tx{font-family:var(--body);font-size:16px;margin:6px 0 0;max-width:65ch;white-space:pre-line}
+.ev .acts{display:flex;gap:12px;margin-top:8px;font-size:13px;flex-wrap:wrap}
+.ev .acts a,.ev .acts button{color:var(--maas);background:none;border:0;padding:0;font-size:13px;font-weight:500;text-decoration:underline;cursor:pointer}
+.tag{display:inline-block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:2px 7px;border-radius:3px;background:var(--goud-soft);color:var(--goud)}
+.empty{font-family:var(--body);color:var(--muted);font-size:16px;padding:20px 0;border-top:1px solid var(--line)}
+.status{font-size:13px;color:var(--muted);min-height:1.2em}
+.status.err{color:var(--warn)}
+dialog{border:1px solid var(--line);border-radius:8px;padding:0;background:var(--sheet);color:var(--ink);width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 32px)}
+dialog::backdrop{background:rgba(10,16,18,.55)}
+.dlg{display:grid;gap:12px;padding:20px}
+.dlg h3{font-family:var(--display);font-weight:600;font-size:22px;margin:0}
+.dlg .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:480px){.dlg .row2{grid-template-columns:1fr}}
+.field{display:grid;gap:4px;min-width:0}
+.field label{font-size:13px;font-weight:600}
+.opt{font-weight:400;color:var(--muted)}
+.field input,.field select,.field textarea{font-family:var(--ui);font-size:16px;padding:8px 10px;border:1px solid var(--line);border-radius:4px;background:var(--paper);color:var(--ink);width:100%}
+.field textarea{min-height:90px;resize:vertical;font-family:var(--body)}
+.actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;align-items:center}
+.actions .status{flex:1}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="site" aria-label="Zöstere.nl">
+    <a class="home" href="/">Zöstere<span>.nl</span></a>
+    <a href="/vertaler/">Sjrief Zösters</a>
+    <a href="/aktiviteite/" aria-current="page">Aktiviteite</a>
+  </nav>
+
+  <header>
+    <h1>Aktiviteite<span class="o">.</span></h1>
+    <p class="lede">Wat is d’r te doon in Zöstere? Vastelaovend, kirmes, meziek, wanjele en alles wat Susteren verder te bieden heeft. Organiseer je zelf iets? Meld het aan.</p>
+  </header>
+
+  <div class="bar">
+    <div class="chips" id="chips" aria-label="Filter op soort"></div>
+    <button class="primary" id="meld" type="button">Aktiviteit aanmelden</button>
+  </div>
+
+  <div id="lijst" aria-live="polite"><p class="empty" id="laden">Aktiviteite laden…</p></div>
+
+  <footer>Ontbreekt er iets of klopt er iets niet? Meld het via <em>Aktiviteit aanmelden</em> of mail naar <a href="mailto:kevin.hoffmans@gmail.com">kevin.hoffmans@gmail.com</a>. · <a href="/privacy/">Privacy</a></footer>
+</div>
+
+<dialog id="dlg" aria-labelledby="dlg-h">
+  <form class="dlg" id="form" method="dialog" novalidate>
+    <h3 id="dlg-h">Aktiviteit aanmelden</h3>
+    <p class="status" style="margin:0">Na een korte controle verschijnt je activiteit op de site.</p>
+    <div class="hp" aria-hidden="true"><label for="f-web">Laat dit veld leeg</label><input type="text" id="f-web" tabindex="-1" autocomplete="off"></div>
+    <div class="field"><label for="f-titel">Naam van de activiteit</label><input type="text" id="f-titel" maxlength="120" required></div>
+    <div class="row2">
+      <div class="field"><label for="f-datum">Datum</label><input type="date" id="f-datum" required></div>
+      <div class="field"><label for="f-eind">Tot en met <span class="opt">(meerdaags)</span></label><input type="date" id="f-eind"></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="f-tijd">Tijd <span class="opt">(bijv. 19:30)</span></label><input type="text" id="f-tijd" maxlength="40"></div>
+      <div class="field"><label for="f-cat">Soort</label><select id="f-cat"></select></div>
+    </div>
+    <div class="field"><label for="f-plaats">Plaats</label><input type="text" id="f-plaats" maxlength="150" required placeholder="bijv. Amelbergabasiliek, Markt 1"></div>
+    <div class="field"><label for="f-org">Organisator</label><input type="text" id="f-org" maxlength="120" required placeholder="vereniging of naam"></div>
+    <div class="field"><label for="f-tekst">Korte omschrijving <span class="opt">(mag in het Zösters!)</span></label><textarea id="f-tekst" maxlength="1500"></textarea></div>
+    <div class="field"><label for="f-link">Website of meer info <span class="opt">(niet verplicht)</span></label><input type="url" id="f-link" maxlength="300" placeholder="https://"></div>
+    <div class="field"><label for="f-contact">Jouw e-mail of telefoon <span class="opt">(niet openbaar, voor vragen)</span></label><input type="text" id="f-contact" maxlength="150" required autocomplete="email"></div>
+    <div class="actions"><span class="status" id="f-st"></span><button type="button" id="f-annuleer">Annuleren</button><button type="submit" class="primary" id="f-stuur">Aanmelden</button></div>
+  </form>
+</dialog>
+
+<script>
+(function(){
+"use strict";
+const API='https://script.google.com/macros/s/AKfycbw3Zu2mL3GQAaLOqeE8wQuM0bn3Zt2biqDMkbFcW6qHO6Y5ZCPFBf1uwCnFH-mS_zQ/exec';
+const CATS=['Vastelaovend','Kirmes & fieëste','Meziek & cultuur','Natuur & wanjele','Kirk','Sport','Kènjer','Markt','Anger'];
+const $=id=>document.getElementById(id);
+const MAAND=['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
+const DAG=['zo','ma','di','wo','do','vr','za'];
+let ITEMS=[], filter='';
+
+async function api(action,data){
+  let r;
+  try{ r=await fetch(API,{method:'POST',headers:{'content-type':'text/plain;charset=utf-8'},body:JSON.stringify(Object.assign({action},data||{})),redirect:'follow'}); }
+  catch{ throw {code:'offline'}; }
+  let j=null; try{ j=await r.json(); }catch{}
+  if(!j) throw {code:'upstream'};
+  if(!j.ok) throw {code:j.code||'upstream'};
+  return j;
+}
+const pd=s=>{ const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); };
+function el(tag,cls,txt){ const e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e; }
+
+function datumTekst(a){
+  const d=pd(a.datum);
+  let t=DAG[d.getDay()]+' '+d.getDate()+' '+MAAND[d.getMonth()];
+  if(a.eind&&a.eind!==a.datum){ const e=pd(a.eind); t+=' t/m '+DAG[e.getDay()]+' '+e.getDate()+' '+MAAND[e.getMonth()]; }
+  return t;
+}
+
+function renderChips(){
+  const box=$('chips'); box.textContent='';
+  const aanwezig=new Set(ITEMS.map(a=>a.cat));
+  [''].concat(CATS.filter(c=>aanwezig.has(c))).forEach(c=>{
+    const b=el('button','chip',c||'Alles'); b.type='button'; b.setAttribute('aria-pressed',String(filter===c));
+    b.onclick=()=>{ filter=c; renderChips(); renderLijst(); }; box.append(b);
+  });
+}
+
+function renderLijst(){
+  const box=$('lijst'); box.textContent='';
+  const items=ITEMS.filter(a=>!filter||a.cat===filter);
+  if(!items.length){ box.append(el('p','empty',ITEMS.length?'Geen aktiviteite in deze categorie.':'Er staan nog geen aktiviteite in de agenda. Weet jij er een? Meld hem aan!')); return; }
+  let huidig='', groep=null;
+  items.forEach(a=>{
+    const d=pd(a.datum); const key=d.getFullYear()+'-'+d.getMonth();
+    if(key!==huidig){ huidig=key; groep=el('section','month'); groep.append(el('h2',null,MAAND[d.getMonth()]+' '+d.getFullYear())); box.append(groep); }
+    const ev=el('article','ev');
+    const db=el('div','date'); db.append(el('div','w',DAG[d.getDay()]),el('div','d',String(d.getDate())),el('div','m',MAAND[d.getMonth()].slice(0,3)));
+    const body=el('div'); body.style.minWidth='0';
+    body.append(el('span','tag',a.cat));
+    const h=el('h3','t',a.titel); h.style.marginTop='4px'; body.append(h);
+    const meta=el('div','meta');
+    meta.append(el('span',null,datumTekst(a)+(a.tijd?' · '+a.tijd:'')));
+    if(a.plaats) meta.append(el('span',null,a.plaats));
+    if(a.org) meta.append(el('span',null,a.org));
+    body.append(meta);
+    if(a.tekst) body.append(el('p','tx',a.tekst));
+    const acts=el('div','acts');
+    if(a.link){ const l=el('a',null,'Meer info'); l.href=a.link; l.target='_blank'; l.rel='noopener'; acts.append(l); }
+    const ics=el('button',null,'Zet in mijn agenda'); ics.type='button'; ics.onclick=()=>downloadIcs(a); acts.append(ics);
+    body.append(acts);
+    ev.append(db,body); groep.append(ev);
+  });
+}
+
+function icsEsc(s){ return String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n'); }
+function ymd(d){ return d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0'); }
+function downloadIcs(a){
+  const s=pd(a.datum), e=pd(a.eind||a.datum);
+  const tm=String(a.tijd||'').match(/(\d{1,2})[:.](\d{2})/);
+  let start, end;
+  if(tm&&!a.eind){ const hh=String(tm[1]).padStart(2,'0'), mm=tm[2]; start='DTSTART;TZID=Europe/Amsterdam:'+ymd(s)+'T'+hh+mm+'00'; const eh=String(Math.min(23,Number(hh)+2)).padStart(2,'0'); end='DTEND;TZID=Europe/Amsterdam:'+ymd(s)+'T'+eh+mm+'00'; }
+  else { const e2=new Date(e); e2.setDate(e2.getDate()+1); start='DTSTART;VALUE=DATE:'+ymd(s); end='DTEND;VALUE=DATE:'+ymd(e2); }
+  const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//zostere.nl//aktiviteite//NL','BEGIN:VEVENT',
+    'UID:'+ymd(s)+'-'+encodeURIComponent(a.titel).slice(0,40)+'@zostere.nl','DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+/,''),
+    start,end,'SUMMARY:'+icsEsc(a.titel),'LOCATION:'+icsEsc(a.plaats||'Susteren'),
+    'DESCRIPTION:'+icsEsc((a.tekst||'')+(a.link?'\n'+a.link:'')+'\nVia zostere.nl/aktiviteite'),'END:VEVENT','END:VCALENDAR'];
+  const blob=new Blob([lines.join('\r\n')],{type:'text/calendar'});
+  const u=URL.createObjectURL(blob); const l=document.createElement('a'); l.href=u; l.download=(a.titel.replace(/[^\wÀ-ÿ -]/g,'').trim()||'aktiviteit')+'.ics';
+  document.body.append(l); l.click(); l.remove(); setTimeout(()=>URL.revokeObjectURL(u),1000);
+}
+
+async function laad(){
+  try{ const j=await api('aktiviteite'); ITEMS=(Array.isArray(j.items)?j.items:[]).filter(a=>a&&a.titel&&/^\d{4}-\d{2}-\d{2}$/.test(a.datum)); renderChips(); renderLijst(); }
+  catch{ $('lijst').textContent=''; $('lijst').append(el('p','empty','De aktiviteite konden niet geladen worden. Probeer het later nog eens.')); }
+}
+
+// Aanmelden
+const dlg=$('dlg');
+CATS.forEach(c=>{ const o=el('option',null,c); o.value=c; $('f-cat').append(o); });
+function st(m,err){ $('f-st').textContent=m||''; $('f-st').classList.toggle('err',!!err); }
+$('meld').onclick=()=>{ $('form').reset(); st(''); try{ $('f-contact').value=localStorage.getItem('akt-contact')||''; $('f-org').value=localStorage.getItem('akt-org')||''; }catch{} if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open',''); $('f-titel').focus(); };
+$('f-annuleer').onclick=()=>dlg.close();
+$('form').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const v=id=>$(id).value.trim();
+  const d={titel:v('f-titel'),datum:v('f-datum'),eind:v('f-eind'),tijd:v('f-tijd'),cat:$('f-cat').value,plaats:v('f-plaats'),org:v('f-org'),tekst:v('f-tekst'),link:v('f-link'),contact:v('f-contact'),website:v('f-web')};
+  const mist=[['f-titel','de naam van de activiteit'],['f-datum','de datum'],['f-plaats','de plaats'],['f-org','de organisator'],['f-contact','je e-mail of telefoon']].find(([id])=>!v(id));
+  if(mist){ st('Vul '+mist[1]+' in.',true); $(mist[0]).focus(); return; }
+  if(d.eind&&d.eind<d.datum){ st('De einddatum ligt voor de begindatum.',true); $('f-eind').focus(); return; }
+  if(d.link&&!/^https?:\/\//.test(d.link)) d.link='https://'+d.link;
+  $('f-stuur').disabled=true; st('Versturen…');
+  try{ await api('aktiviteit',d); try{ localStorage.setItem('akt-contact',d.contact); localStorage.setItem('akt-org',d.org); }catch{} st('Bedankt! Je activiteit verschijnt na controle op de site.'); setTimeout(()=>dlg.close(),1800); }
+  catch(err){ st(err&&err.code==='rate_limited'?'Het is even druk. Probeer het over een paar minuten opnieuw.':'Aanmelden lukte niet. Probeer het opnieuw.',true); }
+  finally{ $('f-stuur').disabled=false; }
+});
+
+laad();
+})();
+</script>
+</body>
+</html>

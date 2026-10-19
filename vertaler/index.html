@@ -30,6 +30,12 @@ html{-webkit-text-size-adjust:100%}
 body{background:var(--paper);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.5;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
 .wrap{max-width:1100px;margin:0 auto;display:grid;gap:36px}
+nav.site{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;font-size:14px}
+nav.site .home{font-family:var(--display);font-weight:700;font-size:20px;color:var(--ink);text-decoration:none;margin-right:8px}
+nav.site .home span{color:var(--goud)}
+nav.site a{color:var(--muted);text-decoration:none}
+nav.site a:hover,nav.site a[aria-current="page"]{color:var(--maas)}
+nav.site a[aria-current="page"]{font-weight:600}
 header{display:grid;gap:10px}
 .eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--maas);font-weight:600}
 h1{font-family:var(--display);font-weight:700;font-size:clamp(34px,6vw,56px);line-height:1;margin:0;text-wrap:balance}
@@ -137,6 +143,11 @@ footer{font-size:13px;color:var(--muted);max-width:80ch;display:grid;gap:6px;bor
 <body>
 
 <div class="wrap">
+  <nav class="site" aria-label="Zöstere.nl">
+    <a class="home" href="/">Zöstere<span>.nl</span></a>
+    <a href="/vertaler/" aria-current="page">Sjrief Zösters</a>
+    <a href="/aktiviteite/">Aktiviteite</a>
+  </nav>
   <header>
     <div class="eyebrow">Nederlands of Limburgs → dialect van Susteren</div>
     <h1>Sjrief <span class="o">Zösters</span></h1>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Zöstere.nl</title>
-<meta name="description" content="Zöstere.nl — het dialect van Susteren online.">
+<meta name="description" content="Zöstere.nl — Susteren in het Zösters: de dialectvertaler, de agenda en meer.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d5e63'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' text-anchor='middle' fill='%23e3b448'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,12 @@
 *{box-sizing:border-box}
 html,body{margin:0}
 body{background:var(--paper);color:var(--ink);font-family:var(--ui);min-height:100vh;display:grid;place-items:center;padding:48px max(16px,env(safe-area-inset-left,0px))}
-main{max-width:620px;display:grid;gap:22px}
+main{max-width:720px;display:grid;gap:22px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+div.card{display:grid;gap:4px;background:transparent;border:1px dashed var(--line);border-radius:6px;padding:18px 20px;opacity:.75}
+div.card b{font-family:var(--display);font-size:22px;font-weight:600;color:var(--muted)}
+div.card span{color:var(--muted);font-size:15px}
+.soon{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--goud)}
 h1{font-family:var(--display);font-size:clamp(44px,9vw,76px);line-height:1;margin:0}
 h1 span{color:var(--goud)}
 p{font-family:var(--body);font-size:19px;line-height:1.55;color:var(--muted);margin:0}
@@ -29,8 +34,16 @@ a.card span{color:var(--muted);font-size:15px}
 <body>
 <main>
   <h1>Zöstere<span>.nl</span></h1>
-  <p>Het dialect van Susteren, online. Gemaakt met de Zösterse Woordelies en de verhalen uit de Heemklank van de Natuurvrienden Susteren.</p>
-  <a class="card" href="/vertaler/"><b>Sjrief Zösters →</b><span>Zet Nederlands of een ander Limburgs dialect om naar het Zösters, of spreek je tekst in.</span></a>
+  <p>Alles over Zöstere, in het Zösters. Met de dialectvertaler Sjrief Zösters, gemaakt met de Zösterse Woordelies en de verhalen uit de Heemklank van de Natuurvrienden Susteren.</p>
+  <div class="cards">
+    <a class="card" href="/vertaler/"><b>Sjrief Zösters →</b><span>Zet Nederlands of een ander Limburgs dialect om naar het Zösters, of spreek je tekst in.</span></a>
+    <a class="card" href="/aktiviteite/"><b>Aktiviteite →</b><span>Wat is d’r te doon in Zöstere? De agenda van Susteren.</span></a>
+    <div class="card"><span class="soon">Binnenkort</span><b>Winkels</b><span>Winkelen in Zöstere.</span></div>
+    <div class="card"><span class="soon">Binnenkort</span><b>Aete en drènke</b><span>Waar eet en drink je goed in Zöstere?</span></div>
+    <div class="card"><span class="soon">Binnenkort</span><b>Bezienswaardigheeje</b><span>De basiliek, de natuur en de verhalen van Zöstere.</span></div>
+    <div class="card"><span class="soon">Binnenkort</span><b>Vastelaovend</b><span>Alles over de vastelaovend in Zöstere.</span></div>
+  </div>
+  <p style="font-size:14px;margin:0"><a href="/privacy/" style="color:var(--muted)">Privacy</a></p>
 </main>
 </body>
 </html>
