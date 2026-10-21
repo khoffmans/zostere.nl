@@ -429,10 +429,20 @@ function corrRelevant(text){
   return CORR.map(c=>{const o=toks(c.nl).filter(t=>w.has(t)).length; return {c,o};}).sort((a,b)=>b.o-a.o||(b.c.t||0)-(a.c.t||0)).slice(0,15).map(x=>x.c);
 }
 
-function buildPrompt(text,R,mode,dialect){
+const VAST_EINDE='\n§§VAST§§\n';   // alles hiervoor is voor elke vertaling gelijk (Claude kan dat bewaren: sneller en goedkoper)
+let VAST_DEEL='';
+function vastDeel(){
+  if(!VAST_DEEL){
+    let v=GIDS+'\n\nVOORBEELDPAREN (Zösters origineel uit Heemklank, Nederlandse vertaling erbij gemaakt)\n';
+    PAREN.forEach(([nl,zo])=>{v+='NL: '+nl+'\nZÖ: '+zo+'\n';});
+    VAST_DEEL=v+VAST_EINDE;
+  }
+  return VAST_DEEL;
+}
+function buildPrompt(text,R,mode,dialect,ctx){
   const corr=corrRelevant(text);
   const li=mode==='li';
-  let p='';
+  let p=vastDeel();
   const zo=li&&dialect==='Zösters';
   if(zo){
     p+='De tekst hieronder is al geschreven in het dialect van Susteren ("Zösters"), maar door iemand die de schrijfwijze niet precies kent. Zet hem in de juiste Zösterse schrijfwijze, zoals de Woordelies en de schrijvers van het tijdschrift Heemklank dat doen (zie de taalgids). Houd de woorden, de woordvolgorde en de toon van de schrijver aan: verander alleen de spelling. Alleen een woord of vorm die duidelijk geen Zösters is (Nederlands, Duits of uit een ander dialect) vervang je door de Zösterse vorm. Je werkt met de bronnen hieronder en de taalgids.\n\n';
@@ -441,20 +451,19 @@ function buildPrompt(text,R,mode,dialect){
   } else {
     p+='Je vertaalt Nederlandse tekst naar het dialect van Susteren (Nederlands Limburg), in het dialect zelf "Zösters" genoemd. Je werkt alleen met de bronnen hieronder en de taalgids. Schrijf natuurlijk, idiomatisch Zösters zoals de schrijvers van het tijdschrift Heemklank dat doen.\n\n';
   }
-  p+=GIDS+'\n\n';
+  p+='Gebruik de TAALGIDS ZÖSTERS en de VOORBEELDPAREN hierboven.\n\n';
   if(corr.length){
     p+='DOOR SPREKERS VERBETERDE VERTALINGEN (hoogste gezag: neem woordkeuze en spelling hieruit over waar ze passen)\n';
     corr.forEach(c=>{p+=(c.bron==='li'?'LIMBURGS'+(c.dialect?' ('+c.dialect+')':'')+': ':'NL: ')+c.nl+'\nZÖ: '+c.zo+'\n';});
     p+='\n';
   }
-  p+='VOORBEELDPAREN (Zösters origineel uit Heemklank, Nederlandse vertaling erbij gemaakt)\n';
-  PAREN.forEach(([nl,zo])=>{p+='NL: '+nl+'\nZÖ: '+zo+'\n';});
-  p+='\nWOORDENLIJST (Zösterse Woordelies 2000; formaat: zösters trefwoord — meervoud/vormen, geslacht m/v/o, Nederlandse betekenis en voorbeelden). '+(li?'Gezocht op de dialectwoorden in de tekst (als Zösters trefwoord en in de betekenissen):':'Gezocht op de Nederlandse woorden in de tekst:')+'\n';
+  p+='WOORDENLIJST (Zösterse Woordelies 2000; formaat: zösters trefwoord — meervoud/vormen, geslacht m/v/o, Nederlandse betekenis en voorbeelden). '+(li?'Gezocht op de dialectwoorden in de tekst (als Zösters trefwoord en in de betekenissen):':'Gezocht op de Nederlandse woorden in de tekst:')+'\n';
   R.entries.forEach(e=>{p+=e.w+' — '+e.d+'\n';});
   if(R.zins.length){
     p+='\nECHTE ZINNEN UIT HEEMKLANK waarin deze woorden voorkomen (laat zien hoe ze gebruikt en gespeld worden):\n';
     R.zins.forEach(z=>{p+='- '+ZIN[z.i][0]+'\n';});
   }
+  if(ctx) p+='\nDit is een deel van een langere tekst. Het stuk dat er direct aan voorafgaat (alleen als context, NIET vertalen of herhalen):\n"…'+ctx+'"\n';
   p+='\n'+(zo?'TEKST IN ZÖSTERS (eigen schrijfwijze)':li?'OM TE ZETTEN TEKST (Limburgs dialect)':'TE VERTALEN TEKST')+':\n<<<\n'+text+'\n>>>\n\n';
   if(zo){
     p+='Antwoord in precies dit formaat en niets anders:\n<nederlands>\nde betekenis van de tekst in gewoon Nederlands, zodat de gebruiker kan controleren of je hem goed begreep\n</nederlands>\n<vertaling>\nde volledige tekst in de juiste Zösterse schrijfwijze\n</vertaling>\n<toelichting>\n- hoogstens 6 korte regels in het Nederlands, elk in de vorm "oude schrijfwijze → nieuwe schrijfwijze: reden", voor de belangrijkste wijzigingen\n</toelichting>';
@@ -577,33 +586,79 @@ function showSources(R){
 }
 
 async function askClaude(prompt,signal){
-  const t0=Date.now(); const tick=setInterval(()=>{ if(out.classList.contains('thinking')) out.textContent='Woorden opzoeken en vertalen… '+Math.round((Date.now()-t0)/1000)+' s'; },1000);
-  try{ const j=await api('vertaal',{prompt},signal); if(!String(j.text||'').trim()) throw {code:'upstream'}; return {text:j.text,truncated:!!j.truncated}; }
-  finally{ clearInterval(tick); }
+  const j=await api('vertaal',{prompt},signal); if(!String(j.text||'').trim()) throw {code:'upstream'}; return {text:j.text,truncated:!!j.truncated};
+}
+// Lange teksten in stukken knippen (op alinea's en zinnen), die tegelijk vertaald worden.
+const STUK=1100, PARALLEL=5, MAX_TOTAAL=60000;
+function stukken(text){
+  const bits=text.split(/(\n\s*\n|\n|(?<=[.!?…])\s+)/);
+  const units=[];
+  for(let i=0;i<bits.length;i+=2){
+    let t=bits[i]||''; const sep=bits[i+1]||'';
+    if(!t.trim()){ if(units.length) units[units.length-1].sep+=t+sep; continue; }
+    while(t.length>STUK){ let k=t.lastIndexOf(' ',STUK); if(k<STUK/3) k=STUK; units.push({t:t.slice(0,k),sep:' '}); t=t.slice(k).replace(/^\s+/,''); }
+    units.push({t,sep});
+  }
+  const res=[]; let cur='', curSep='';
+  for(const u of units){
+    if(cur&&(cur.length+curSep.length+u.t.length>STUK||(cur.length>STUK*0.6&&/\n/.test(curSep)))){ res.push({t:cur,sep:curSep}); cur=''; }
+    cur=cur?cur+curSep+u.t:u.t; curSep=u.sep;
+  }
+  if(cur) res.push({t:cur,sep:''});
+  return res.map(s=>({t:s.t.trim(),sep:/\n\s*\n/.test(s.sep)?'\n\n':/\n/.test(s.sep)?'\n':s.sep?' ':''}));
 }
 async function translate(){
   const text=nl.value.trim(); if(!text){nl.focus();return;}
   if(listening&&rec) rec.stop();
-  const dialect=mode==='li'?$('dialect').value:''; const R=retrieve(text,mode); const prompt=buildPrompt(text,R,mode,dialect); const useMode=mode;
-  ctl?.abort(); ctl=new AbortController();
+  if(text.length>MAX_TOTAAL){ setStatus(st,'De tekst is erg lang (meer dan '+MAX_TOTAAL.toLocaleString('nl-NL')+' tekens). Vertaal hem in twee keer.',true); return; }
+  const dialect=mode==='li'?$('dialect').value:''; const useMode=mode;
+  const delen=stukken(text);
+  const taken=delen.map((d,i)=>{ const R=retrieve(d.t,useMode); const ctx=i?delen[i-1].t.slice(-300):''; return {d,R,prompt:buildPrompt(d.t,R,useMode,dialect,ctx),res:null,fout:null}; });
+  ctl?.abort(); ctl=new AbortController(); const signal=ctl.signal;
   go.disabled=true; stopBtn.hidden=false; $('edit').hidden=true; setStatus(st,'');
   $('out-tag').innerHTML='<span class="tag ex">Concept</span>';
   out.className='out thinking'; out.textContent='Woorden opzoeken en vertalen…';
   $('notes').hidden=true;
+  const t0=Date.now(); let klaar=0;
+  const toon=()=>{
+    const s=Math.round((Date.now()-t0)/1000);
+    if(!klaar){ out.className='out thinking'; out.textContent='Woorden opzoeken en vertalen… '+s+' s'+(taken.length>1?' (in '+taken.length+' stukken tegelijk)':''); return; }
+    out.className='out';
+    out.textContent=taken.map((t,i)=>(t.res?t.res.zo:t.fout?'[dit stuk lukte niet]':'…')+(i<taken.length-1?delen[i].sep:'')).join('');
+    if(klaar<taken.length) setStatus(st,'Stuk '+klaar+' van '+taken.length+' klaar… '+s+' s');
+  };
+  const tick=setInterval(toon,1000);
+  async function doe(t){
+    for(let poging=0;poging<2;poging++){
+      try{ const r=await askClaude(t.prompt,signal); const p=parse(r.text); t.res={zo:p.zo||r.text.trim(),nlU:p.nlU,notes:p.notes,truncated:r.truncated}; t.fout=null; break; }
+      catch(e){ t.fout=e; if(e&&(e.code==='cancelled'||e.code==='daily_limit'||e.code==='rate_limited'||e.code==='too_long'||e.code==='not_configured')) break; await new Promise(r=>setTimeout(r,1500)); }
+    }
+    klaar++; toon();
+  }
   try{
-    const res=await askClaude(prompt,ctl.signal);
-    const p=parse(res.text);
-    out.className='out'; out.textContent=p.zo||res.text.trim();
+    let volgende=0;
+    await Promise.all(Array.from({length:Math.min(PARALLEL,taken.length)},async()=>{ while(volgende<taken.length&&!signal.aborted){ await doe(taken[volgende++]); } }));
+    if(signal.aborted) throw {code:'cancelled'};
+    const goed=taken.filter(t=>t.res);
+    if(!goed.length) throw taken[0].fout||{code:'upstream'};
+    toon();
     lastNl=text; lastZo=out.textContent; lastMode=useMode; lastDialect=dialect;
-    $('und-box').hidden=!(useMode==='li'&&p.nlU); $('und').textContent=p.nlU||'';
+    const nlU=goed.map(t=>t.res.nlU).filter(Boolean).join('\n\n');
+    $('und-box').hidden=!(useMode==='li'&&nlU); $('und').textContent=nlU;
+    const notes=[...new Set(goed.flatMap(t=>t.res.notes))].slice(0,12);
     const ul=$('note-list'); ul.textContent='';
-    (p.notes.length?p.notes:['Geen twijfelgevallen gemeld.']).forEach(n=>{const li=document.createElement('li');li.textContent=n;ul.append(li);});
+    (notes.length?notes:['Geen twijfelgevallen gemeld.']).forEach(n=>{const li=document.createElement('li');li.textContent=n;ul.append(li);});
+    const R={entries:[],zins:[]}; const sE=new Set(), sZ=new Set();
+    taken.forEach(t=>{ t.R.entries.forEach(e=>{ if(!sE.has(e.i)){sE.add(e.i);R.entries.push(e);} }); t.R.zins.forEach(z=>{ if(!sZ.has(z.i)){sZ.add(z.i);R.zins.push(z);} }); });
     showSources(R); $('notes').hidden=false;
-    if(res.truncated) setStatus(st,'De vertaling is afgekapt. Vertaal kortere stukken.',true);
+    const mis=taken.filter(t=>!t.res);
+    if(mis.length) setStatus(st,mis.length+' van de '+taken.length+' stukken lukte niet. '+(ERR[mis[0].fout&&mis[0].fout.code]||'Probeer het opnieuw.'),true);
+    else if(taken.some(t=>t.res.truncated)) setStatus(st,'Een deel van de vertaling is afgekapt. Probeer het opnieuw.',true);
+    else setStatus(st,taken.length>1?'Klaar: '+taken.length+' stukken in '+Math.round((Date.now()-t0)/1000)+' s.':'');
   }catch(e){
     if(e&&e.code==='cancelled'){ out.className='out placeholder'; out.textContent='Gestopt.'; setStatus(st,''); }
-    else { out.className='out placeholder'; out.textContent=(e&&e.text&&parse(e.text).zo)||'Geen vertaling.'; setStatus(st,ERR[e&&e.code]||'Er ging iets mis bij het vertalen. Probeer het opnieuw.',true); }
-  }finally{ go.disabled=false; stopBtn.hidden=true; }
+    else { out.className='out placeholder'; out.textContent='Geen vertaling.'; setStatus(st,ERR[e&&e.code]||'Er ging iets mis bij het vertalen. Probeer het opnieuw.',true); }
+  }finally{ clearInterval(tick); go.disabled=false; stopBtn.hidden=true; }
 }
 go.onclick=translate;
 stopBtn.onclick=()=>ctl?.abort();
@@ -623,7 +678,7 @@ $('save').onclick=async()=>{
   if(!zo||!src){setStatus($('save-st'),'Zowel de brontekst als de verbeterde vertaling zijn nodig.',true);return;}
   $('save').disabled=true; setStatus($('save-st'),'Versturen…');
   try{
-    await api('voorstel',{nl:src.slice(0,4000),zo:zo.slice(0,4000),concept:lastZo.slice(0,4000),bron:lastMode,dialect:lastDialect});
+    await api('voorstel',{nl:src.slice(0,45000),zo:zo.slice(0,45000),concept:lastZo.slice(0,45000),bron:lastMode,dialect:lastDialect});
     setStatus($('save-st'),'Bedankt! Je voorstel gaat naar de redactie.');
     out.textContent=zo; $('out-tag').innerHTML='<span class="tag ok">Jouw versie</span>';
     setTimeout(()=>{$('edit').hidden=true;},1600);

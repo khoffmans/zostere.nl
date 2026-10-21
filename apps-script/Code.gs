@@ -19,9 +19,12 @@ const MAP_NAAM = 'Sjrief Zösters – inzendingen';
 const SHEET_NAAM = 'Sjrief Zösters – verbetervoorstellen';
 const AKT_NAAM = 'Zöstere.nl – aktiviteite';
 
-// Grenzen tegen misbruik (voor de hele site samen)
-const MAX_VERTALINGEN_PER_10_MIN = 40;
-const MAX_VERTALINGEN_PER_DAG = 400;
+// Grenzen tegen misbruik (voor de hele site samen). Een lange tekst wordt in stukken
+// vertaald; elk stuk telt als één vertaling.
+const MAX_VERTALINGEN_PER_10_MIN = 150;
+const MAX_VERTALINGEN_PER_DAG = 1500;
+// Alles vóór dit teken is voor elke vertaling gelijk; Claude bewaart dat deel 5 minuten (sneller en goedkoper).
+const VAST_EINDE = '\n§§VAST§§\n';
 const MAX_INZENDINGEN_PER_UUR = 30;
 
 /** Eén keer uitvoeren: maakt de map en de Sheet aan en controleert de API-sleutel. */
@@ -142,6 +145,15 @@ function vertaal(d) {
   return vraagClaude(prompt);
 }
 
+function inhoud(prompt) {
+  const i = prompt.indexOf(VAST_EINDE);
+  if (i < 0) return prompt;
+  return [
+    { type: 'text', text: prompt.slice(0, i), cache_control: { type: 'ephemeral' } },
+    { type: 'text', text: prompt.slice(i + VAST_EINDE.length) },
+  ];
+}
+
 function vraagClaude(prompt) {
   const key = PropertiesService.getScriptProperties().getProperty('ANTHROPIC_API_KEY');
   if (!key) return { ok: false, code: 'not_configured' };
@@ -149,7 +161,7 @@ function vraagClaude(prompt) {
     method: 'post',
     contentType: 'application/json',
     headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01' },
-    payload: JSON.stringify({ model: MODEL, max_tokens: 4000, messages: [{ role: 'user', content: prompt }] }),
+    payload: JSON.stringify({ model: MODEL, max_tokens: 4000, messages: [{ role: 'user', content: inhoud(prompt) }] }),
     muteHttpExceptions: true,
   });
   const status = res.getResponseCode();
@@ -198,11 +210,11 @@ function inzending(d) {
 
 // ---- 3. Verbetervoorstel ----
 function voorstel(d) {
-  const nl = str(d.nl, 4000), zo = str(d.zo, 4000);
+  const nl = str(d.nl, 45000), zo = str(d.zo, 45000);
   if (!nl || !zo) return { ok: false, code: 'bad_request' };
   if (!teller('inz-' + Math.floor(Date.now() / 3600000), MAX_INZENDINGEN_PER_UUR, 4000)) return { ok: false, code: 'rate_limited' };
   const id = PropertiesService.getScriptProperties().getProperty('SHEET_ID');
-  const rij = [Utilities.formatDate(new Date(), 'Europe/Amsterdam', 'yyyy-MM-dd HH:mm'), d.bron === 'li' ? 'Limburgs' : 'Nederlands', str(d.dialect, 40), nl, zo, str(d.concept, 4000), ''];
+  const rij = [Utilities.formatDate(new Date(), 'Europe/Amsterdam', 'yyyy-MM-dd HH:mm'), d.bron === 'li' ? 'Limburgs' : 'Nederlands', str(d.dialect, 40), nl, zo, str(d.concept, 45000), ''];
   // RAW: tekst wordt nooit als formule gelezen
   google('post', 'https://sheets.googleapis.com/v4/spreadsheets/' + id + '/values/A1:G1:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS',
     JSON.stringify({ values: [rij] }));
