@@ -12,6 +12,7 @@
 </head>
 <body class="app">
 <a class="skip" href="#main">Naar de vertaler</a>
+<div class="taalbalk"><div class="container"><div class="taal" role="group" aria-label="Taal"><span class="taal__label" data-zo="Taol">Taal</span><button type="button" class="vlag" data-taal="nl" aria-pressed="true" aria-label="Nederlands" title="Nederlands"><svg viewBox="0 0 27 18" aria-hidden="true"><rect class="f-red" width="27" height="6"/><rect class="f-white" y="6" width="27" height="6"/><rect class="f-blue" y="12" width="27" height="6"/></svg></button><button type="button" class="vlag" data-taal="zo" aria-pressed="false" aria-label="Zösters" title="Zösters"><svg viewBox="0 0 27 18" aria-hidden="true"><rect class="f-white" width="27" height="8.5"/><rect class="f-blue" y="8.5" width="27" height="2"/><rect class="f-yellow" y="10.5" width="27" height="7.5"/><path class="f-red" d="M3 1.4 5.6.9l1 1.5 1.5-.5-.5 2 1 1.5-1.5 1 .5 1.4-2-.4-1 .5-.5-1.5-1.5-.5 1-1.5-1-1.5z"/></svg></button></div></div></div>
 <header class="mast">
   <div class="container">
     <a class="wordmark" href="/" aria-label="Zöstere.nl, naar de beginpagina">Zöstere.nl</a>
@@ -21,11 +22,11 @@
 <div class="wrap container" id="main">
   <header class="app-kop">
     <h1>Sjrief Zösters</h1>
-    <p class="lede">Typ of plak een tekst in het Nederlands of in een ander Limburgs dialect. De vertaler zoekt de woorden op in de Zösterse Woordelies, haalt er echte zinnen uit de Heemklank bij en schrijft de tekst in het Zösters.</p>
+    <p class="lede" data-zo="Sjrief of plek ein tekst in ’t Holles of in e anger Limburgs dialek. De vertaler zeuk de woorde op in de Zösterse Woordelies, haolt d’r ech zinne oet de Heemklank bie en sjrif de tekst in ’t Zösters.">Typ of plak een tekst in het Nederlands of in een ander Limburgs dialect. De vertaler zoekt de woorden op in de Zösterse Woordelies, haalt er echte zinnen uit de Heemklank bij en schrijft de tekst in het Zösters.</p>
     <dl class="facts">
       <div><dt>Woordelies (2000)</dt><dd id="f-dict">5.723</dd></div>
-      <div><dt>Zinnen uit Heemklank</dt><dd id="f-zin">6.434</dd></div>
-      <div><dt>Goedgekeurde verbeteringen</dt><dd id="f-corr">0</dd></div>
+      <div><dt data-zo="Zinne oet Heemklank">Zinnen uit Heemklank</dt><dd id="f-zin">6.434</dd></div>
+      <div><dt data-zo="Goodgekeurde verbeteringe">Goedgekeurde verbeteringen</dt><dd id="f-corr">0</dd></div>
     </dl>
   </header>
 
@@ -35,7 +36,7 @@
       <div class="sheet">
         <div class="sheet-head">
           <div class="seg" role="radiogroup" aria-label="Taal van de tekst">
-            <button type="button" role="radio" aria-checked="true" data-mode="nl" id="m-nl">Nederlands</button>
+            <button type="button" role="radio" aria-checked="true" data-mode="nl" id="m-nl" data-zo="Holles">Nederlands</button>
             <button type="button" role="radio" aria-checked="false" data-mode="li" id="m-li">Limburgs</button>
           </div>
           <span class="small" id="count">0 woorden</span>
@@ -63,7 +64,7 @@
         <textarea id="nl" aria-label="Te vertalen tekst" spellcheck="true">Want als het goed is, komt morgen weer een nieuwe dag.</textarea>
         <div class="sheet-foot">
           <button class="btn" type="button" id="go">Vertaal naar ’t Zösters</button>
-          <button type="button" class="btn btn--frame mic" id="mic" aria-expanded="false" aria-controls="dictate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path><path d="M12 18v3"></path></svg>Inspreken</button>
+          <button type="button" class="btn btn--frame mic" id="mic" aria-expanded="false" aria-controls="dictate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path><path d="M12 18v3"></path></svg><span data-zo="Insjpraeke">Inspreken</span></button>
           <button class="btn btn--frame" type="button" id="stop" hidden>Stop</button>
           <span class="grow"></span>
           <span class="small" id="tier"></span>
@@ -74,8 +75,8 @@
         <div class="out" id="out" aria-live="polite">Want es ’t good is, kump mörge weer eine nuujen daag.</div>
         <div class="sheet-foot">
           <button class="btn btn--frame" type="button" id="copy">Kopieer</button>
-          <button class="btn btn--frame" type="button" id="fix">Verbeter deze vertaling</button>
-          <button id="gz" class="btn btn--frame gz-btn" type="button">Insturen voor de Gezèt</button>
+          <button class="btn btn--frame" type="button" id="fix" data-zo="Verbeter dees vertaling">Verbeter deze vertaling</button>
+          <button id="gz" class="btn btn--frame gz-btn" type="button" data-zo="Insjture veur de Gezèt">Insturen voor de Gezèt</button>
           <span class="grow"></span>
           <span class="status" id="st"></span>
         </div>
@@ -102,16 +103,16 @@
   </section>
 
   <section class="section" aria-labelledby="h-wl">
-    <h2 id="h-wl">Zoek in de Woordelies</h2>
-    <p class="intro">Zoek op een Nederlands of een Zösters woord. Dit werkt zonder Claude, rechtstreeks in de woordenlijst van 2000.</p>
-    <div class="search"><input class="input" id="q" type="search" placeholder="bijv. kermis, regen, sjoan" aria-label="Zoekterm"></div>
+    <h2 id="h-wl" data-zo="Zeuk in de Woordelies">Zoek in de Woordelies</h2>
+    <p class="intro" data-zo="Zeuk op e Holles of e Zösters woord, drek in de woordelies van 2000.">Zoek op een Nederlands of een Zösters woord. Dit werkt zonder Claude, rechtstreeks in de woordenlijst van 2000.</p>
+    <div class="search"><input class="input" id="q" type="search" placeholder="bijv. kermis, regen, sjoan" data-zo-ph="bv. kirmes, raege, sjoan" aria-label="Zoekterm"></div>
     <div class="small" id="q-n"></div>
     <div class="dict" id="dict"></div>
   </section>
 
   <section class="section" aria-labelledby="h-corr">
-    <h2 id="h-corr">Verbeterde voorbeelden</h2>
-    <p class="intro">Verbeteringen van bezoekers die door de redactie zijn nagekeken en goedgekeurd. Ze wegen bij elke nieuwe vertaling het zwaarst.</p>
+    <h2 id="h-corr" data-zo="Verbeterde veurbeelde">Verbeterde voorbeelden</h2>
+    <p class="intro" data-zo="Verbeteringe van bezeukers die de redaksie haet nagekeke en goodgekeurd. Ze telle bie jeder nuuj vertaling ’t zwaorste.">Verbeteringen van bezoekers die door de redactie zijn nagekeken en goedgekeurd. Ze wegen bij elke nieuwe vertaling het zwaarst.</p>
     <div class="corr" id="corr"><p class="small" id="corr-empty">Verbeterde voorbeelden laden…</p></div>
   </section>
 
@@ -125,7 +126,7 @@
   <div class="container">
     <div>
       <span class="wordmark">Zöstere.nl</span>
-      <p>Een tip of een fout gezien? Mail naar <a href="mailto:info@zostere.nl">info@zostere.nl</a>.</p>
+      <p data-zo-html="Höbs doe ein tip, of get gezeen det neet klopt? Mail nao &lt;a href=&quot;mailto:info@zostere.nl&quot;&gt;info@zostere.nl&lt;/a&gt;.">Een tip of een fout gezien? Mail naar <a href="mailto:info@zostere.nl">info@zostere.nl</a>.</p>
     </div>
     <ul>
       <li><a href="/aktiviteite/">Aktiviteite</a></li>
@@ -659,5 +660,6 @@ loadCorr();
 try{ const t=new URLSearchParams(location.search).get('t'); if(t&&t.trim()){ nl.value=t.slice(0,8000); nl.dispatchEvent(new Event('input')); history.replaceState(null,'',location.pathname); go.click(); } }catch{}
 })();
 </script>
+<script src="../js/taal.js" defer></script>
 </body>
 </html>

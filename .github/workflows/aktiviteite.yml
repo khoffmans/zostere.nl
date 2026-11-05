@@ -30,7 +30,7 @@ jobs:
         run: |
           git config user.name "Zöstere.nl"
           git config user.email "info@zostere.nl"
-          git add -A aktiviteite sitemap.xml robots.txt
+          git add -A aktiviteite sitemap.xml robots.txt index.html
           if git diff --cached --quiet; then
             echo "Niets veranderd."
           else

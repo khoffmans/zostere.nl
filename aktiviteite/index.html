@@ -20,6 +20,7 @@
 </head>
 <body class="akt">
 <a class="skip" href="#main">Naar de inhoud</a>
+<div class="taalbalk"><div class="container"><div class="taal" role="group" aria-label="Taal"><span class="taal__label" data-zo="Taol">Taal</span><button type="button" class="vlag" data-taal="nl" aria-pressed="true" aria-label="Nederlands" title="Nederlands"><svg viewBox="0 0 27 18" aria-hidden="true"><rect class="f-red" width="27" height="6"/><rect class="f-white" y="6" width="27" height="6"/><rect class="f-blue" y="12" width="27" height="6"/></svg></button><button type="button" class="vlag" data-taal="zo" aria-pressed="false" aria-label="Zösters" title="Zösters"><svg viewBox="0 0 27 18" aria-hidden="true"><rect class="f-white" width="27" height="8.5"/><rect class="f-blue" y="8.5" width="27" height="2"/><rect class="f-yellow" y="10.5" width="27" height="7.5"/><path class="f-red" d="M3 1.4 5.6.9l1 1.5 1.5-.5-.5 2 1 1.5-1.5 1 .5 1.4-2-.4-1 .5-.5-1.5-1.5-.5 1-1.5-1-1.5z"/></svg></button></div></div></div>
 <header class="mast">
   <div class="container">
     <a class="wordmark" href="/" aria-label="Zöstere.nl, naar de beginpagina">Zöstere.nl</a>
@@ -31,8 +32,8 @@
     <div class="container">
       <h1 class="fitbox"><span class="fit" style="--n:11">Aktiviteite</span></h1>
       <div class="akthero__tekst">
-        <p class="lead">Wat is d’r te doon in Zöstere? Vastelaovend, kirmes, meziek en sport. Organiseer je zelf iets? <a href="#aanmelden" id="meld-link">Meld het aan</a>.</p>
-        <div class="actions"><button class="btn" id="meld" type="button">Aktiviteit aanmelden</button></div>
+        <p class="lead">Wat is d’r te doon in Zöstere? Vastelaovend, kirmes, meziek en sport. <span data-zo="Organiseers doe zelf get?">Organiseer je zelf iets?</span> <a href="#aanmelden" id="meld-link" data-zo="Meld ’t aan">Meld het aan</a>.</p>
+        <div class="actions"><button class="btn" id="meld" type="button" data-zo="Aktiviteit aanmelje">Aktiviteit aanmelden</button></div>
       </div>
     </div>
   </section>
@@ -41,7 +42,7 @@
     <div class="container">
       <div class="chips" id="chips" role="group" aria-label="Filter op soort"><button type="button" class="chip" data-cat="" aria-pressed="true">Alles</button><button type="button" class="chip" data-cat="Vastelaovend" aria-pressed="false"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</button><button type="button" class="chip" data-cat="Kirmes &amp; fieëste" aria-pressed="false"><i class="k k-kirmes" aria-hidden="true"></i>Kirmes &amp; fieëste</button><button type="button" class="chip" data-cat="Meziek &amp; cultuur" aria-pressed="false"><i class="k k-meziek" aria-hidden="true"></i>Meziek &amp; cultuur</button><button type="button" class="chip" data-cat="Natuur &amp; wanjele" aria-pressed="false"><i class="k k-natuur" aria-hidden="true"></i>Natuur &amp; wanjele</button><button type="button" class="chip" data-cat="Kirk" aria-pressed="false"><i class="k k-kirk" aria-hidden="true"></i>Kirk</button><button type="button" class="chip" data-cat="Sport" aria-pressed="false"><i class="k k-sport" aria-hidden="true"></i>Sport</button><button type="button" class="chip" data-cat="Kènjer" aria-pressed="false"><i class="k k-kenjer" aria-hidden="true"></i>Kènjer</button><button type="button" class="chip" data-cat="Markt" aria-pressed="false"><i class="k k-markt" aria-hidden="true"></i>Markt</button><button type="button" class="chip" data-cat="Anger" aria-pressed="false"><i class="k k-anger" aria-hidden="true"></i>Anger</button></div>
       <div class="cal">
-        <div class="cal-head"><button class="btn btn--frame cal-nav" type="button" id="vorige" aria-label="Vorige maand">Vorige</button><h2 id="maandnaam" aria-live="polite">november 2026</h2><button class="btn btn--frame cal-nav" type="button" id="volgende" aria-label="Volgende maand">Volgende</button></div>
+        <div class="cal-head"><button class="btn btn--frame cal-nav" type="button" id="vorige" aria-label="Vorige maand" data-zo="Trök">Vorige</button><h2 id="maandnaam" aria-live="polite">november 2026</h2><button class="btn btn--frame cal-nav" type="button" id="volgende" aria-label="Volgende maand" data-zo="Wiejer">Volgende</button></div>
         <div class="grid" id="grid"></div>
         <div class="daglijst" id="daglijst" hidden></div>
       </div>
@@ -51,157 +52,157 @@
   <section class="lijst" aria-label="Komende aktiviteite">
     <div class="container" id="lijst">
       <section class="month" data-maand="2026-10"><h2>november 2026</h2><ol class="evlijst"><li><a class="ev" href="/aktiviteite/2026-11-13-aopening-vastelaovend-graasboerriek/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">13</span><span class="ev__m">vrijdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">13</span><span class="ev__m" data-zo="vriedig">vrijdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Äöpening vastelaovend Graasboerriek</h3>
         <span class="ev__meta"><span class="visually-hidden">vrijdag 13 november 2026</span><span>20:11</span><span>De Graasboer, Mèrt</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2026-11-14-sjlagerverkeezing/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">14</span><span class="ev__m">zaterdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">14</span><span class="ev__m" data-zo="zaoterdig">zaterdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Sjlagerverkeezing</h3>
         <span class="ev__meta"><span class="visually-hidden">zaterdag 14 november 2026</span><span>20:11</span><span>Café Bie Alois</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2026-11-15-boake-van-t-lache/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">15</span><span class="ev__m">zondag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">15</span><span class="ev__m" data-zo="zóndig">zondag</span></span>
       <span class="ev__body"><h3 class="ev__t">Böäke van ’t Lache</h3>
         <span class="ev__meta"><span class="visually-hidden">zondag 15 november 2026</span><span>14:11</span><span>Zaal Mirage</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2026-11-20-winter-bbq-pubquiz/" data-cat="Sport">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">20</span><span class="ev__m">vrijdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">20</span><span class="ev__m" data-zo="vriedig">vrijdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Winter BBQ + PubQuiz</h3>
         <span class="ev__meta"><span class="visually-hidden">vrijdag 20 november 2026</span><span>SCS Susteren</span></span></span>
       <span class="ev__soort"><i class="k k-sport" aria-hidden="true"></i>Sport</span>
     </a></li><li><a class="ev" href="/aktiviteite/2026-11-25-lezing-over-sint-nicolaas/" data-cat="Kirk">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">25</span><span class="ev__m">woensdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">25</span><span class="ev__m" data-zo="goonsdig">woensdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Lezing over Sint-Nicolaas</h3>
         <span class="ev__meta"><span class="visually-hidden">woensdag 25 november 2026</span><span>Susteren</span></span><span class="ev__org">Parochie Christus Salvator</span></span>
       <span class="ev__soort"><i class="k k-kirk" aria-hidden="true"></i>Kirk</span>
     </a></li><li><a class="ev" href="/aktiviteite/2026-11-28-sinterklaasviering-jeugd/" data-cat="Kènjer">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">28</span><span class="ev__m">zaterdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">28</span><span class="ev__m" data-zo="zaoterdig">zaterdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Sinterklaasviering Jeugd</h3>
         <span class="ev__meta"><span class="visually-hidden">zaterdag 28 november 2026</span><span>SCS Susteren</span></span></span>
       <span class="ev__soort"><i class="k k-kenjer" aria-hidden="true"></i>Kènjer</span>
     </a></li></ol></section><section class="month" data-maand="2026-11"><h2>december 2026</h2><ol class="evlijst"><li><a class="ev" href="/aktiviteite/2026-12-11-kerst-toeptoernooi/" data-cat="Sport">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">11</span><span class="ev__m">vrijdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">11</span><span class="ev__m" data-zo="vriedig">vrijdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Kerst Toeptoernooi</h3>
         <span class="ev__meta"><span class="visually-hidden">vrijdag 11 december 2026</span><span>SCS Susteren</span></span></span>
       <span class="ev__soort"><i class="k k-sport" aria-hidden="true"></i>Sport</span>
     </a></li><li><a class="ev" href="/aktiviteite/2026-12-19-beerkiene-bie-alois/" data-cat="Kirmes &amp; fieëste">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">19</span><span class="ev__m">zaterdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">19</span><span class="ev__m" data-zo="zaoterdig">zaterdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Beerkiene bie Alois</h3>
         <span class="ev__meta"><span class="visually-hidden">zaterdag 19 december 2026</span><span>14:00</span><span>Café Bie Alois</span></span></span>
       <span class="ev__soort"><i class="k k-kirmes" aria-hidden="true"></i>Kirmes &amp; fieëste</span>
     </a></li><li><a class="ev" href="/aktiviteite/2026-12-27-dart-toernooi/" data-cat="Sport">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">27</span><span class="ev__m">zondag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">27</span><span class="ev__m" data-zo="zóndig">zondag</span></span>
       <span class="ev__body"><h3 class="ev__t">Dart Toernooi</h3>
         <span class="ev__meta"><span class="visually-hidden">zondag 27 december 2026</span><span>SCS Susteren</span></span></span>
       <span class="ev__soort"><i class="k k-sport" aria-hidden="true"></i>Sport</span>
     </a></li></ol></section><section class="month" data-maand="2027-0"><h2>januari 2027</h2><ol class="evlijst"><li><a class="ev" href="/aktiviteite/2027-01-03-nieuwjaarswandeling-receptie/" data-cat="Natuur &amp; wanjele">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">3</span><span class="ev__m">zondag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">3</span><span class="ev__m" data-zo="zóndig">zondag</span></span>
       <span class="ev__body"><h3 class="ev__t">Nieuwjaarswandeling + Receptie</h3>
         <span class="ev__meta"><span class="visually-hidden">zondag 3 januari 2027</span><span>SCS Susteren</span></span></span>
       <span class="ev__soort"><i class="k k-natuur" aria-hidden="true"></i>Natuur &amp; wanjele</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-01-08-kleedlokalenparty/" data-cat="Sport">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">8</span><span class="ev__m">vrijdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">8</span><span class="ev__m" data-zo="vriedig">vrijdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Kleedlokalenparty</h3>
         <span class="ev__meta"><span class="visually-hidden">vrijdag 8 januari 2027</span><span>SCS Susteren</span></span></span>
       <span class="ev__soort"><i class="k k-sport" aria-hidden="true"></i>Sport</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-01-09-galazitting/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">9</span><span class="ev__m">zaterdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">9</span><span class="ev__m" data-zo="zaoterdig">zaterdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Galazitting</h3>
         <span class="ev__meta"><span class="visually-hidden">zaterdag 9 januari 2027</span><span>20:11</span><span>D’n Hermeniezaal</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-01-10-aanbeeje-graasboer/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">10</span><span class="ev__m">zondag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">10</span><span class="ev__m" data-zo="zóndig">zondag</span></span>
       <span class="ev__body"><h3 class="ev__t">Aanbeeje Graasboer</h3>
         <span class="ev__meta"><span class="visually-hidden">zondag 10 januari 2027</span><span>10:30</span><span>Nuuje Prins</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-01-10-auwt-prinse-middig/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">10</span><span class="ev__m">zondag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">10</span><span class="ev__m" data-zo="zóndig">zondag</span></span>
       <span class="ev__body"><h3 class="ev__t">Auwt Prinse-middig</h3>
         <span class="ev__meta"><span class="visually-hidden">zondag 10 januari 2027</span><span>15:11</span><span>Café Hermeniezaal</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-01-17-kenjerzitting/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">17</span><span class="ev__m">zondag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">17</span><span class="ev__m" data-zo="zóndig">zondag</span></span>
       <span class="ev__body"><h3 class="ev__t">Kènjerzitting</h3>
         <span class="ev__meta"><span class="visually-hidden">zondag 17 januari 2027</span><span>14:11</span><span>Zaal Mirage</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-01-23-recepsie-hoaghede/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">23</span><span class="ev__m">zaterdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">23</span><span class="ev__m" data-zo="zaoterdig">zaterdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Recepsie Hoaghede</h3>
         <span class="ev__meta"><span class="visually-hidden">zaterdag 23 januari 2027</span><span>20:11</span><span>D’n Hermeniezaal</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-01-24-vrouwluujzitting/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">24</span><span class="ev__m">zondag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">24</span><span class="ev__m" data-zo="zóndig">zondag</span></span>
       <span class="ev__body"><h3 class="ev__t">Vrouwluujzitting</h3>
         <span class="ev__meta"><span class="visually-hidden">zondag 24 januari 2027</span><span>10:00</span><span>D’n Hermeniezaal</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-01-28-seniorenmiddig/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">28</span><span class="ev__m">donderdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">28</span><span class="ev__m" data-zo="dónderdig">donderdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Seniorenmiddig</h3>
         <span class="ev__meta"><span class="visually-hidden">donderdag 28 januari 2027</span><span>D’n Hermeniezaal</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-01-30-bombarie-basilca/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">30</span><span class="ev__m">zaterdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">30</span><span class="ev__m" data-zo="zaoterdig">zaterdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Bombarie Basilca</h3>
         <span class="ev__meta"><span class="visually-hidden">zaterdag 30 januari 2027</span><span>15:11</span><span>Salvatorplein</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li></ol></section><section class="month" data-maand="2027-1"><h2>februari 2027</h2><ol class="evlijst"><li><a class="ev" href="/aktiviteite/2027-02-05-sjoale-optoch/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">5</span><span class="ev__m">vrijdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">5</span><span class="ev__m" data-zo="vriedig">vrijdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Sjoale-optoch</h3>
         <span class="ev__meta"><span class="visually-hidden">vrijdag 5 februari 2027</span><span>09:11</span><span>Raadhuisplein</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-02-05-vastelaovesaovend-scs-en-noav/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">5</span><span class="ev__m">vrijdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">5</span><span class="ev__m" data-zo="vriedig">vrijdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Vastelaovesaovend SCS en NOAV</h3>
         <span class="ev__meta"><span class="visually-hidden">vrijdag 5 februari 2027</span><span>20:11</span><span>D’n Hermeniezaal</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-02-06-vastelaovend/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">6</span><span class="ev__m">zaterdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">6</span><span class="ev__m" data-zo="zaoterdig">zaterdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Vastelaovend</h3>
         <span class="ev__meta"><span class="visually-hidden">za 6 februari t/m dinsdag 9 februari 2027</span><span>6 februari t/m 9 februari</span><span>Zöstere</span></span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-02-06-graasborgersbal/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">6</span><span class="ev__m">zaterdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">6</span><span class="ev__m" data-zo="zaoterdig">zaterdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Graasbörgersbal</h3>
         <span class="ev__meta"><span class="visually-hidden">zaterdag 6 februari 2027</span><span>20:11</span><span>Keffees Zöstere</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-02-07-vastelaovesmes/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">7</span><span class="ev__m">zondag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">7</span><span class="ev__m" data-zo="zóndig">zondag</span></span>
       <span class="ev__body"><h3 class="ev__t">Vastelaovesmès</h3>
         <span class="ev__meta"><span class="visually-hidden">zondag 7 februari 2027</span><span>12:00</span><span>Amelbergabasiliek</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-02-07-traotte-toch/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">7</span><span class="ev__m">zondag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">7</span><span class="ev__m" data-zo="zóndig">zondag</span></span>
       <span class="ev__body"><h3 class="ev__t">Träötte-toch</h3>
         <span class="ev__meta"><span class="visually-hidden">zondag 7 februari 2027</span><span>14:11</span><span>Keffees Zöstere</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-02-08-de-groate-optoch/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">8</span><span class="ev__m">maandag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">8</span><span class="ev__m" data-zo="maondig">maandag</span></span>
       <span class="ev__body"><h3 class="ev__t">De Groate Optoch</h3>
         <span class="ev__meta"><span class="visually-hidden">maandag 8 februari 2027</span><span>14:11</span><span>Zöstere</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-02-09-de-leste-runj/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">9</span><span class="ev__m">dinsdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">9</span><span class="ev__m" data-zo="daensdig">dinsdag</span></span>
       <span class="ev__body"><h3 class="ev__t">De Lèste Runj</h3>
         <span class="ev__meta"><span class="visually-hidden">dinsdag 9 februari 2027</span><span>14:11</span><span>Zöstere</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-02-09-aafsjeete-graasboer/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">9</span><span class="ev__m">dinsdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">9</span><span class="ev__m" data-zo="daensdig">dinsdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Aafsjeete Graasboer</h3>
         <span class="ev__meta"><span class="visually-hidden">dinsdag 9 februari 2027</span><span>20:11</span><span>Raadhuisplein</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-02-10-hieeringbiete/" data-cat="Vastelaovend">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">10</span><span class="ev__m">woensdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">10</span><span class="ev__m" data-zo="goonsdig">woensdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Hieëringbiete</h3>
         <span class="ev__meta"><span class="visually-hidden">woensdag 10 februari 2027</span><span>16:00</span><span>Keffees Zöstere</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-vastelaovend" aria-hidden="true"></i>Vastelaovend</span>
     </a></li><li><a class="ev" href="/aktiviteite/2027-02-10-esj-kruutske-haole/" data-cat="Kirk">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">10</span><span class="ev__m">woensdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">10</span><span class="ev__m" data-zo="goonsdig">woensdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Esj-kruutske haole</h3>
         <span class="ev__meta"><span class="visually-hidden">woensdag 10 februari 2027</span><span>17:45</span><span>Kirk Mariaveldj</span></span><span class="ev__org">KV De Graasbörgers Zöstere</span></span>
       <span class="ev__soort"><i class="k k-kirk" aria-hidden="true"></i>Kirk</span>
     </a></li></ol></section><section class="month" data-maand="2027-5"><h2>juni 2027</h2><ol class="evlijst"><li><a class="ev" href="/aktiviteite/2027-06-05-kunstroute-en-kunstmarkt-datum-onder-voorbehoud/" data-cat="Meziek &amp; cultuur">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">5</span><span class="ev__m">zaterdag</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">5</span><span class="ev__m" data-zo="zaoterdig">zaterdag</span></span>
       <span class="ev__body"><h3 class="ev__t">Kunstroute &amp; Kunstmarkt (datum onder voorbehoud)</h3>
         <span class="ev__meta"><span class="visually-hidden">za 5 juni t/m zondag 6 juni 2027</span><span>5 juni t/m 6 juni</span><span>Centrum en Beeldentuin Suestra, achter de Amelbergabasiliek</span></span><span class="ev__org">Kunstgroep Swentibold</span></span>
       <span class="ev__soort"><i class="k k-meziek" aria-hidden="true"></i>Meziek &amp; cultuur</span>
@@ -214,38 +215,39 @@
   <div class="container">
     <div>
       <span class="wordmark">Zöstere.nl</span>
-      <p>Ontbreekt er iets of klopt er iets niet? Meld een activiteit aan via het formulier, of mail naar <a href="mailto:info@zostere.nl">info@zostere.nl</a>.</p>
+      <p data-zo-html="Mis d’r get, of klopt get neet? Meld ein aktiviteit aan mit ’t formuleer, of mail nao &lt;a href=&quot;mailto:info@zostere.nl&quot;&gt;info@zostere.nl&lt;/a&gt;.">Ontbreekt er iets of klopt er iets niet? Meld een activiteit aan via het formulier, of mail naar <a href="mailto:info@zostere.nl">info@zostere.nl</a>.</p>
     </div>
     <ul>
       <li><a href="/aktiviteite/">Aktiviteite</a></li>
-      <li><a href="/aktiviteite/#aanmelden">Aktiviteit aanmelden</a></li>
+      <li><a href="/aktiviteite/#aanmelden" data-zo="Aktiviteit aanmelje">Aktiviteit aanmelden</a></li>
       <li><a href="/vertaler/">Sjrief Zösters</a></li>
       <li><a href="/privacy/">Privacy</a></li>
     </ul>
   </div>
 </footer>
 <script src="../js/fit.js" defer></script>
+<script src="../js/taal.js" defer></script>
 <dialog id="dlg" aria-labelledby="dlg-h">
   <form class="dlg" id="form" method="dialog" novalidate>
-    <h2 id="dlg-h">Aktiviteit aanmelden</h2>
-    <p class="small">Na een korte controle verschijnt je activiteit op de site.</p>
+    <h2 id="dlg-h" data-zo="Aktiviteit aanmelje">Aktiviteit aanmelden</h2>
+    <p class="small" data-zo="Nao ein korte controle kump dien aktiviteit op de site.">Na een korte controle verschijnt je activiteit op de site.</p>
     <div class="hp" aria-hidden="true"><label for="f-web">Laat dit veld leeg</label><input type="text" id="f-web" tabindex="-1" autocomplete="off"></div>
-    <div class="field"><label for="f-titel">Naam van de activiteit</label><input class="input" type="text" id="f-titel" maxlength="120" required></div>
+    <div class="field"><label for="f-titel" data-zo="Naam van de aktiviteit">Naam van de activiteit</label><input class="input" type="text" id="f-titel" maxlength="120" required></div>
     <div class="row2">
       <div class="field"><label for="f-datum">Datum</label><input class="input" type="date" id="f-datum" required></div>
-      <div class="field"><label for="f-eind">Tot en met <span class="opt">(meerdaags)</span></label><input class="input" type="date" id="f-eind"></div>
+      <div class="field"><label for="f-eind" data-zo-html="Tót en mit &lt;span class=&quot;opt&quot;&gt;(mieëdaags)&lt;/span&gt;">Tot en met <span class="opt">(meerdaags)</span></label><input class="input" type="date" id="f-eind"></div>
     </div>
     <div class="row2">
-      <div class="field"><label for="f-tijd">Tijd <span class="opt">(bijv. 19:30)</span></label><input class="input" type="text" id="f-tijd" maxlength="40"></div>
+      <div class="field"><label for="f-tijd" data-zo-html="Tied &lt;span class=&quot;opt&quot;&gt;(bv. 19:30)&lt;/span&gt;">Tijd <span class="opt">(bijv. 19:30)</span></label><input class="input" type="text" id="f-tijd" maxlength="40"></div>
       <div class="field"><label for="f-cat">Soort</label><select class="input" id="f-cat"><option>Vastelaovend</option><option>Kirmes &amp; fieëste</option><option>Meziek &amp; cultuur</option><option>Natuur &amp; wanjele</option><option>Kirk</option><option>Sport</option><option>Kènjer</option><option>Markt</option><option>Anger</option></select></div>
     </div>
     <div class="field"><label for="f-plaats">Plaats</label><input class="input" type="text" id="f-plaats" maxlength="150" required placeholder="bijv. Amelbergabasiliek, Markt 1"></div>
     <div class="field"><label for="f-org">Organisator</label><input class="input" type="text" id="f-org" maxlength="120" required placeholder="vereniging of naam"></div>
-    <div class="field"><label for="f-tekst">Korte omschrijving <span class="opt">(mag in het Zösters)</span></label><textarea class="input" id="f-tekst" maxlength="1500"></textarea></div>
-    <div class="field"><label for="f-link">Website of meer info <span class="opt">(niet verplicht)</span></label><input class="input" type="url" id="f-link" maxlength="300" placeholder="https://"></div>
-    <div class="field"><label for="f-contact">Jouw e-mail of telefoon <span class="opt">(niet openbaar, voor vragen)</span></label><input class="input" type="text" id="f-contact" maxlength="150" required autocomplete="email"></div>
+    <div class="field"><label for="f-tekst" data-zo-html="Korte omsjrieving &lt;span class=&quot;opt&quot;&gt;(mag in ’t Zösters)&lt;/span&gt;">Korte omschrijving <span class="opt">(mag in het Zösters)</span></label><textarea class="input" id="f-tekst" maxlength="1500"></textarea></div>
+    <div class="field"><label for="f-link" data-zo-html="Website of mieë info &lt;span class=&quot;opt&quot;&gt;(neet verplich)&lt;/span&gt;">Website of meer info <span class="opt">(niet verplicht)</span></label><input class="input" type="url" id="f-link" maxlength="300" placeholder="https://"></div>
+    <div class="field"><label for="f-contact" data-zo-html="Dien e-mail of telefoon &lt;span class=&quot;opt&quot;&gt;(kump neet op de site, veur vraoge)&lt;/span&gt;">Jouw e-mail of telefoon <span class="opt">(niet openbaar, voor vragen)</span></label><input class="input" type="text" id="f-contact" maxlength="150" required autocomplete="email"></div>
     <p class="status" id="f-st" aria-live="polite"></p>
-    <div class="dlg__knoppen"><button class="btn btn--frame" type="button" id="f-annuleer">Annuleren</button><button class="btn" type="submit" id="f-stuur">Aanmelden</button></div>
+    <div class="dlg__knoppen"><button class="btn btn--frame" type="button" id="f-annuleer" data-zo="Aafzègke">Annuleren</button><button class="btn" type="submit" id="f-stuur" data-zo="Aanmelje">Aanmelden</button></div>
   </form>
 </dialog>
 <script>

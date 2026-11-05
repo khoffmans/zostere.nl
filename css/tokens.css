@@ -23,6 +23,7 @@
   --cat-vastelaovend: oklch(52% 0.19 30); --cat-kirmes: oklch(60% 0.15 62); --cat-meziek: oklch(48% 0.15 300);
   --cat-natuur: oklch(50% 0.13 142); --cat-kirk: oklch(47% 0.12 255); --cat-sport: oklch(53% 0.1 192);
   --cat-kenjer: oklch(55% 0.17 352); --cat-markt: oklch(47% 0.08 58); --cat-anger: oklch(50% 0.02 240);
+  --flag-red: oklch(50% 0.19 27); --flag-white: oklch(98% 0.005 90); --flag-blue: oklch(36% 0.14 262); --flag-yellow: oklch(82% 0.16 88);
 }
 /* inked colourway: the same bill printed buff on black, for a dark screen */
 @media (prefers-color-scheme: dark) {

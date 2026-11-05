@@ -23,6 +23,7 @@ export const CATS = {
 };
 const MAAND = ['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
 const DAG = ['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'];
+const DAG_ZO = ['zóndig','maondig','daensdig','goonsdig','dónderdig','vriedig','zaoterdig'];
 
 // ---------- hulpfuncties ----------
 const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -90,6 +91,8 @@ function fitRegels(t, px = 220) {
   return regels.map(r => `<span class="fit" style="--n:${Math.max(8, r.length)};--max:${px}px" data-max="${px}">${esc(r)}</span>`).join('');
 }
 
+const TAALBALK = '<div class="taalbalk"><div class="container"><div class="taal" role="group" aria-label="Taal"><span class="taal__label" data-zo="Taol">Taal</span><button type="button" class="vlag" data-taal="nl" aria-pressed="true" aria-label="Nederlands" title="Nederlands"><svg viewBox="0 0 27 18" aria-hidden="true"><rect class="f-red" width="27" height="6"/><rect class="f-white" y="6" width="27" height="6"/><rect class="f-blue" y="12" width="27" height="6"/></svg></button><button type="button" class="vlag" data-taal="zo" aria-pressed="false" aria-label="Zösters" title="Zösters"><svg viewBox="0 0 27 18" aria-hidden="true"><rect class="f-white" width="27" height="8.5"/><rect class="f-blue" y="8.5" width="27" height="2"/><rect class="f-yellow" y="10.5" width="27" height="7.5"/><path class="f-red" d="M3 1.4 5.6.9l1 1.5 1.5-.5-.5 2 1 1.5-1.5 1 .5 1.4-2-.4-1 .5-.5-1.5-1.5-.5 1-1.5-1-1.5z"/></svg></button></div></div></div>';
+
 function kop({ titel, beschrijving, url, extra = '', huidig = 'aktiviteite', pre = '../' }) {
   return `<!doctype html>
 <html lang="nl">
@@ -113,6 +116,7 @@ ${extra}
 </head>
 <body class="akt">
 <a class="skip" href="#main">Naar de inhoud</a>
+${TAALBALK}
 <header class="mast">
   <div class="container">
     <a class="wordmark" href="/" aria-label="Zöstere.nl, naar de beginpagina">Zöstere.nl</a>
@@ -125,24 +129,25 @@ const voet = (pre = '../') => `
   <div class="container">
     <div>
       <span class="wordmark">Zöstere.nl</span>
-      <p>Ontbreekt er iets of klopt er iets niet? Meld een activiteit aan via het formulier, of mail naar <a href="mailto:info@zostere.nl">info@zostere.nl</a>.</p>
+      <p data-zo-html="Mis d’r get, of klopt get neet? Meld ein aktiviteit aan mit ’t formuleer, of mail nao &lt;a href=&quot;mailto:info@zostere.nl&quot;&gt;info@zostere.nl&lt;/a&gt;.">Ontbreekt er iets of klopt er iets niet? Meld een activiteit aan via het formulier, of mail naar <a href="mailto:info@zostere.nl">info@zostere.nl</a>.</p>
     </div>
     <ul>
       <li><a href="/aktiviteite/">Aktiviteite</a></li>
-      <li><a href="/aktiviteite/#aanmelden">Aktiviteit aanmelden</a></li>
+      <li><a href="/aktiviteite/#aanmelden" data-zo="Aktiviteit aanmelje">Aktiviteit aanmelden</a></li>
       <li><a href="/vertaler/">Sjrief Zösters</a></li>
       <li><a href="/privacy/">Privacy</a></li>
     </ul>
   </div>
 </footer>
-<script src="${pre}js/fit.js" defer></script>`;
+<script src="${pre}js/fit.js" defer></script>
+<script src="${pre}js/taal.js" defer></script>`;
 
 // ---------- onderdelen ----------
 function evRegel(a, kop = 'h3') {
   const d = pd(a.datum), t = tijdVan(a.tijd);
   const wann = a.eind && a.eind !== a.datum ? `${pd(a.datum).getUTCDate()} ${MAAND[d.getUTCMonth()]} t/m ${datumKort(a.eind).slice(3)}` : '';
   return `<li><a class="ev" href="/aktiviteite/${a.slug}/" data-cat="${esc(a.cat)}">
-      <span class="ev__datum" aria-hidden="true"><span class="ev__d">${d.getUTCDate()}</span><span class="ev__m">${DAG[d.getUTCDay()]}</span></span>
+      <span class="ev__datum" aria-hidden="true"><span class="ev__d">${d.getUTCDate()}</span><span class="ev__m" data-zo="${DAG_ZO[d.getUTCDay()]}">${DAG[d.getUTCDay()]}</span></span>
       <span class="ev__body"><${kop} class="ev__t">${esc(a.titel)}</${kop}>
         <span class="ev__meta"><span class="visually-hidden">${esc(wanneer(a))}</span>${wann ? `<span>${esc(wann)}</span>` : ''}${t ? `<span>${esc(t)}</span>` : ''}${a.plaats ? `<span>${esc(a.plaats)}</span>` : ''}</span>${a.org && a.org !== a.plaats ? `<span class="ev__org">${esc(a.org)}</span>` : ''}</span>
       <span class="ev__soort"><i class="k ${cls(a.cat)}" aria-hidden="true"></i>${esc(a.cat)}</span>
@@ -160,7 +165,8 @@ function volgendeBlok(komend) {
   if (eerste) {
     const d = pd(eerste.datum), t = tijdVan(eerste.tijd);
     const datum = `${DAG[d.getUTCDay()]} ${d.getUTCDate()} ${MAAND[d.getUTCMonth()]}`;
-    html = `<a class="eerste" href="/aktiviteite/${eerste.slug}/"><span class="fitbox"><span class="fit fit--accent" style="--n:${datum.length};--max:120px" data-max="120">${esc(datum)}</span></span><span class="wat">${esc(eerste.titel)}</span><span class="waar"><i class="k ${cls(eerste.cat)}" aria-hidden="true"></i>${esc([t, eerste.plaats].filter(Boolean).join(', ') || eerste.cat)}</span></a>
+    const datumZo = `${DAG_ZO[d.getUTCDay()]} ${d.getUTCDate()} ${MAAND[d.getUTCMonth()]}`;
+    html = `<a class="eerste" href="/aktiviteite/${eerste.slug}/"><span class="fitbox"><span class="fit fit--accent" style="--n:${datum.length};--max:120px" data-max="120" data-zo="${esc(datumZo)}">${esc(datum)}</span></span><span class="wat">${esc(eerste.titel)}</span><span class="waar"><i class="k ${cls(eerste.cat)}" aria-hidden="true"></i>${esc([t, eerste.plaats].filter(Boolean).join(', ') || eerste.cat)}</span></a>
         ${rest.length ? `<ol class="volgende">\n          ${rest.map(rij).join('\n          ')}\n        </ol>` : ''}`;
   }
   return `<!-- volgende:begin -->
@@ -221,6 +227,7 @@ function detailPagina(a, komend, nu) {
   const deelTekst = encodeURIComponent(`${a.titel}, ${wanneer(a)}${tijdVan(a.tijd) ? ' ' + tijdVan(a.tijd) : ''} ${url}`);
   const d = pd(a.datum);
   const datumRegel = a.eind && a.eind !== a.datum ? `${d.getUTCDate()} ${MAAND[d.getUTCMonth()]} t/m ${datumKort(a.eind).slice(3)}` : `${DAG[d.getUTCDay()]} ${d.getUTCDate()} ${MAAND[d.getUTCMonth()]}`;
+  const datumRegelZo = a.eind && a.eind !== a.datum ? datumRegel.replace(' t/m ', ' tót ') : `${DAG_ZO[d.getUTCDay()]} ${d.getUTCDate()} ${MAAND[d.getUTCMonth()]}`;
   return kop({ titel, beschrijving: beschr, url, extra: jsonLdEvent(a, voorbij), pre: '../../' }) + `
 <main id="main">
   <section class="evhero">
@@ -228,28 +235,28 @@ function detailPagina(a, komend, nu) {
       <div class="evhero__kop">
         <nav class="crumb" aria-label="Kruimelpad"><ol><li><a href="/">Zöstere.nl</a></li><li><a href="/aktiviteite/">Aktiviteite</a></li><li aria-current="page">${esc(a.titel)}</li></ol></nav>
         <h1 class="fitbox">${fitRegels(a.titel)}</h1>
-        <p class="fitbox evhero__datum" aria-hidden="true"><span class="fit fit--accent" style="--n:${datumRegel.length};--max:84px" data-max="84">${esc(datumRegel)}</span></p>
-        ${voorbij ? '<p class="voorbij">Deze activiteit is voorbij.</p>' : ''}
+        <p class="fitbox evhero__datum" aria-hidden="true"><span class="fit fit--accent" style="--n:${datumRegel.length};--max:84px" data-max="84" data-zo="${esc(datumRegelZo)}">${esc(datumRegel)}</span></p>
+        ${voorbij ? '<p class="voorbij" data-zo="Dees aktiviteit is gedaon.">Deze activiteit is voorbij.</p>' : ''}
         ${a.tekst ? `<p class="lead evhero__tekst">${esc(a.tekst)}</p>` : ''}
         <div class="actions">
-          ${voorbij ? '' : `<a class="btn" href="/aktiviteite/${a.slug}/agenda.ics" download>Zet in mijn agenda</a>`}
+          ${voorbij ? '' : `<a class="btn" href="/aktiviteite/${a.slug}/agenda.ics" download data-zo="Zèt in mien agenda">Zet in mijn agenda</a>`}
           <a class="btn btn--frame" href="https://wa.me/?text=${deelTekst}" target="_blank" rel="noopener">Deel via WhatsApp</a>
-          ${a.link ? `<a class="evhero__link" href="${esc(a.link)}" target="_blank" rel="noopener">Meer info bij de organisatie</a>` : ''}
+          ${a.link ? `<a class="evhero__link" href="${esc(a.link)}" target="_blank" rel="noopener" data-zo="Mieë info bie de organisasie">Meer info bij de organisatie</a>` : ''}
         </div>
       </div>
       <dl class="particulars evhero__feiten">
-        <div><dt>Wanneer</dt><dd>${esc(wanneer(a))}</dd></div>
-        ${a.tijd ? `<div><dt>Hoe laat</dt><dd>${esc(a.tijd)}${a.deuren ? `<span class="small">deuren open ${esc(a.deuren)}</span>` : ''}</dd></div>` : ''}
-        ${a.plaats ? `<div><dt>Waar</dt><dd>${esc(a.plaats)}, Susteren</dd></div>` : ''}
-        ${a.org ? `<div><dt>Organisatie</dt><dd>${esc(a.org)}</dd></div>` : ''}
-        ${a.prijs ? `<div><dt>Toegang</dt><dd>${esc(a.prijs)}</dd></div>` : ''}
+        <div><dt data-zo="Wienieë">Wanneer</dt><dd>${esc(wanneer(a))}</dd></div>
+        ${a.tijd ? `<div><dt data-zo="Wie laat">Hoe laat</dt><dd>${esc(a.tijd)}${a.deuren ? `<span class="small" data-zo="deure aope ${esc(a.deuren)}">deuren open ${esc(a.deuren)}</span>` : ''}</dd></div>` : ''}
+        ${a.plaats ? `<div><dt data-zo="Wo">Waar</dt><dd>${esc(a.plaats)}, Susteren</dd></div>` : ''}
+        ${a.org ? `<div><dt data-zo="Organisasie">Organisatie</dt><dd>${esc(a.org)}</dd></div>` : ''}
+        ${a.prijs ? `<div><dt data-zo="Entree">Toegang</dt><dd>${esc(a.prijs)}</dd></div>` : ''}
         <div><dt>Soort</dt><dd class="soort"><i class="k ${cls(a.cat)}" aria-hidden="true"></i>${esc(a.cat)}</dd></div>
       </dl>
     </div>
   </section>
   ${meer.length ? `<section class="meer" aria-labelledby="meer-kop">
     <div class="container">
-      <h2 id="meer-kop">Meer aktiviteite in Zöstere</h2>
+      <h2 id="meer-kop" data-zo="Mieë aktiviteite in Zöstere">Meer aktiviteite in Zöstere</h2>
       <ol class="evlijst">${meer.map(x => evRegel(x)).join('\n')}</ol>
       <p><a class="alle" href="/aktiviteite/">Alle aktiviteite</a></p>
     </div>
@@ -277,8 +284,8 @@ function overzicht(komend, alle, nu) {
     <div class="container">
       <h1 class="fitbox"><span class="fit" style="--n:11">Aktiviteite</span></h1>
       <div class="akthero__tekst">
-        <p class="lead">Wat is d’r te doon in Zöstere? Vastelaovend, kirmes, meziek en sport. Organiseer je zelf iets? <a href="#aanmelden" id="meld-link">Meld het aan</a>.</p>
-        <div class="actions"><button class="btn" id="meld" type="button">Aktiviteit aanmelden</button></div>
+        <p class="lead">Wat is d’r te doon in Zöstere? Vastelaovend, kirmes, meziek en sport. <span data-zo="Organiseers doe zelf get?">Organiseer je zelf iets?</span> <a href="#aanmelden" id="meld-link" data-zo="Meld ’t aan">Meld het aan</a>.</p>
+        <div class="actions"><button class="btn" id="meld" type="button" data-zo="Aktiviteit aanmelje">Aktiviteit aanmelden</button></div>
       </div>
     </div>
   </section>
@@ -287,7 +294,7 @@ function overzicht(komend, alle, nu) {
     <div class="container">
       <div class="chips" id="chips" role="group" aria-label="Filter op soort"><button type="button" class="chip" data-cat="" aria-pressed="true">Alles</button>${legend}</div>
       <div class="cal">
-        <div class="cal-head"><button class="btn btn--frame cal-nav" type="button" id="vorige" aria-label="Vorige maand">Vorige</button><h2 id="maandnaam" aria-live="polite">${MAAND[+nu.slice(5,7)-1]} ${nu.slice(0,4)}</h2><button class="btn btn--frame cal-nav" type="button" id="volgende" aria-label="Volgende maand">Volgende</button></div>
+        <div class="cal-head"><button class="btn btn--frame cal-nav" type="button" id="vorige" aria-label="Vorige maand" data-zo="Trök">Vorige</button><h2 id="maandnaam" aria-live="polite">${MAAND[+nu.slice(5,7)-1]} ${nu.slice(0,4)}</h2><button class="btn btn--frame cal-nav" type="button" id="volgende" aria-label="Volgende maand" data-zo="Wiejer">Volgende</button></div>
         <div class="grid" id="grid"></div>
         <div class="daglijst" id="daglijst" hidden></div>
       </div>
@@ -357,25 +364,25 @@ teken();
 const AANMELDEN = `
 <dialog id="dlg" aria-labelledby="dlg-h">
   <form class="dlg" id="form" method="dialog" novalidate>
-    <h2 id="dlg-h">Aktiviteit aanmelden</h2>
-    <p class="small">Na een korte controle verschijnt je activiteit op de site.</p>
+    <h2 id="dlg-h" data-zo="Aktiviteit aanmelje">Aktiviteit aanmelden</h2>
+    <p class="small" data-zo="Nao ein korte controle kump dien aktiviteit op de site.">Na een korte controle verschijnt je activiteit op de site.</p>
     <div class="hp" aria-hidden="true"><label for="f-web">Laat dit veld leeg</label><input type="text" id="f-web" tabindex="-1" autocomplete="off"></div>
-    <div class="field"><label for="f-titel">Naam van de activiteit</label><input class="input" type="text" id="f-titel" maxlength="120" required></div>
+    <div class="field"><label for="f-titel" data-zo="Naam van de aktiviteit">Naam van de activiteit</label><input class="input" type="text" id="f-titel" maxlength="120" required></div>
     <div class="row2">
       <div class="field"><label for="f-datum">Datum</label><input class="input" type="date" id="f-datum" required></div>
-      <div class="field"><label for="f-eind">Tot en met <span class="opt">(meerdaags)</span></label><input class="input" type="date" id="f-eind"></div>
+      <div class="field"><label for="f-eind" data-zo-html="Tót en mit &lt;span class=&quot;opt&quot;&gt;(mieëdaags)&lt;/span&gt;">Tot en met <span class="opt">(meerdaags)</span></label><input class="input" type="date" id="f-eind"></div>
     </div>
     <div class="row2">
-      <div class="field"><label for="f-tijd">Tijd <span class="opt">(bijv. 19:30)</span></label><input class="input" type="text" id="f-tijd" maxlength="40"></div>
+      <div class="field"><label for="f-tijd" data-zo-html="Tied &lt;span class=&quot;opt&quot;&gt;(bv. 19:30)&lt;/span&gt;">Tijd <span class="opt">(bijv. 19:30)</span></label><input class="input" type="text" id="f-tijd" maxlength="40"></div>
       <div class="field"><label for="f-cat">Soort</label><select class="input" id="f-cat">${Object.keys(CATS).map(c => `<option>${esc(c)}</option>`).join('')}</select></div>
     </div>
     <div class="field"><label for="f-plaats">Plaats</label><input class="input" type="text" id="f-plaats" maxlength="150" required placeholder="bijv. Amelbergabasiliek, Markt 1"></div>
     <div class="field"><label for="f-org">Organisator</label><input class="input" type="text" id="f-org" maxlength="120" required placeholder="vereniging of naam"></div>
-    <div class="field"><label for="f-tekst">Korte omschrijving <span class="opt">(mag in het Zösters)</span></label><textarea class="input" id="f-tekst" maxlength="1500"></textarea></div>
-    <div class="field"><label for="f-link">Website of meer info <span class="opt">(niet verplicht)</span></label><input class="input" type="url" id="f-link" maxlength="300" placeholder="https://"></div>
-    <div class="field"><label for="f-contact">Jouw e-mail of telefoon <span class="opt">(niet openbaar, voor vragen)</span></label><input class="input" type="text" id="f-contact" maxlength="150" required autocomplete="email"></div>
+    <div class="field"><label for="f-tekst" data-zo-html="Korte omsjrieving &lt;span class=&quot;opt&quot;&gt;(mag in ’t Zösters)&lt;/span&gt;">Korte omschrijving <span class="opt">(mag in het Zösters)</span></label><textarea class="input" id="f-tekst" maxlength="1500"></textarea></div>
+    <div class="field"><label for="f-link" data-zo-html="Website of mieë info &lt;span class=&quot;opt&quot;&gt;(neet verplich)&lt;/span&gt;">Website of meer info <span class="opt">(niet verplicht)</span></label><input class="input" type="url" id="f-link" maxlength="300" placeholder="https://"></div>
+    <div class="field"><label for="f-contact" data-zo-html="Dien e-mail of telefoon &lt;span class=&quot;opt&quot;&gt;(kump neet op de site, veur vraoge)&lt;/span&gt;">Jouw e-mail of telefoon <span class="opt">(niet openbaar, voor vragen)</span></label><input class="input" type="text" id="f-contact" maxlength="150" required autocomplete="email"></div>
     <p class="status" id="f-st" aria-live="polite"></p>
-    <div class="dlg__knoppen"><button class="btn btn--frame" type="button" id="f-annuleer">Annuleren</button><button class="btn" type="submit" id="f-stuur">Aanmelden</button></div>
+    <div class="dlg__knoppen"><button class="btn btn--frame" type="button" id="f-annuleer" data-zo="Aafzègke">Annuleren</button><button class="btn" type="submit" id="f-stuur" data-zo="Aanmelje">Aanmelden</button></div>
   </form>
 </dialog>
 <script>
