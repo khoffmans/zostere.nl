@@ -2,48 +2,105 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Zöstere.nl</title>
-<meta name="description" content="Zöstere.nl — Susteren in het Zösters: de dialectvertaler, de agenda en meer.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d5e63'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' text-anchor='middle' fill='%23e3b448'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@600;700&family=Source+Serif+4:opsz,wght@8..60,400&family=IBM+Plex+Sans:wght@500;600&display=swap">
-<style>
-:root{--paper:#f5f6f2;--sheet:#fff;--ink:#1c2629;--muted:#5a676b;--line:#d5dbd8;--maas:#0d5e63;--goud:#b7860f;
-  --display:"Zilla Slab",Rockwell,Georgia,serif;--body:"Source Serif 4",Georgia,serif;--ui:"IBM Plex Sans",system-ui,sans-serif}
-@media (prefers-color-scheme:dark){:root{--paper:#11181a;--sheet:#182124;--ink:#e4ebe9;--muted:#9aa8a9;--line:#2c3a3d;--maas:#63bfc0;--goud:#e3b448;color-scheme:dark}}
-*{box-sizing:border-box}
-html,body{margin:0}
-body{background:var(--paper);color:var(--ink);font-family:var(--ui);min-height:100vh;display:grid;place-items:center;padding:48px max(16px,env(safe-area-inset-left,0px))}
-main{max-width:720px;display:grid;gap:22px}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
-div.card{display:grid;gap:4px;background:transparent;border:1px dashed var(--line);border-radius:6px;padding:18px 20px;opacity:.75}
-div.card b{font-family:var(--display);font-size:22px;font-weight:600;color:var(--muted)}
-div.card span{color:var(--muted);font-size:15px}
-.soon{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--goud)}
-h1{font-family:var(--display);font-size:clamp(44px,9vw,76px);line-height:1;margin:0}
-h1 span{color:var(--goud)}
-p{font-family:var(--body);font-size:19px;line-height:1.55;color:var(--muted);margin:0}
-a.card{display:grid;gap:4px;text-decoration:none;color:var(--ink);background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:18px 20px}
-a.card:hover,a.card:focus-visible{border-color:var(--maas);outline:none}
-a.card b{font-family:var(--display);font-size:24px;font-weight:600;color:var(--maas)}
-a.card span{color:var(--muted);font-size:15px}
-</style>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Zöstere.nl: Susteren in het Zösters</title>
+<meta name="description" content="Zöstere.nl gaat over Susteren, in het Zösters: de agenda van het dorp en Sjrief Zösters, de vertaler naar het dialect.">
+<link rel="canonical" href="https://zostere.nl/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/six-caps-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/bevan-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/zostere.css">
 </head>
-<body>
-<main>
-  <h1>Zöstere<span>.nl</span></h1>
-  <p>Alles over Zöstere, in het Zösters. Met de dialectvertaler Sjrief Zösters, gemaakt met de Zösterse Woordelies en de verhalen uit de Heemklank van de Natuurvrienden Susteren.</p>
-  <div class="cards">
-    <a class="card" href="/vertaler/"><b>Sjrief Zösters →</b><span>Zet Nederlands of een ander Limburgs dialect om naar het Zösters, of spreek je tekst in.</span></a>
-    <a class="card" href="/aktiviteite/"><b>Aktiviteite →</b><span>Wat is d’r te doon in Zöstere? De agenda van Susteren.</span></a>
-    <div class="card"><span class="soon">Binnenkort</span><b>Winkels</b><span>Winkelen in Zöstere.</span></div>
-    <div class="card"><span class="soon">Binnenkort</span><b>Aete en drènke</b><span>Waar eet en drink je goed in Zöstere?</span></div>
-    <div class="card"><span class="soon">Binnenkort</span><b>Bezienswaardigheeje</b><span>De basiliek, de natuur en de verhalen van Zöstere.</span></div>
-    <div class="card"><span class="soon">Binnenkort</span><b>Vastelaovend</b><span>Alles over de vastelaovend in Zöstere.</span></div>
+<body class="home">
+<a class="skip" href="#main">Naar de inhoud</a>
+<header class="mast">
+  <div class="container">
+    <a class="wordmark" href="/" aria-label="Zöstere.nl, naar de beginpagina">Zöstere.nl</a>
+    <nav aria-label="Zöstere.nl"><ul><li><a href="/vertaler/">Sjrief Zösters</a></li><li><a href="/aktiviteite/">Aktiviteite</a></li></ul></nav>
   </div>
-  <p style="font-size:14px;margin:0"><a href="/privacy/" style="color:var(--muted)">Privacy</a></p>
+</header>
+
+<main id="main">
+  <section class="hero-bill">
+    <div class="container">
+      <div class="hero-bill__head">
+        <h1 class="fitbox"><span class="fit" style="--n:7">Zöstere</span><span class="fit" style="--n:14">in ’t Zösters</span></h1>
+        <p class="lead">De agenda van Susteren en een vertaler naar het dialect.</p>
+        <div class="actions">
+          <a class="btn" href="/aktiviteite/">Bekiek de agenda</a>
+          <a class="btn btn--frame" href="/vertaler/">Sjrief Zösters</a>
+        </div>
+      </div>
+      <div class="hero-bill__list" aria-labelledby="volgende-kop">
+        <h2 id="volgende-kop" class="hero-bill__kop">Volgende in Zöstere</h2>
+<!-- volgende:begin -->
+        <a class="eerste" href="/aktiviteite/2026-11-13-aopening-vastelaovend-graasboerriek/"><span class="fitbox"><span class="fit fit--accent" style="--n:19;--max:120px" data-max="120">vrijdag 13 november</span></span><span class="wat">Äöpening vastelaovend Graasboerriek</span><span class="waar"><i class="k k-vastelaovend" aria-hidden="true"></i>20:11, De Graasboer, Mèrt</span></a>
+        <ol class="volgende">
+          <li><a href="/aktiviteite/2026-11-14-sjlagerverkeezing/"><span class="wanneer"><span class="visually-hidden">zaterdag 14 november 2026 </span><span aria-hidden="true">14 nov</span></span><span><span class="wat">Sjlagerverkeezing</span><span class="waar"><i class="k k-vastelaovend" aria-hidden="true"></i>20:11, Café Bie Alois</span></span></a></li>
+          <li><a href="/aktiviteite/2026-11-15-boake-van-t-lache/"><span class="wanneer"><span class="visually-hidden">zondag 15 november 2026 </span><span aria-hidden="true">15 nov</span></span><span><span class="wat">Böäke van ’t Lache</span><span class="waar"><i class="k k-vastelaovend" aria-hidden="true"></i>14:11, Zaal Mirage</span></span></a></li>
+        </ol>
+        <a class="alle" href="/aktiviteite/">Alle 31 aktiviteite in de agenda</a>
+<!-- volgende:end -->
+      </div>
+    </div>
+  </section>
+
+  <section class="sjrief" aria-labelledby="sjrief-kop">
+    <div class="container">
+      <div class="sjrief__voorbeeld">
+        <h2 id="sjrief-kop">Sjrief Zösters</h2>
+        <figure>
+          <blockquote lang="li"><p>Want es ’t good is, kump mörge weer eine nuujen daag.</p></blockquote>
+          <figcaption>Uit de Heemklank. In het Nederlands: want als het goed is, komt morgen weer een nieuwe dag.</figcaption>
+        </figure>
+      </div>
+      <form class="sjrief__form" action="/vertaler/" method="get">
+        <label for="t">Typ een zin in het Nederlands</label>
+        <textarea class="input" id="t" name="t" rows="3" maxlength="2000" placeholder="Morgen gaan we met de hele familie naar de kermis."></textarea>
+        <button class="btn btn--frame" type="submit">Vertaal naar ’t Zösters</button>
+        <p class="small">Of plak een tekst in een ander Limburgs dialect in de vertaler.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="bronnen" aria-labelledby="bronnen-kop">
+    <div class="container">
+      <h2 id="bronnen-kop">Waar het Zösters vandaan komt</h2>
+      <dl class="particulars">
+        <div><dt>Woordelies</dt><dd><span class="figure">5.723</span> trefwoorden uit de Zösterse Woordelies van 2000</dd></div>
+        <div><dt>Heemklank</dt><dd><span class="figure">6.434</span> zinnen uit acht jaargangen van het tijdschrift van de Natuurvrienden Susteren</dd></div>
+        <div><dt>Sprekers</dt><dd>Verbeteringen van bezoekers, nagekeken door de redactie, wegen het zwaarst</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="binnenkort grained" aria-labelledby="binnenkort-kop">
+    <div class="container">
+      <h2 id="binnenkort-kop">Binnenkort op Zöstere.nl</h2>
+      <ul class="bill">
+        <li><span class="fitbox"><span class="fit" style="--n:7;--max:260px" data-max="260">Winkels</span></span><p>Winkelen in Zöstere.</p></li>
+        <li><span class="fitbox"><span class="fit" style="--n:14;--max:260px" data-max="260">Aete en drènke</span></span><p>Waar eet en drink je goed in Zöstere?</p></li>
+        <li><span class="fitbox"><span class="fit" style="--n:19;--max:260px" data-max="260">Bezienswaardigheeje</span></span><p>De basiliek, de natuur en de verhalen van Zöstere.</p></li>
+        <li><span class="fitbox"><span class="fit" style="--n:12;--max:260px" data-max="260">Vastelaovend</span></span><p>Alles over de vastelaovend in Zöstere.</p></li>
+      </ul>
+    </div>
+  </section>
 </main>
+
+<footer class="colophon">
+  <div class="container">
+    <div>
+      <span class="wordmark">Zöstere.nl</span>
+      <p>Zöstere.nl gaat over Susteren, in het Zösters. Sjrief Zösters is gemaakt met de Zösterse Woordelies en de verhalen uit Heemklank van de Natuurvrienden Susteren. Een tip of een fout gezien? Mail naar <a href="mailto:info@zostere.nl">info@zostere.nl</a>.</p>
+    </div>
+    <ul>
+      <li><a href="/vertaler/">Sjrief Zösters</a></li>
+      <li><a href="/aktiviteite/">Aktiviteite</a></li>
+      <li><a href="/aktiviteite/#aanmelden">Aktiviteit aanmelden</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+    </ul>
+  </div>
+</footer>
+<script src="js/fit.js" defer></script>
 </body>
 </html>

@@ -3,160 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Sjrief Zösters</title>
+<title>Sjrief Zösters: vertaal naar het dialect van Susteren | Zöstere.nl</title>
 <meta name="description" content="Zet Nederlandse of Limburgse tekst om naar het dialect van Susteren, op basis van de Zösterse Woordelies en de Heemklank.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d5e63'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' text-anchor='middle' fill='%23e3b448'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<style>
-/* Layout: werkblad met twee vellen naast elkaar (Nederlands | Zösters), daaronder naslag: woordelies en verbeterde voorbeelden */
-:root{
-  --paper:#f5f6f2; --sheet:#ffffff; --ink:#1c2629; --muted:#5a676b; --line:#d5dbd8;
-  --maas:#0d5e63; --maas-soft:#e3efee; --goud:#b7860f; --goud-soft:#f7edd3; --warn:#9a4a12;
-  --display:"Zilla Slab",Rockwell,"Roboto Slab",Georgia,serif;
-  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
-  --ui:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#11181a; --sheet:#182124; --ink:#e4ebe9; --muted:#9aa8a9; --line:#2c3a3d;
-  --maas:#63bfc0; --maas-soft:#1b3234; --goud:#e3b448; --goud-soft:#2e2814; --warn:#e8935a; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --paper:#11181a; --sheet:#182124; --ink:#e4ebe9; --muted:#9aa8a9; --line:#2c3a3d;
-  --maas:#63bfc0; --maas-soft:#1b3234; --goud:#e3b448; --goud-soft:#2e2814; --warn:#e8935a; color-scheme:dark}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-[hidden]{display:none!important}
-body{background:var(--paper);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.5;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
-.wrap{max-width:1100px;margin:0 auto;display:grid;gap:36px}
-nav.site{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;font-size:14px}
-nav.site .home{font-family:var(--display);font-weight:700;font-size:20px;color:var(--ink);text-decoration:none;margin-right:8px}
-nav.site .home span{color:var(--goud)}
-nav.site a{color:var(--muted);text-decoration:none}
-nav.site a:hover,nav.site a[aria-current="page"]{color:var(--maas)}
-nav.site a[aria-current="page"]{font-weight:600}
-header{display:grid;gap:10px}
-.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--maas);font-weight:600}
-h1{font-family:var(--display);font-weight:700;font-size:clamp(34px,6vw,56px);line-height:1;margin:0;text-wrap:balance}
-h1 .o{color:var(--goud)}
-.lede{font-family:var(--body);font-size:17px;max-width:62ch;color:var(--muted);margin:0}
-.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
-.facts b{color:var(--ink);font-weight:600}
-h2{font-family:var(--display);font-weight:600;font-size:24px;margin:0;text-wrap:balance}
-.desk{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-@media (max-width:820px){.desk{grid-template-columns:1fr}}
-.sheet{background:var(--sheet);border:1px solid var(--line);border-radius:6px;display:flex;flex-direction:column;min-width:0}
-.sheet-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.lang{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--muted)}
-.lang.zo{color:var(--goud)}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:5px;padding:2px;gap:2px;background:var(--paper)}
-.seg button{border:0;background:transparent;padding:5px 12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--muted);border-radius:3px}
-.seg button[aria-checked="true"]{background:var(--sheet);color:var(--maas);box-shadow:0 0 0 1px var(--line)}
-.dialect-row{display:flex;align-items:center;gap:10px;padding:10px 14px 0;flex-wrap:wrap;font-size:13px;color:var(--muted)}
-.dialect-row select{font-family:var(--ui);font-size:14px;padding:5px 8px;border:1px solid var(--line);border-radius:4px;background:var(--sheet);color:var(--ink);max-width:100%}
-.mic{display:inline-flex;align-items:center;gap:6px}
-.mic svg{width:16px;height:16px}
-.mic[aria-expanded="true"]{border-color:var(--maas);color:var(--maas)}
-.mic.rec{border-color:#c0392b;color:#c0392b}
-.mic.rec::before{content:"";width:8px;height:8px;border-radius:50%;background:#c0392b;animation:pulse 1.2s infinite}
-@keyframes pulse{50%{opacity:.25}}
-@media (prefers-reduced-motion:reduce){.mic.rec::before{animation:none}}
-.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.dictate{display:grid;gap:10px;padding:12px 14px;border-top:1px solid var(--line);background:var(--maas-soft);font-size:14px}
-.dictate p{margin:0;max-width:62ch}
-.dictate ul{margin:0;padding-left:18px;display:grid;gap:3px}
-.dictate .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.gz-btn{border-color:var(--goud);color:var(--ink)}
-.gz-btn:hover{border-color:var(--goud);background:var(--goud-soft)}
-dialog{border:1px solid var(--line);border-radius:8px;padding:0;background:var(--sheet);color:var(--ink);width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 32px)}
-dialog::backdrop{background:rgba(10,16,18,.55)}
-.dlg{display:grid;gap:14px;padding:20px}
-.dlg h3{font-family:var(--display);font-weight:600;font-size:22px;margin:0}
-.dlg .field{display:grid;gap:5px}
-.dlg label{font-size:13px;font-weight:600}
-.dlg .opt{font-weight:400;color:var(--muted)}
-.dlg input[type=text],.dlg input[type=tel],.dlg textarea{font-family:var(--ui);font-size:16px;padding:9px 11px;border:1px solid var(--line);border-radius:4px;background:var(--paper);color:var(--ink);width:100%}
-.dlg textarea{font-family:var(--body);font-size:16px;min-height:150px;resize:vertical}
-.dlg .actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;align-items:center}
-.dlg .actions .status{flex:1}
-.thumb{max-width:160px;max-height:120px;border-radius:4px;border:1px solid var(--line);display:block}
-.inz{display:grid;gap:0}
-.inz-row{display:grid;grid-template-columns:auto 1fr auto;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);align-items:start}
-@media (max-width:640px){.inz-row{grid-template-columns:1fr}}
-.inz-row .t{font-family:var(--display);font-weight:600;font-size:18px}
-.inz-row .m{font-size:13px;color:var(--muted)}
-.inz-row .x{font-family:var(--body);font-size:15px;white-space:pre-wrap;max-height:7.5em;overflow:hidden}
-.inz-row .ph{width:96px;height:72px;object-fit:cover;border-radius:4px;border:1px solid var(--line);background:var(--paper)}
-.understood{font-family:var(--body);font-size:16px;font-style:italic;margin:4px 0 0;max-width:70ch}
-textarea,.out{font-family:var(--body);font-size:19px;line-height:1.55;color:var(--ink);background:transparent;border:0;padding:16px;min-height:220px;width:100%;resize:vertical}
-textarea:focus{outline:none}
-.sheet:focus-within{border-color:var(--maas)}
-.out{white-space:pre-wrap;overflow-wrap:anywhere}
-.out.placeholder{color:var(--muted);font-style:italic;font-size:16px}
-.out.thinking{color:var(--muted)}
-.sheet-foot{display:flex;gap:8px;align-items:center;padding:10px 14px;border-top:1px solid var(--line);flex-wrap:wrap}
-.sheet-foot .grow{flex:1}
-button{font-family:var(--ui);font-size:14px;font-weight:500;border-radius:4px;border:1px solid var(--line);background:var(--sheet);color:var(--ink);padding:8px 14px;cursor:pointer}
-button:hover{border-color:var(--maas)}
-button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--maas);outline-offset:2px}
-button.primary{background:var(--maas);border-color:var(--maas);color:var(--sheet);font-weight:600}
-button.primary:hover{filter:brightness(1.08)}
-button:disabled{opacity:.5;cursor:default}
-.small{font-size:13px;color:var(--muted)}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:3px 10px;background:transparent;color:var(--muted);cursor:pointer}
-.chip:hover{color:var(--ink);border-color:var(--maas)}
-.notes{display:grid;gap:12px}
-.note-list{margin:0;padding-left:18px;font-family:var(--body);font-size:16px}
-.note-list li{margin-block:3px}
-.tag{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:2px 7px;border-radius:3px}
-.tag.ex{background:var(--goud-soft);color:var(--goud)}
-.tag.ok{background:var(--maas-soft);color:var(--maas)}
-details{border-top:1px solid var(--line);padding-top:10px}
-summary{cursor:pointer;font-weight:500}
-.src{display:grid;gap:4px;margin-top:10px;font-size:14px}
-.src .w{font-weight:600;color:var(--goud)}
-.src .q{font-family:var(--body);font-style:italic}
-.src .meta{color:var(--muted);font-size:12px}
-.section{display:grid;gap:14px}
-.section p.intro{margin:0;max-width:70ch;color:var(--muted);font-family:var(--body);font-size:16px}
-.search{display:flex;gap:8px;flex-wrap:wrap}
-.search input{flex:1;min-width:0;font-family:var(--ui);font-size:16px;padding:9px 12px;border:1px solid var(--line);border-radius:4px;background:var(--sheet);color:var(--ink)}
-.dict{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:0 28px}
-.entry{padding:9px 0;border-bottom:1px solid var(--line);min-width:0}
-.entry .w{font-family:var(--display);font-weight:600;font-size:18px;color:var(--goud)}
-.entry .d{font-family:var(--body);font-size:15px}
-.corr{display:grid;gap:0}
-.corr-row{display:grid;grid-template-columns:1fr 1fr auto;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);align-items:start}
-@media (max-width:640px){.corr-row{grid-template-columns:1fr}}
-.corr-row .nl{font-family:var(--body);color:var(--muted)}
-.corr-row .zo{font-family:var(--body);font-weight:600}
-.edit{display:grid;gap:8px;padding:14px;border-top:1px solid var(--line);background:var(--goud-soft)}
-.edit textarea{background:var(--sheet);border:1px solid var(--line);border-radius:4px;min-height:120px;font-size:17px}
-.status{font-size:13px;color:var(--muted);min-height:1.2em}
-.status.err{color:var(--warn)}
-footer{font-size:13px;color:var(--muted);max-width:80ch;display:grid;gap:6px;border-top:1px solid var(--line);padding-top:16px}
-@media (prefers-reduced-motion:no-preference){.out{transition:color .2s}}
-</style>
+<link rel="canonical" href="https://zostere.nl/vertaler/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../fonts/bevan-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/zostere.css">
 </head>
-<body>
-
-<div class="wrap">
-  <nav class="site" aria-label="Zöstere.nl">
-    <a class="home" href="/">Zöstere<span>.nl</span></a>
-    <a href="/vertaler/" aria-current="page">Sjrief Zösters</a>
-    <a href="/aktiviteite/">Aktiviteite</a>
-  </nav>
-  <header>
-    <div class="eyebrow">Nederlands of Limburgs → dialect van Susteren</div>
-    <h1>Sjrief <span class="o">Zösters</span></h1>
+<body class="app">
+<a class="skip" href="#main">Naar de vertaler</a>
+<header class="mast">
+  <div class="container">
+    <a class="wordmark" href="/" aria-label="Zöstere.nl, naar de beginpagina">Zöstere.nl</a>
+    <nav aria-label="Zöstere.nl"><ul><li><a href="/vertaler/" aria-current="page">Sjrief Zösters</a></li><li><a href="/aktiviteite/">Aktiviteite</a></li></ul></nav>
+  </div>
+</header>
+<div class="wrap container" id="main">
+  <header class="app-kop">
+    <h1>Sjrief Zösters</h1>
     <p class="lede">Typ of plak een tekst in het Nederlands of in een ander Limburgs dialect. De vertaler zoekt de woorden op in de Zösterse Woordelies, haalt er echte zinnen uit de Heemklank bij en schrijft de tekst in het Zösters.</p>
-    <div class="facts">
-      <span><b id="f-dict">–</b> trefwoorden uit de Woordelies (2000)</span>
-      <span><b id="f-zin">–</b> zinnen uit acht jaargangen Heemklank</span>
-      <span><b id="f-corr">0</b> goedgekeurde verbeteringen</span>
-    </div>
+    <dl class="facts">
+      <div><dt>Woordelies (2000)</dt><dd id="f-dict">5.723</dd></div>
+      <div><dt>Zinnen uit Heemklank</dt><dd id="f-zin">6.434</dd></div>
+      <div><dt>Goedgekeurde verbeteringen</dt><dd id="f-corr">0</dd></div>
+    </dl>
   </header>
 
   <section class="section" aria-labelledby="h-vertaal">
@@ -192,9 +62,9 @@ footer{font-size:13px;color:var(--muted);max-width:80ch;display:grid;gap:6px;bor
         </div>
         <textarea id="nl" aria-label="Te vertalen tekst" spellcheck="true">Want als het goed is, komt morgen weer een nieuwe dag.</textarea>
         <div class="sheet-foot">
-          <button class="primary" id="go">Vertaal naar ’t Zösters</button>
-          <button type="button" class="mic" id="mic" aria-expanded="false" aria-controls="dictate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path><path d="M12 18v3"></path></svg>Inspreken</button>
-          <button id="stop" hidden>Stop</button>
+          <button class="btn" type="button" id="go">Vertaal naar ’t Zösters</button>
+          <button type="button" class="btn btn--frame mic" id="mic" aria-expanded="false" aria-controls="dictate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path><path d="M12 18v3"></path></svg>Inspreken</button>
+          <button class="btn btn--frame" type="button" id="stop" hidden>Stop</button>
           <span class="grow"></span>
           <span class="small" id="tier"></span>
         </div>
@@ -203,9 +73,9 @@ footer{font-size:13px;color:var(--muted);max-width:80ch;display:grid;gap:6px;bor
         <div class="sheet-head"><span class="lang zo">Zösters</span><span id="out-tag"><span class="tag ex">Voorbeeld uit Heemklank</span></span></div>
         <div class="out" id="out" aria-live="polite">Want es ’t good is, kump mörge weer eine nuujen daag.</div>
         <div class="sheet-foot">
-          <button id="copy">Kopieer</button>
-          <button id="fix">Verbeter deze vertaling</button>
-          <button id="gz" class="gz-btn" type="button">Insturen voor de Vastelaovesgezèt</button>
+          <button class="btn btn--frame" type="button" id="copy">Kopieer</button>
+          <button class="btn btn--frame" type="button" id="fix">Verbeter deze vertaling</button>
+          <button id="gz" class="btn btn--frame gz-btn" type="button">Insturen voor de Gezèt</button>
           <span class="grow"></span>
           <span class="status" id="st"></span>
         </div>
@@ -213,8 +83,8 @@ footer{font-size:13px;color:var(--muted);max-width:80ch;display:grid;gap:6px;bor
           <label class="small" for="fixbox">Pas de vertaling aan zoals een Zösterse spreker het zou zeggen. Je voorstel gaat naar de redactie; na goedkeuring telt het mee als voorbeeld.</label>
           <textarea id="fixbox"></textarea>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button class="primary" id="save">Voorstel versturen</button>
-            <button id="cancel">Annuleren</button>
+            <button class="btn" type="button" id="save">Voorstel versturen</button>
+            <button class="btn btn--frame" type="button" id="cancel">Annuleren</button>
             <span class="status" id="save-st"></span>
           </div>
         </div>
@@ -234,7 +104,7 @@ footer{font-size:13px;color:var(--muted);max-width:80ch;display:grid;gap:6px;bor
   <section class="section" aria-labelledby="h-wl">
     <h2 id="h-wl">Zoek in de Woordelies</h2>
     <p class="intro">Zoek op een Nederlands of een Zösters woord. Dit werkt zonder Claude, rechtstreeks in de woordenlijst van 2000.</p>
-    <div class="search"><input id="q" type="search" placeholder="bijv. kermis, regen, sjoan" aria-label="Zoekterm"></div>
+    <div class="search"><input class="input" id="q" type="search" placeholder="bijv. kermis, regen, sjoan" aria-label="Zoekterm"></div>
     <div class="small" id="q-n"></div>
     <div class="dict" id="dict"></div>
   </section>
@@ -245,24 +115,36 @@ footer{font-size:13px;color:var(--muted);max-width:80ch;display:grid;gap:6px;bor
     <div class="corr" id="corr"><p class="small" id="corr-empty">Verbeterde voorbeelden laden…</p></div>
   </section>
 
-  <footer>
+  <footer class="app-voet">
     <div>Bronnen: Zösterse Woordelies (2000) en de jaargangen 2012, 2014, 2015, 2017, 2018, 2020, 2021 en 2022 van Heemklank, het tijdschrift van de Vereniging van Natuurvrienden Susteren. Stukken in het Roosters, het Geleens en andere dialecten zijn buiten de voorbeeldzinnen gehouden.</div>
     <div>De vertalingen worden gemaakt door Claude (Anthropic) en zijn niet nagekeken door een moedertaalspreker. Gebruik ze als eerste versie. De tekst die je vertaalt wordt daarvoor naar Anthropic gestuurd en niet door deze site bewaard.</div>
     <div>Inspreken gebruikt de spraakherkenning van je browser; die stuurt het geluid naar de maker van de browser (bijvoorbeeld Google of Apple). Inzendingen voor de Vastelaovesgezèt en verbetervoorstellen gaan naar de redactie van zostere.nl.</div>
   </footer>
 </div>
+<footer class="colophon">
+  <div class="container">
+    <div>
+      <span class="wordmark">Zöstere.nl</span>
+      <p>Een tip of een fout gezien? Mail naar <a href="mailto:info@zostere.nl">info@zostere.nl</a>.</p>
+    </div>
+    <ul>
+      <li><a href="/aktiviteite/">Aktiviteite</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+    </ul>
+  </div>
+</footer>
 
 <dialog id="gz-dlg" aria-labelledby="gz-h">
   <form class="dlg" id="gz-form" method="dialog" novalidate>
-    <h3 id="gz-h">Insturen voor de Vastelaovesgezèt</h3>
+    <h2 id="gz-h">Insturen voor de Vastelaovesgezèt</h2>
     <p class="small" style="margin:0">Je stuk gaat naar de redactie van de Vastelaovesgezèt. Je naam en telefoonnummer worden alleen gebruikt om contact op te nemen bij vragen.</p>
     <div class="hp" aria-hidden="true"><label for="gz-web">Laat dit veld leeg</label><input type="text" id="gz-web" tabindex="-1" autocomplete="off"></div>
-    <div class="field"><label for="gz-titel">Titel van het stuk</label><input type="text" id="gz-titel" maxlength="120" required></div>
-    <div class="field"><label for="gz-naam">Naam van de inzender</label><input type="text" id="gz-naam" maxlength="100" autocomplete="name" required></div>
-    <div class="field"><label for="gz-tel">Telefoonnummer <span class="opt">(niet verplicht, voor vragen)</span></label><input type="tel" id="gz-tel" maxlength="30" autocomplete="tel"></div>
-    <div class="field"><label for="gz-tekst">Tekst in het Zösters</label><textarea id="gz-tekst" maxlength="20000"></textarea></div>
-    <div class="field"><label for="gz-foto">Foto <span class="opt">(niet verplicht)</span></label><input type="file" id="gz-foto" accept="image/jpeg,image/png,image/webp,image/heic,image/*"><img id="gz-prev" class="thumb" alt="Voorbeeld van de gekozen foto" hidden></div>
-    <div class="actions"><span class="status" id="gz-st"></span><button type="button" id="gz-cancel">Annuleren</button><button type="submit" class="primary" id="gz-send">Versturen</button></div>
+    <div class="field"><label for="gz-titel">Titel van het stuk</label><input class="input" type="text" id="gz-titel" maxlength="120" required></div>
+    <div class="field"><label for="gz-naam">Naam van de inzender</label><input class="input" type="text" id="gz-naam" maxlength="100" autocomplete="name" required></div>
+    <div class="field"><label for="gz-tel">Telefoonnummer <span class="opt">(niet verplicht, voor vragen)</span></label><input class="input" type="tel" id="gz-tel" maxlength="30" autocomplete="tel"></div>
+    <div class="field"><label for="gz-tekst">Tekst in het Zösters</label><textarea class="input" id="gz-tekst" maxlength="20000"></textarea></div>
+    <div class="field"><label for="gz-foto">Foto <span class="opt">(niet verplicht)</span></label><input type="file" id="gz-foto" accept="image/jpeg,image/png,image/webp,image/heic,image/*"><img id="gz-prev" class="thumb" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="160" height="120" alt="Voorbeeld van de gekozen foto" hidden></div>
+    <div class="actions"><span class="status" id="gz-st"></span><button class="btn btn--frame" type="button" id="gz-cancel">Annuleren</button><button class="btn" type="submit" id="gz-send">Versturen</button></div>
   </form>
 </dialog>
 
@@ -773,6 +655,8 @@ $('gz-form').addEventListener('submit',async e=>{
 });
 
 loadCorr();
+// tekst die vanaf de beginpagina is meegestuurd (?t=...) meteen vertalen
+try{ const t=new URLSearchParams(location.search).get('t'); if(t&&t.trim()){ nl.value=t.slice(0,8000); nl.dispatchEvent(new Event('input')); history.replaceState(null,'',location.pathname); go.click(); } }catch{}
 })();
 </script>
 </body>

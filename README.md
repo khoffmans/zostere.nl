@@ -16,3 +16,9 @@ De Anthropic API-sleutel staat niet in deze repository, maar alleen in de Script
 - **Grenzen** tegen misbruik (vertalingen per 10 minuten en per dag) staan bovenaan `Code.gs`.
 - **Code.gs aangepast?** In Apps Script: *Implementeren → Implementaties beheren → potloodje → Versie: Nieuwe versie → Implementeren.* De URL blijft dan hetzelfde.
 - **Rechten:** het script vraagt alleen toegang tot bestanden die het zelf maakt (`drive.file`) en tot externe diensten (voor Claude). Zie `apps-script/appsscript.json`.
+
+## Vormgeving (Hallmark · Broadside)
+- Alle pagina's delen `css/zostere.css` (met `css/tokens.css`, `css/base.css`, `css/fonts.css`); de lettertypes Six Caps, Bevan en Archivo Narrow staan in `fonts/` (OFL-licentie).
+- `js/fit.js` past de grote houtletterregels (`.fit`) aan de kolombreedte aan.
+- De agenda, de pagina's per activiteit en het lijstje "Volgende in Zöstere" op de beginpagina maakt `tools/bouw-aktiviteite.mjs`.
+- Het vaste ontwerpsysteem staat in `design.md`.

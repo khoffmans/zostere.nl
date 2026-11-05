@@ -2,6 +2,7 @@ exclude:
   - apps-script
   - tools
   - README.md
+  - design.md
   - aktiviteite/vast.json
   - aktiviteite/archief.json
   - aktiviteite/sheet-cache.json
